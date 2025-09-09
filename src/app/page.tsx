@@ -5,11 +5,11 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/assets/logo-fix/logo-sumedang-500.png"
+          alt="Logo Sumedang"
+          width={100}
+          height={100}
+          style={{ width: "auto", height: "auto" }}
           priority
         />
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
@@ -36,6 +36,7 @@ export default function Home() {
               alt="Vercel logomark"
               width={20}
               height={20}
+              style={{ width: "auto" }}
             />
             Deploy now
           </a>
@@ -62,6 +63,7 @@ export default function Home() {
             alt="File icon"
             width={16}
             height={16}
+            style={{ width: "auto" }}
           />
           Learn
         </a>
@@ -77,6 +79,7 @@ export default function Home() {
             alt="Window icon"
             width={16}
             height={16}
+            style={{ width: "auto" }}
           />
           Examples
         </a>
@@ -92,6 +95,7 @@ export default function Home() {
             alt="Globe icon"
             width={16}
             height={16}
+            style={{ width: "auto" }}
           />
           Go to nextjs.org →
         </a>
