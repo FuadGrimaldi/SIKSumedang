@@ -122,8 +122,8 @@ export default function NavGuest({
       <div
         className={`fixed w-full mx-auto z-50 transition-all duration-300 ${
           isScrolled
-            ? "backdrop-blur-md bg-gray-900/70 shadow-lg border-b border-gray-800/50"
-            : "backdrop-blur-sm bg-gray-900/60"
+            ? "backdrop-blur-md bg-gray-500/60 shadow-lg"
+            : "backdrop-blur-sm bg-gray-0/50"
         }`}
       >
         <div className=" sm:px-6 lg:px-1 mx-auto max-w-7xl px-4">

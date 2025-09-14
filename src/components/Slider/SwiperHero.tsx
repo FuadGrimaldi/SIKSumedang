@@ -18,91 +18,90 @@ import "swiper/css/navigation";
 import Link from "next/link";
 
 const DestinationSwiper = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Simulate a 1-second loading time
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+      </div>
+    );
+  }
   // Sample data - replace with your actual data
   const destinations = [
     {
       id: 1,
-      title: "Curug Cipeuteuy",
+      title: "Hajat Lembur",
       description:
-        "Air terjun eksotis dengan ketinggian 50 meter yang dikelilingi hutan tropis. Tempat yang sempurna untuk menikmati keindahan alam dan udara segar pegunungan.",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
-      category: "Air Terjun",
+        "Hajat Lembur merupakan sebuah tradisi syukuran masyarakat Sunda sebagai ungkapan rasa syukur kepada Sang Pencipta atas limpahan rezeki, keselamatan, dan keharmonisan hidup dalam komunitas",
+      image: "/assets/rancakalong/hajat-lembur.jpg",
+      location: `Rancakalong, Sumedang, Jawa Barat`,
+      category: "tradisi",
       rating: 4.8,
-      price: 15000,
-      features: ["Kolam Renang Alami", "Trekking"],
-      slug: "curug-cipeuteuy",
+      slug: "hajat-lembur",
     },
     {
       id: 2,
-      title: "Kampung Wisata Budaya",
+      title: "Ngalaksa",
       description:
-        "Kampung tradisional yang melestarikan budaya Sunda dengan berbagai atraksi budaya, kerajinan tangan, dan kuliner khas daerah yang autentik.",
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
+        "upacara tradisional masyarakat Sunda yang dilaksanakan berhubungan dengan kesuburan lahan pertanian. Upacara ini merupakan ungkapan kepercayaan lokal masyarakatnya terhadap Nyi Pohaci dan Karuhun (roh-roh nenek moyang).",
+      image: "/assets/rancakalong/Ngalaksa.jpg",
+      location: `Rancakalong, Sumedang, Jawa Barat`,
       category: "Budaya",
       rating: 4.6,
-      price: 25000,
-      features: ["Workshop Kerajinan", "Pertunjukan Budaya"],
-      slug: "kampung-wisata-budaya",
+      slug: "budaya",
     },
     {
       id: 3,
-      title: "Gunung Tampomas",
+      title: "Geo Teater",
       description:
-        "Gunung dengan pemandangan spektakuler dan jalur pendakian yang menantang. Cocok untuk para pecinta alam dan adventure yang mencari pengalaman mendaki.",
-      image:
-        "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
-      category: "Gunung",
+        "Geotheater Rancakalong menjadi destinasi wisata unggulan di Sumedang, yang diproyeksikan menjadi pusat budaya Sunda di Sumedang. Keberadaan Geotheater Rancakalong ditunjang dengan adanya exit Tol Cisumdawu yang tak jauh dari lokasi yaitu exit tol pamulihan.",
+      image: "/assets/rancakalong/geoteater.jpg",
+      location: `Rancakalong, sumedang, Jawa Barat`,
+      category: "kesenian",
       rating: 4.7,
-      price: null,
-      features: ["Hiking Trail", "Sunrise View"],
-      slug: "gunung-tampomas",
+      slug: "geo-teater",
     },
     {
       id: 4,
-      title: "Danau Situ Gede",
+      title: "Reak",
       description:
-        "Danau alami yang tenang dengan pemandangan indah, ideal untuk rekreasi keluarga, memancing, atau sekadar menikmati ketenangan alam.",
-      image:
-        "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
-      category: "Danau",
+        "Seni reak buhun sudah ada sejak ratusan tahun lalu di Dusun Pasir, Desa Rancakalong, dan dianggap sebagai warisan leluhur yang masih dijaga hingga kini. Reak merupakan seni pertunjukkan yang menyatu dengan kuda, music renggong, dan ekspresi bunyi-bunyian khas. Nama Reak sendiri berasal dari ungkapan rame di eak-eak yang menggambarkan suasana ramai di jalan saat pertunjukkan berlangsung.",
+      image: "/assets/rancakalong/reak.jpg",
+      location: `Rancakalong, Sumedang, Jawa Barat`,
+      category: "tradisi",
       rating: 4.5,
-      price: 10000,
-      features: ["Perahu Kayuh", "Area Piknik"],
-      slug: "danau-situ-gede",
+      slug: "tradisi-reak",
     },
     {
       id: 5,
-      title: "Kebun Teh Ciater",
+      title: "Tarawangsa",
       description:
-        "Perkebunan teh yang luas dengan pemandangan hijau membentang, dilengkapi dengan tur edukasi dan cafe dengan view panorama pegunungan.",
-      image:
-        "https://images.unsplash.com/photo-1563532659-4b1c2b9dc1a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
-      category: "Agrowisata",
+        "Tarawangsa telah menjadi salah satu ikon budaya Desa Rancakalong yang telah dikenal di kancahinternasional. Asal usul kesenian tarawangsa yang terdiri dari jentreng (semacam kacapi siter) dan ek-ek (semacam rebab, yang banyak dikenal dengan nama tarawangsa) secara historis memiliki beragam versi terkait awal mula kemunculannya. Menurut Pupung Sumpena (salah satu tokoh budaya) yang merupakan seorang praktisi tarawangsa, menyebutkan bahwa secara historis tarawangsa memang berasal dari Rancakalong,",
+      image: "/assets/rancakalong/tarawangsa.jpg",
+      location: `Rancakalong, Sumedang, Jawa Barat`,
+      category: "tradisi",
       rating: 4.9,
-      price: 20000,
-      features: ["Tea Tasting", "Photo Spot"],
-      slug: "kebun-teh-ciater",
+      slug: "tradisi-tarawangsa",
     },
     {
       id: 6,
-      title: "Pasar Tradisional",
+      title: "Desa Wisata Rancakalong",
       description:
-        "Pasar tradisional dengan berbagai produk lokal, makanan khas, dan kerajinan tangan. Tempat terbaik untuk merasakan kehidupan lokal yang autentik.",
-      image:
-        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      location: `sumedang, Jawa Barat`,
-      category: "Kuliner",
+        "Desa Wisata Rancakalong di Sumedang adalah sebuah destinasi yang memukau, menyajikan pesona alam pedesaan yang memesona dan kehidupan masyarakat yang kaya akan budaya. Terletak di tengah-tengah lanskap berbukit yang hijau, desa ini menawarkan pengalaman yang autentik bagi para pengunjung yang ingin merasakan kehidupan pedesaan yang damai dan tradisional.",
+      image: "/assets/rancakalong/desa-wisata.png",
+      location: `Rancakalong, Sumedang, Jawa Barat`,
+      category: "Wisata",
       rating: 4.4,
-      price: null,
-      features: ["Makanan Lokal", "Oleh-oleh"],
-      slug: "pasar-tradisional",
+
+      slug: "desa-wisata",
     },
   ];
 
@@ -194,29 +193,6 @@ const DestinationSwiper = () => {
           </svg>
         </div>
       </Swiper>
-
-      {/* View All Button */}
-      <div className="text-center mt-8">
-        <Link
-          href="/destinasi"
-          className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 transform hover:scale-105"
-        >
-          Lihat Semua Destinasi
-          <svg
-            className="w-4 h-4 ml-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
-      </div>
     </div>
   );
 };

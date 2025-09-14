@@ -29,6 +29,7 @@ model users {
 model profile_kecamatan {
   id               Int       @id @default(autoincrement())
   nama_kecamatan   String
+  subdomain        String
   alamat           String
   telepon          String
   email            String

@@ -26,12 +26,8 @@ body {
   }
 }
 
-/* #hero-section {
-  background-image: url("/assets/background/al-kamil.jpg");
+#lapor-card {
+  background-image: url("/assets/background/bg-lapor.png");
   background-size: cover;
   background-position: center;
-  filter: blur(2px) brightness(0.5);
-  position: relative;
-  width: 100%;
-  height: 100%;
-} */
+}
