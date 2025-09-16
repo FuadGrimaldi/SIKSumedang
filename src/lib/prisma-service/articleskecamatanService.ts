@@ -2,6 +2,25 @@ import { prisma } from "./prisma";
 import { ArticleCreate, ArticleUpdate } from "@/types/article";
 
 export class ArticlesKecamatanService {
+  static async getArticleBytitle(title: string) {
+    return prisma.articles.findUnique({
+      where: { title },
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+      },
+    });
+  }
   static async getAllArticles() {
     return prisma.articles.findMany({
       include: {

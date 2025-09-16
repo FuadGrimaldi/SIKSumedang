@@ -53,13 +53,12 @@ export default function NavGuest({
   const menuItems = [
     { name: "Beranda", href: "/", icon: Home },
     {
-      name: "Profil Desa",
+      name: "Profil",
       icon: User,
       submenu: [
+        { name: "Profile", href: "/profile" },
         { name: "Visi Misi", href: "/visi-misi" },
-        { name: "Struktur", href: "/struktur" },
-        { name: "Sejarah", href: "/sejarah" },
-        { name: "Kontak", href: "/kontak" },
+        { name: "Struktur organisasi & tupoksi", href: "/struktur" },
       ],
     },
     {
@@ -72,25 +71,25 @@ export default function NavGuest({
         { name: "Pengaduan dan Aspirasi", href: "/pengaduan-aspirasi" },
       ],
     },
-    {
-      name: "Statistik Desa",
-      icon: BarChart3,
-      submenu: [
-        {
-          name: "Desa Cantik",
-          href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/desa/`,
-        },
-        {
-          name: "E-Sakip Desa",
-          href: `https://e-officedesa.sumedangkab.go.id/dashboard_sakip/desa/`,
-        },
-        {
-          name: "Desa Simpatik",
-          href: `https://e-officedesa.sumedangkab.go.id/dashboard_simpatik/desa/`,
-        },
-        { name: "Status SDGS", href: "/sdgs" },
-      ],
-    },
+    // {
+    //   name: "Statistik Desa",
+    //   icon: BarChart3,
+    //   submenu: [
+    //     {
+    //       name: "Desa Cantik",
+    //       href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/desa/`,
+    //     },
+    //     {
+    //       name: "E-Sakip Desa",
+    //       href: `https://e-officedesa.sumedangkab.go.id/dashboard_sakip/desa/`,
+    //     },
+    //     {
+    //       name: "Desa Simpatik",
+    //       href: `https://e-officedesa.sumedangkab.go.id/dashboard_simpatik/desa/`,
+    //     },
+    //     { name: "Status SDGS", href: "/sdgs" },
+    //   ],
+    // },
     {
       name: "Publikasi",
       icon: FileText,
@@ -122,8 +121,8 @@ export default function NavGuest({
       <div
         className={`fixed w-full mx-auto z-50 transition-all duration-300 ${
           isScrolled
-            ? "backdrop-blur-md bg-gray-500/60 shadow-lg"
-            : "backdrop-blur-sm bg-gray-0/50"
+            ? "backdrop-blur-md bg-black/60 shadow-lg"
+            : "backdrop-blur-sm bg-black/0"
         }`}
       >
         <div className=" sm:px-6 lg:px-1 mx-auto max-w-7xl px-4">

@@ -88,7 +88,7 @@ model articles {
   user_id            Int
   kecamatan_id       Int
   tipe               ArticleType
-  title              String    @db.VarChar(255)
+  title              String    @unique @db.VarChar(255)
   slug               String    @unique
   content            String    @db.LongText
   featured_image     String    @db.VarChar(255)

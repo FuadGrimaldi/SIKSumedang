@@ -4,16 +4,16 @@ const Hero = async ({ subdomain }) => {
   return (
     <div className="relative">
       <div
-        className="hero relative overflow-hidden"
+        className="hero relative overflow-hidden min-h-screen"
         style={{
-          backgroundImage: 'url("/assets/background/bg-hero.jpg")',
+          backgroundImage: 'url("/assets/background/bg-hero-3.jpg")',
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         {/* Blur Overlay */}
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-sm z-2"></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-2"></div>
         {/* Content Container */}
         <div className="flex flex-col justify-center items-center w-full h-full rounded-2xl relative z-3 pt-[100px]">
           <div className="text-white text-center max-w-2xl mx-auto px-4">
