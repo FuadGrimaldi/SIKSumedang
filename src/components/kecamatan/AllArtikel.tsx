@@ -180,7 +180,6 @@ const ArtikelComp = ({
           article.status === "published"
       );
       setArticles(filteredArticles || []);
-      console.log("data", filteredArticles);
       setTotalItems(data.total || 0);
     } catch (err) {
       console.error("Error fetching articles:", err);
