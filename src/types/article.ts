@@ -1,12 +1,4 @@
 // Enums
-export enum ArticleType {
-  berita = "berita",
-  agenda = "agenda",
-  sakip = "sakip",
-  sid = "sid",
-  kegiatan = "kegiatan",
-  pengumuman = "pengumuman",
-}
 
 export enum ArticleStatus {
   published = "published",
@@ -18,7 +10,9 @@ export interface Article {
   id: number;
   user_id: number;
   kecamatan_id: number;
-  tipe: ArticleType; // pakai enum
+  desa_id: number | null; // nullable for subdomain
+  kategori_id: number | null; // nullable if no category
+  sub_kategori_id: number | null; // nullable if no sub-category
   title: string;
   slug: string;
   content: string;
@@ -38,13 +32,27 @@ export interface Article {
     id: number;
     full_name: string;
   } | null; // optional, for include
+  desa?: {
+    id: number;
+    nama_desa: string;
+  };
+  kategori_article?: {
+    id: number;
+    nama: string;
+  } | null; // optional, for include
+  sub_kategori_article?: {
+    id: number;
+    sub_nama: string;
+  } | null; // optional, for include
 }
 
 // Create
 export interface ArticleCreate {
   user_id: number;
   kecamatan_id: number;
-  tipe: ArticleType; // wajib enum
+  desa_id?: number | null; // nullable for subdomain
+  kategori_id?: number | null; // nullable if no category
+  sub_kategori_id?: number | null; // nullable if no sub-category
   title: string;
   slug: string;
   content: string;
@@ -58,7 +66,9 @@ export interface ArticleCreate {
 
 // Update
 export interface ArticleUpdate {
-  tipe?: ArticleType;
+  desa_id?: number | null; // nullable for subdomain
+  kategori_id?: number | null; // nullable if no category
+  sub_kategori_id?: number | null; // nullable if no sub-category
   title?: string;
   slug?: string;
   content?: string;

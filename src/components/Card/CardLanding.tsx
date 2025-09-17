@@ -57,7 +57,7 @@ const BlogCardSingle = ({ article }: BlogCardProps) => {
                   clipRule="evenodd"
                 />
               </svg>
-              {article.tipe || "Berita"}
+              {article.kategori_article?.nama || "Berita"}
             </span>
           </div>
 
@@ -203,7 +203,7 @@ const BlogCard = ({ article }: BlogCardProps) => {
         />
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-300"></div>
         <div className="absolute top-0 right-0 text-white text-xs px-3 py-1 m-2 rounded backdrop-blur-xl bg-black/50">
-          {article.tipe || "Berita"}
+          {article.kategori_article?.nama || "Berita"}
         </div>
       </div>
 

@@ -1,10 +1,11 @@
+import { sub } from "framer-motion/client";
 import { prisma } from "./prisma";
 import { ArticleCreate, ArticleUpdate } from "@/types/article";
 
 export class ArticlesKecamatanService {
-  static async getArticleBytitle(title: string) {
+  static async getArticleBySlug(slug: string) {
     return prisma.articles.findUnique({
-      where: { title },
+      where: { slug },
       include: {
         profile_kecamatan: {
           select: {
@@ -16,6 +17,18 @@ export class ArticlesKecamatanService {
           select: {
             id: true,
             full_name: true,
+          },
+        },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
           },
         },
       },
@@ -36,6 +49,18 @@ export class ArticlesKecamatanService {
             full_name: true,
           },
         },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
+          },
+        },
       },
       orderBy: { created_at: "desc" },
     });
@@ -45,8 +70,10 @@ export class ArticlesKecamatanService {
     try {
       const createData: any = {
         user_id: data.user_id,
+        desa_id: data.desa_id,
+        kategori_id: data.kategori_id,
+        sub_kategori_id: data.sub_kategori_id,
         kecamatan_id: data.kecamatan_id,
-        tipe: data.tipe,
         title: data.title,
         slug: data.slug,
         content: data.content,
@@ -92,6 +119,18 @@ export class ArticlesKecamatanService {
             full_name: true,
           },
         },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
+          },
+        },
       },
     });
   }
@@ -100,7 +139,9 @@ export class ArticlesKecamatanService {
   static async updateArticle(id: number, data: ArticleUpdate) {
     try {
       const updateData: any = {
-        tipe: data.tipe,
+        desa_id: data.desa_id,
+        kategori_id: data.kategori_id,
+        sub_kategori_id: data.sub_kategori_id,
         title: data.title,
         slug: data.slug,
         content: data.content,
@@ -142,6 +183,32 @@ export class ArticlesKecamatanService {
     const skip = (page - 1) * limit;
     return prisma.articles.findMany({
       where: { kecamatan_id },
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
+          },
+        },
+      },
       orderBy: { created_at: "desc" },
       skip,
       take: limit,
@@ -152,7 +219,7 @@ export class ArticlesKecamatanService {
   static async searchArticles(
     query: string,
     kecamatan_id: number,
-    tipe?: string,
+    kategori?: string,
     page: number = 1,
     limit: number = 10
   ) {
@@ -167,8 +234,8 @@ export class ArticlesKecamatanService {
       ];
     }
 
-    if (tipe && tipe.trim() !== "") {
-      whereClause.tipe = tipe;
+    if (kategori && kategori.trim() !== "") {
+      whereClause.kategori = kategori;
     }
 
     return prisma.articles.findMany({
@@ -187,6 +254,18 @@ export class ArticlesKecamatanService {
           select: {
             id: true,
             full_name: true,
+          },
+        },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
           },
         },
       },

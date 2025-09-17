@@ -1,10 +1,10 @@
 import { prisma } from "./prisma";
-import { Agenda, CreateAgendaData, UpdateAgendaData } from "@/types/agenda";
+import { Acara, CreateAcaraData, UpdateAcaraData } from "@/types/Acara";
 
-export class AgendaKecamatanService {
-  // Get all agendas
-  static async getAllAgendas() {
-    return prisma.agenda_kecamatan.findMany({
+export class AcaraKecamatanService {
+  // Get all Acara
+  static async getAllAcara() {
+    return prisma.acara.findMany({
       include: {
         profile_kecamatan: {
           select: {
@@ -12,25 +12,31 @@ export class AgendaKecamatanService {
             nama_kecamatan: true,
           },
         },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
       },
       orderBy: { created_at: "desc" },
     });
   }
 
-  // Create a new agenda
-  static async createAgenda(data: CreateAgendaData) {
+  // Create a new Acara
+  static async createAcara(data: CreateAcaraData) {
     try {
       const createData: any = {
         kecamatan_id: data.kecamatan_id,
+        user_id: data.user_id,
         judul: data.judul,
         slug: data.slug,
-        kategori: data.kategori,
         deskripsi: data.deskripsi,
         lokasi: data.lokasi,
         waktu: new Date(data.waktu),
         poster: data.poster,
-        created_by: data.created_by,
-        status: data.status,
+        penyelenggara: data.penyelenggara,
+        status_acara: data.status_acara,
         created_at: new Date(),
         updated_at: new Date(),
       };
@@ -42,35 +48,49 @@ export class AgendaKecamatanService {
         createData.poster = data.poster;
       }
 
-      const agenda = await prisma.agenda_kecamatan.create({ data: createData });
-      return agenda;
+      const Acara = await prisma.acara.create({ data: createData });
+      return Acara;
     } catch (error) {
-      console.error("❌ Prisma createAgenda error:", error);
+      console.error("❌ Prisma create Acara error:", error);
       throw error;
     }
   }
 
-  // Get agendas by kecamatan_id
-  static async getAgendasByKecamatanId(kecamatan_id: number) {
-    return prisma.agenda_kecamatan.findMany({
+  // Get Acaras by kecamatan_id
+  static async getAcaraByKecamatanId(kecamatan_id: number) {
+    return prisma.acara.findMany({
       where: { kecamatan_id },
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+      },
       orderBy: { created_at: "desc" },
     });
   }
-  // Update an existing agenda
-  static async updateAgenda(id: number, data: UpdateAgendaData) {
+  // Update an existing Acara
+  static async updateAcara(id: number, data: UpdateAcaraData) {
     try {
       const updateData: any = {
         kecamatan_id: data.kecamatan_id,
+        user_id: data.user_id,
         judul: data.judul,
         slug: data.slug,
-        kategori: data.kategori,
         deskripsi: data.deskripsi,
         lokasi: data.lokasi,
         waktu: data.waktu ? new Date(data.waktu) : undefined,
         poster: data.poster,
-        created_by: data.created_by,
-        status: data.status,
+        penyelenggara: data.penyelenggara,
+        status_acara: data.status_acara,
         updated_at: new Date(),
       };
 
@@ -82,36 +102,42 @@ export class AgendaKecamatanService {
         updateData.poster = data.poster;
       }
 
-      const agenda = await prisma.agenda_kecamatan.update({
+      const Acara = await prisma.acara.update({
         where: { id },
         data: updateData,
       });
-      return agenda;
+      return Acara;
     } catch (error) {
-      console.error("❌ Prisma updateAgenda error:", error);
+      console.error("❌ Prisma updateAcara error:", error);
       throw error;
     }
   }
-  // Delete an agenda
-  static async deleteAgenda(id: number) {
+  // Delete an Acara
+  static async deleteAcara(id: number) {
     try {
-      return await prisma.agenda_kecamatan.delete({
+      return await prisma.acara.delete({
         where: { id },
       });
     } catch (error) {
-      console.error("❌ Prisma deleteAgenda error:", error);
+      console.error("❌ Prisma deleteAcara error:", error);
       throw error;
     }
   }
-  // Get a single agenda by id
-  static async getAgendaById(id: number) {
-    return prisma.agenda_kecamatan.findUnique({
+  // Get a single Acara by id
+  static async getAcaraById(id: number) {
+    return prisma.acara.findUnique({
       where: { id },
       include: {
         profile_kecamatan: {
           select: {
             id: true,
             nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
           },
         },
       },

@@ -21,12 +21,10 @@ interface Kategori {
 
 export default function NavGuest({
   subdomain,
-  username,
-  desaId,
+  kecamatanId,
 }: {
   subdomain: string | null;
-  username: string | null;
-  desaId: number | null;
+  kecamatanId: number | null;
 }) {
   const [kategoris, setKategoris] = useState<Kategori[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,8 +63,11 @@ export default function NavGuest({
       name: "Layanan",
       icon: Settings,
       submenu: [
-        { name: "Daftar Instansi", href: "/instansi" },
         { name: "Daftar Layanan", href: "/layanan" },
+        {
+          name: "Data Desa Cantik",
+          href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/kecamatan/${kecamatanId}`,
+        },
         // { name: "Lapor!", href: "/pengaduan" },
         { name: "Pengaduan dan Aspirasi", href: "/pengaduan-aspirasi" },
       ],
@@ -166,7 +167,7 @@ export default function NavGuest({
                             <Link
                               key={subindex}
                               href={subitem.href}
-                              className="block px-4 py-3 text-white hover:text-gray-100 hover:backdrop-blur-md hover:bg-gray-600/60 transition-colors duration-200 font-medium"
+                              className="block text-[14px] px-4 py-3 text-white hover:text-gray-100 hover:backdrop-blur-md hover:bg-gray-600/60 transition-colors duration-200 font-medium"
                             >
                               {subitem.name}
                             </Link>

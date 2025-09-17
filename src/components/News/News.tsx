@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Article } from "@/types/article";
-import { Agenda } from "@/types/agenda";
 import { Infografis } from "@/types/infografis";
 import { useState, useEffect, useCallback } from "react";
 import SidebarNewsLanding from "../Sidebar/SidebarNewsLanding";
@@ -16,30 +15,10 @@ interface AllBeritaProps {
 const News = ({ kecamatanId }: AllBeritaProps) => {
   const [pengumaman, setPengumuman] = useState<Article[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
-  const [agenda, setAgenda] = useState<Agenda[]>([]);
   const [infografis, setInfografis] = useState<Infografis[]>([]);
   const [sidebarArticles, setSidebarArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const fetchAgenda = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`/api/agenda/subdomain/${kecamatanId}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch agenda");
-      }
-      const data = await res.json();
-      setAgenda(data);
-    } catch (error) {
-      console.error("Error fetching agenda:", error);
-      setError("Gagal memuat agenda");
-      setAgenda([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [kecamatanId]);
 
   const fetchInfografis = useCallback(async () => {
     setLoading(true);
@@ -73,6 +52,7 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
       }
 
       const data = await res.json();
+      console.log("Fetched articles data:", data);
 
       if (data.error) {
         setError(data.error);
@@ -89,10 +69,10 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
           )
           .filter(
             (article: Article) =>
-              article.tipe !== "pengumuman" && article.status === "published"
+              article.kategori_id !== 8 && article.status === "published"
           );
         const pengumumanTerbaru = data
-          .filter((a: Article) => a.tipe === "pengumuman")
+          .filter((a: Article) => a.kategori_id === 8)
           .sort(
             (a: Article, b: Article) =>
               new Date(b.published_at).getTime() -
@@ -120,12 +100,13 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
   useEffect(() => {
     if (kecamatanId) {
       fetchArticles();
-      fetchAgenda();
       fetchInfografis();
     } else {
       setLoading(false);
     }
-  }, [kecamatanId, fetchArticles, fetchAgenda, fetchInfografis]);
+  }, [kecamatanId, fetchArticles, fetchInfografis]);
+
+  console.log("Articles:", articles);
 
   // Loading state
   if (loading) {

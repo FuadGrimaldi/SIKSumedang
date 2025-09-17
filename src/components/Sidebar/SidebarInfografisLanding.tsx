@@ -33,7 +33,22 @@ const InfographicSlider = ({ infografis }: InfographicSliderProps) => {
 
   if (!infografis || infografis.length === 0) {
     return (
-      <p className="text-center py-10 text-gray-600">Belum ada infografis.</p>
+      <div className={`infographic-slider bg-white  border border-gray-200`}>
+        {/* Header Section */}
+        <div className="flex items-center justify-between p-4 bg-blue-500 rounded-t-xl">
+          <div>
+            <h4 className="text-xl lg:text-2xl font-bold text-white mb-2">
+              Infografis Kecamatan
+            </h4>
+            <p className="text-sm text-white">
+              Informasi penting dalam bentuk visual yang mudah dipahami
+            </p>
+          </div>
+        </div>
+        <div className="p-6 text-center text-gray-500">
+          Tidak ada infografis tersedia saat ini.
+        </div>
+      </div>
     );
   }
 

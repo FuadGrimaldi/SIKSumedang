@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AgendaKecamatanService } from "@/lib/prisma-service/agendaKecamatanService";
+import { AcaraKecamatanService } from "@/lib/prisma-service/acaraKecamatanService";
 import { writeFile } from "fs/promises";
 import fs from "fs";
 import path from "path";
-import { CreateAgendaData, AgendaKategori, Status } from "@/types/agenda";
+import { CreateAcaraData, StatusAcara } from "@/types/Acara";
 
 export async function GET() {
   try {
-    const agendas = await AgendaKecamatanService.getAllAgendas();
-    return NextResponse.json(agendas);
+    const acaras = await AcaraKecamatanService.getAllAcara();
+    return NextResponse.json(acaras);
   } catch (error: any) {
-    console.error("GET /api/agenda error:", error);
+    console.error("GET /api/acara error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -21,18 +21,25 @@ export async function POST(req: NextRequest) {
 
     // Extract form fields
     const kecamatan_id = formData.get("kecamatan_id") as string;
+    const user_id = formData.get("user_id") as string;
     const judul = formData.get("judul") as string;
     const slug = formData.get("slug") as string;
-    const kategori = formData.get("kategori") as string;
     const deskripsi = formData.get("deskripsi") as string;
     const lokasi = formData.get("lokasi") as string;
     const waktu = formData.get("waktu") as string;
     const poster = formData.get("poster") as File | null;
-    const created_by = formData.get("created_by") as string;
-    const status = formData.get("status") as string;
+    const penyelenggara = formData.get("penyelenggara") as string;
+    const status_acara = formData.get("status_acara") as string;
 
     // Validation
-    if (!kecamatan_id || !judul || !slug || !kategori || !deskripsi || !waktu) {
+    if (
+      !kecamatan_id ||
+      !judul ||
+      !slug ||
+      !penyelenggara ||
+      !deskripsi ||
+      !waktu
+    ) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -58,7 +65,7 @@ export async function POST(req: NextRequest) {
           "public",
           "assets",
           "uploads",
-          "agenda"
+          "acara"
         );
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
@@ -67,7 +74,7 @@ export async function POST(req: NextRequest) {
         // Write file to disk
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        posterPath = `/assets/uploads/agenda/${fileName}`;
+        posterPath = `/assets/uploads/acara/${fileName}`;
       } catch (error) {
         console.error("Error uploading poster:", error);
         return NextResponse.json(
@@ -78,22 +85,22 @@ export async function POST(req: NextRequest) {
     }
 
     // Prepare data for creation
-    const createData: CreateAgendaData = {
+    const createData: CreateAcaraData = {
       kecamatan_id: parseInt(kecamatan_id),
+      user_id: parseInt(user_id),
       judul,
       slug,
-      kategori: kategori as AgendaKategori,
       deskripsi,
       lokasi,
       waktu: new Date(waktu).toISOString(),
+      penyelenggara,
       poster: posterPath ?? "/assets/default/image-not-available.png",
-      created_by: parseInt(created_by),
-      status: status as Status,
+      status_acara: status_acara as StatusAcara,
     };
-    const agenda = await AgendaKecamatanService.createAgenda(createData);
-    return NextResponse.json(agenda, { status: 201 });
+    const acara = await AcaraKecamatanService.createAcara(createData);
+    return NextResponse.json(acara, { status: 201 });
   } catch (error: any) {
-    console.error("POST /api/agenda error:", error);
+    console.error("POST /api/acara error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

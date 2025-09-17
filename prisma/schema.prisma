@@ -8,22 +8,22 @@ generator client {
 }
 
 model users {
-  id             Int     @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   kecamatan_id   Int?
-  nik            String     @unique @db.VarChar(16)
-  username       String     @unique @db.VarChar(50)
-  full_name      String     @db.VarChar(255)
-  email          String     @unique @db.VarChar(255)
-  password       String     @db.VarChar(255)
+  nik            String   @unique @db.VarChar(16)
+  username       String   @unique @db.VarChar(50)
+  full_name      String   @db.VarChar(255)
+  email          String   @unique @db.VarChar(255)
+  password       String   @db.VarChar(255)
   role           Role
   status         Status
   last_login_at  DateTime?  
-  created_at     DateTime
-  updated_at     DateTime
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
 
   profile_kecamatan profile_kecamatan? @relation(fields: [kecamatan_id], references: [id])
-  articles       articles[]
-  agenda_kecamatan agenda_kecamatan[]
+  articles         articles[]
+  acara acara[]
 }
 
 model profile_kecamatan {
@@ -37,13 +37,11 @@ model profile_kecamatan {
   foto_kantor      String    @db.VarChar(255)
   visi             String    @db.LongText
   misi             String    @db.LongText
-  tujuan           String    @db.LongText
   sejarah          String    @db.LongText
+  deskripsi        String    @db.LongText
   gmaps_embed_url  String    @db.LongText
-  lat              Float?
-  lng              Float?
-  created_at       DateTime
-  updated_at       DateTime
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
 
   users            users[]
   komentar         komentar[]  
@@ -51,12 +49,24 @@ model profile_kecamatan {
   infografis       infografis[]
   articles         articles[]
   videos           videos[]
-  organisasi       organisasi[]
-  kategori_organisasi kategori_organisasi[]
-  agenda_kecamatan agenda_kecamatan[]
+  acara             acara[]
+  desa              desa[]
+  kategori_article   kategori_article[]
+  sub_kategori_article        sub_kategori_article[]
+  front_image        front_image[]
   officials        officials[]
-  sarana_prasarana sarana_prasarana[]  
-  anggaran_apbkec  anggaran_apbkec[]
+}
+
+model front_image {
+  id           Int      @id @default(autoincrement())
+  kecamatan_id Int  
+  title        String   @db.VarChar(255)
+  lokasi       String   @db.VarChar(255)
+  gambar_path  String   @db.VarChar(255)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
 }
 
 model infografis {
@@ -64,45 +74,72 @@ model infografis {
   kecamatan_id Int  
   title        String   @db.VarChar(255)
   gambar_path  String   @db.VarChar(255)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
 }
 
-model anggaran_apbkec {
-  id                  Int      @id @default(autoincrement())
-  kecamatan_id        Int
-  tahun_anggaran      Int      @db.Year
-  deskripsi           String   @db.LongText
-  total_pendapatan    Decimal  @db.Decimal(15, 2)
-  total_belanja       Decimal  @db.Decimal(15, 2)
-  dokumen_realisasi_path String @db.VarChar(255)
-  infografis_path     String   @db.VarChar(255)
-  status              ApbdesStatus
-  published_at        DateTime
-
-  profile_kecamatan   profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
-}
-
 model articles {
-  id                 Int    @id @default(autoincrement())
-  user_id            Int
-  kecamatan_id       Int
-  tipe               ArticleType
-  title              String    @unique @db.VarChar(255)
-  slug               String    @unique
-  content            String    @db.LongText
-  featured_image     String    @db.VarChar(255)
-  dokumen_terkait_path String  @db.VarChar(255)
-  waktu_kegiatan     DateTime
-  lokasi_kegiatan    String    @db.VarChar(255)
-  status             ArticleStatus
-  published_at       DateTime
-  created_at         DateTime
-  updated_at         DateTime
+  id                   Int    @id @default(autoincrement())
+  user_id              Int
+  kecamatan_id         Int
+  desa_id              Int
+  kategori_id          Int
+  sub_kategori_id      Int
+  title                String    @unique @db.VarChar(255)
+  slug                 String    @unique
+  content              String    @db.LongText
+  featured_image       String    @db.VarChar(255)
+  waktu_kegiatan       DateTime
+  lokasi_kegiatan      String    @db.VarChar(255)
+  status               ArticleStatus
+  published_at         DateTime
+  created_at           DateTime  @default(now())
+  updated_at           DateTime  @updatedAt
 
   komentar           komentar[]
   users              users? @relation(fields: [user_id], references: [id])
   profile_kecamatan  profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
+  desa               desa @relation(fields: [desa_id], references: [id])
+  kategori_article   kategori_article @relation(fields: [kategori_id], references: [id])
+  sub_kategori_article sub_kategori_article @relation(fields: [sub_kategori_id], references: [id])
+}
+
+model desa {
+  id           Int    @id @default(autoincrement())
+  kecamatan_id Int
+  nama_desa    String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
+  articles     articles[]
+}
+
+model kategori_article {
+  id           Int    @id @default(autoincrement())
+  kecamatan_id Int
+  nama         String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
+  articles     articles[]
+  sub_kategori sub_kategori_article[]
+}
+
+model sub_kategori_article {
+  id           Int    @id @default(autoincrement())
+  kecamatan_id Int
+  kategori_id  Int
+  sub_nama     String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  kategori_article kategori_article @relation(fields: [kategori_id], references: [id])
+  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
+  articles        articles[]
 }
 
 model videos {
@@ -113,51 +150,29 @@ model videos {
   kategori     String   
   deskripsi    String   @db.LongText
   uploaded_at  DateTime
-  created_at   DateTime
-  updated_at   DateTime
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
 }
 
-model organisasi {
-  id                  Int    @id @default(autoincrement())
-  kecamatan_id        Int
-  kategori_id         Int
-  nama_organisasi     String @db.VarChar(255)
-  nama_ketua          String @db.VarChar(255)
-  deskripsi_kegiatan  String @db.LongText
-  logo_path           String @db.VarChar(255)
-
-  profile_kecamatan   profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
-  kategori_organisasi kategori_organisasi @relation(fields: [kategori_id], references: [id])
-}
-
-model kategori_organisasi {
-  id              Int          @id @default(autoincrement())
-  nama_kategori   String       @db.VarChar(100)
-  kecamatan_id    Int
+model acara {
+  id             Int     @id @default(autoincrement())
+  user_id         Int
+  kecamatan_id   Int
+  judul          String  @db.VarChar(255)
+  slug           String  @unique
+  deskripsi      String  @db.LongText
+  lokasi         String  @db.VarChar(255)
+  waktu          DateTime
+  poster         String  @db.VarChar(255)
+  penyelenggara  String  @db.VarChar(255)
+  status_acara   StatusAcara
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
-  organisasi      organisasi[]
-}
-
-model agenda_kecamatan {
-  id           Int     @id @default(autoincrement())
-  kecamatan_id Int
-  judul        String  @db.VarChar(255)
-  slug         String  @unique
-  kategori     AgendaKategori
-  deskripsi    String  @db.LongText
-  lokasi       String  @db.VarChar(255)
-  waktu        DateTime
-  poster       String  @db.VarChar(255)
-  created_by   Int
-  status       Status
-  created_at   DateTime
-  updated_at   DateTime
-
-  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
-  users        users  @relation(fields: [created_by], references: [id])
+  users             users  @relation(fields: [user_id], references: [id])
 }
 
 model officials {
@@ -166,9 +181,8 @@ model officials {
   name          String
   position      String
   photo         String
-  display_order Int
-  created_at    DateTime
-  updated_at    DateTime
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
 }
@@ -182,8 +196,8 @@ model komentar {
   no_telp       String
   pesan         String  @db.LongText
   status        Status
-  created_at    DateTime
-  updated_at    DateTime
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
   articles      articles @relation(fields: [article_id], references: [id])
@@ -198,24 +212,8 @@ model pengaduan_aspirasi {
   pesan         String  @db.LongText
   kategori      PengaduanAspirasiKategori
   status        Status
-  created_at    DateTime
-  updated_at    DateTime
-
-  profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
-}
-
-model sarana_prasarana {
-  id             Int    @id @default(autoincrement())
-  kecamatan_id   Int
-  kategori       SaranaKategori
-  nama_sarana    String @db.VarChar(255)
-  deskripsi      String @db.LongText
-  alamat_lokasi  String @db.VarChar(255)
-  koordinat_lat  String @db.VarChar(50)
-  koordinat_long String @db.VarChar(50)
-  foto_path      String @db.VarChar(255)
-  unggulan       SaranaUnggulan
-  status         Status
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   profile_kecamatan profile_kecamatan @relation(fields: [kecamatan_id], references: [id])
 }
@@ -241,54 +239,12 @@ enum Status {
   rejected
 }
 
-enum PotensiKategori {
-  Pertanian
-  Peternakan
-  UMKM
-  Pariwisata
-  Jasa
-}
-
-enum ArticleType {
-  berita
-  agenda
-  sakip
-  sid
-  kegiatan
-  pengumuman
-}
-
 enum ArticleStatus {
   published
   draft
 }
 
-enum AgendaKategori {
-  Kebudayaan
-  Olahraga
-  Umum
-  Peringatan_Hari_Besar
-  Sepedahan
-  Olahraga_Asik
-  PKK
-}
-
-enum SaranaKategori {
-  pendidikan
-  kesehatan
-  ibadah
-  olahraga
-  umum
-  wisata
-}
-
-enum SaranaUnggulan {
-  Y
-  N
-}
-
-enum ApbdesStatus {
-  draft
+enum StatusAcara {
   published
-  archived
+  draft
 }

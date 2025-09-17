@@ -1,7 +1,7 @@
 // src/app/api/gallery/subdomain/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { ArticlesKecamatanService } from "@/lib/prisma-service/articleskecamatanService";
-import { AgendaKecamatanService } from "@/lib/prisma-service/agendaKecamatanService";
+import { AcaraKecamatanService } from "@/lib/prisma-service/acaraKecamatanService";
 import { InfografisKecamatanService } from "@/lib/prisma-service/infografisKecamatanService";
 import { GalleryItem } from "@/types/gallery";
 
@@ -10,28 +10,28 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const desaId = parseInt(params.id);
-    if (isNaN(desaId)) {
+    const kecamatanId = parseInt(params.id);
+    if (isNaN(kecamatanId)) {
       return NextResponse.json({ error: "Invalid desa ID" }, { status: 400 });
     }
 
     // Get query parameters
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "6");
+    const limit = parseInt(searchParams.get("limit") || "8");
 
     // Fetch published articles with images
     const articles = await ArticlesKecamatanService.getArticlesByKecamatanId(
-      desaId
+      kecamatanId
     );
 
-    // Fetch published agendas with posters
-    const agendas = await AgendaKecamatanService.getAgendasByKecamatanId(
-      desaId
+    // Fetch published acara with posters
+    const acara = await AcaraKecamatanService.getAcaraByKecamatanId(
+      kecamatanId
     );
 
     const infographics =
-      await InfografisKecamatanService.getInfografisByKecamatan(desaId);
+      await InfografisKecamatanService.getInfografisByKecamatan(kecamatanId);
 
     // Convert articles to gallery items
     const articleGalleryItems: GalleryItem[] = articles
@@ -40,15 +40,19 @@ export async function GET(
         id: article.id,
         title: article.title,
         image_url: article.featured_image!,
+        created_at: article.created_at.toISOString(),
+        updated_at: article.updated_at.toISOString(),
       }));
 
-    // Convert agendas to gallery items
-    const agendaGalleryItems: GalleryItem[] = agendas
-      .filter((agenda) => agenda.poster) // Only published agendas with posters
+    // Convert acara to gallery items
+    const acaraGalleryItems: GalleryItem[] = acara
+      .filter((agenda) => agenda.poster) // Only published acara with posters
       .map((agenda) => ({
         id: agenda.id,
         title: agenda.judul,
         image_url: agenda.poster!,
+        created_at: agenda.created_at.toISOString(),
+        updated_at: agenda.updated_at.toISOString(),
       }));
 
     // Convert infographics to gallery items
@@ -58,12 +62,14 @@ export async function GET(
         id: infographic.id,
         title: infographic.title,
         image_url: infographic.gambar_path,
+        created_at: infographic.created_at.toISOString(),
+        updated_at: infographic.updated_at.toISOString(),
       }));
 
     // Combine and sort by published date (newest first)
     const allGalleryItems = [
       ...articleGalleryItems,
-      ...agendaGalleryItems,
+      ...acaraGalleryItems,
       ...infographicGalleryItems,
     ]; // Assuming higher ID means newer
 
