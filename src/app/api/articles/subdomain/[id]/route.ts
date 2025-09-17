@@ -6,23 +6,55 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const desaId = parseInt(params.id);
-    if (isNaN(desaId)) {
-      return NextResponse.json({ error: "Invalid desa ID" }, { status: 400 });
+    const kecamatanId = parseInt(params.id);
+    if (isNaN(kecamatanId)) {
+      return NextResponse.json(
+        { error: "Invalid kecamatan ID" },
+        { status: 400 }
+      );
     }
 
-    // Get query parameters for filtering
+    // Ambil query params
     const { searchParams } = new URL(req.url);
-    const tipe = searchParams.get("tipe");
-    const status = searchParams.get("status") || "PUBLISHED";
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "6");
+
+    const desa_id = searchParams.get("desa_id")
+      ? parseInt(searchParams.get("desa_id")!)
+      : undefined;
+
+    const kategori_id = searchParams.get("kategori_id")
+      ? parseInt(searchParams.get("kategori_id")!)
+      : undefined;
+
+    const sub_kategori_id = searchParams.get("sub_kategori_id")
+      ? parseInt(searchParams.get("sub_kategori_id")!)
+      : undefined;
 
     const articles = await ArticlesKecamatanService.getArticlesByKecamatanId(
-      desaId
+      kecamatanId,
+      {
+        desa_id,
+        kategori_id,
+        sub_kategori_id,
+      }
     );
 
-    return NextResponse.json(articles);
+    const startIndex = (page - 1) * limit;
+    const paginatedItems = articles.slice(startIndex, startIndex + limit);
+
+    return NextResponse.json(
+      {
+        items: paginatedItems,
+        total: articles.length,
+        page,
+        limit,
+        totalPages: Math.ceil(articles.length / limit),
+      },
+      { status: 200 }
+    );
   } catch (error: any) {
-    console.error("GET /api/articles/subdomain/[id] error:", error);
+    console.error("GET /api/articles/kecamatan/[id] error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

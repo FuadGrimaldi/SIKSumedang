@@ -10,6 +10,7 @@ import {
   BarChart3,
   FileText,
   BookOpen,
+  Calendar,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -92,11 +93,15 @@ export default function NavGuest({
     //   ],
     // },
     {
+      name: "Acara",
+      icon: Calendar,
+      href: "/acara",
+    },
+    {
       name: "Publikasi",
       icon: FileText,
       submenu: [
         { name: "Berita & Informasi", href: "/berita" },
-        { name: "Agenda", href: "/agenda" },
         { name: "Galeri", href: "/galeri" },
         { name: "Video", href: "/video" },
         { name: "Informasi Lainnya", href: "/informasi-tambahan" },

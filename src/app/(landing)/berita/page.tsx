@@ -1,0 +1,22 @@
+import { headers } from "next/headers";
+import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
+import BeritaComp from "@/components/kecamatan/AllBerita";
+
+export default async function BeritaPage() {
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const kecamatan =
+    await ProfileKecamatanService.getKecamatanProfileBySubdomain(subdomain);
+  console.log(kecamatan);
+  return (
+    <div>
+      <div>
+        <BeritaComp
+          nama_kecamatan={kecamatan?.nama_kecamatan}
+          kecamatanId={Number(kecamatan?.id)}
+        />
+      </div>
+    </div>
+  );
+}

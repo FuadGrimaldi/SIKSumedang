@@ -177,12 +177,31 @@ export class ArticlesKecamatanService {
   }
   static async getArticlesByKecamatanId(
     kecamatan_id: number,
-    page: number = 1,
-    limit: number = 10
+    options?: {
+      desa_id?: number;
+      kategori_id?: number;
+      sub_kategori_id?: number;
+      page?: number;
+      limit?: number;
+    }
   ) {
+    const {
+      desa_id,
+      kategori_id,
+      sub_kategori_id,
+      page = 1,
+      limit = 10,
+    } = options || {};
+
     const skip = (page - 1) * limit;
+
+    const where: any = { kecamatan_id };
+    if (desa_id) where.desa_id = desa_id;
+    if (kategori_id) where.kategori_id = kategori_id;
+    if (sub_kategori_id) where.sub_kategori_id = sub_kategori_id;
+
     return prisma.articles.findMany({
-      where: { kecamatan_id },
+      where,
       include: {
         profile_kecamatan: {
           select: {
