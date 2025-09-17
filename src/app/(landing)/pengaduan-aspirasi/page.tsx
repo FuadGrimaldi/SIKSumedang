@@ -8,7 +8,6 @@ export default async function PengaduanAspirasiPage() {
   const subdomain = host.split(".")[0];
   const kecamatan =
     await ProfileKecamatanService.getKecamatanProfileBySubdomain(subdomain);
-  console.log(kecamatan);
   return (
     <div>
       <div>

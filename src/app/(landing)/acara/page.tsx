@@ -1,8 +1,8 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
-import ProfileComp from "@/components/kecamatan/Profile";
+import AcaraComp from "@/components/kecamatan/AllAcara";
 
-export default async function ProfilePage() {
+export default async function AcaraPage() {
   const headersList = headers();
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
@@ -11,7 +11,10 @@ export default async function ProfilePage() {
   return (
     <div>
       <div>
-        <ProfileComp kecamatanId={kecamatan?.id} />
+        <AcaraComp
+          nama_kecamatan={kecamatan?.nama_kecamatan}
+          kecamatanId={Number(kecamatan?.id)}
+        />
       </div>
     </div>
   );

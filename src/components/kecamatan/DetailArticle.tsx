@@ -17,7 +17,6 @@ const DetailArticle = ({ title }: ArticleDetailProps) => {
     try {
       const res = await fetch(`/api/articles/detail/${title}`);
       const data = await res.json();
-      console.log("Fetched article data:", data);
 
       if (data.error) {
         setError(data.error);
@@ -37,7 +36,6 @@ const DetailArticle = ({ title }: ArticleDetailProps) => {
       fetchArticle();
     }
   }, [title, fetchArticle]);
-  console.log("Article detail component title:", article);
   return <div>DetailArticle</div>;
 };
 

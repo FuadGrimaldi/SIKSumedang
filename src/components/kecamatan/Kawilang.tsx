@@ -32,7 +32,7 @@ const Kawilang = ({ kecamatanId }: AllBeritaProps) => {
         setAcara([]);
       } else {
         // Sort by published_at descending
-        const sortedAcara = data
+        const sortedAcara = data.items
           .sort(
             (a: Acara, b: Acara) =>
               new Date(b.waktu).getTime() - new Date(a.waktu).getTime()
@@ -115,9 +115,9 @@ const Kawilang = ({ kecamatanId }: AllBeritaProps) => {
                   d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v8m0 0V9a2 2 0 00-2-2H9m10 13a2 2 0 01-2-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2h10z"
                 />
               </svg>
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              <h2 className="text-lg font-semibold text-gray-700 mb-2">
                 Belum Ada Acara
-              </h3>
+              </h2>
               <p className="text-gray-500">
                 Tidak ada acara yang tersedia untuk kecamatan ini saat ini.
               </p>

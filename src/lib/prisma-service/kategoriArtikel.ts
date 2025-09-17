@@ -16,6 +16,7 @@ export class KategoriArtikelService {
   static async createKategoriArtikel(data: CreateKategoriArtikel) {
     try {
       const createData: any = {
+        kecamatan_id: data.kecamatan_id,
         nama: data.nama,
       };
       const kategoriArtikel = await prisma.kategori_article.create({
@@ -31,6 +32,8 @@ export class KategoriArtikelService {
   static async updateKategoriArtikel(id: number, data: UpdateKategoriArtikel) {
     try {
       const updateData: any = {};
+      if (data.kecamatan_id !== undefined)
+        updateData.kecamatan_id = data.kecamatan_id;
       if (data.nama !== undefined) updateData.nama = data.nama;
       const kategoriArtikel = await prisma.kategori_article.update({
         where: { id },

@@ -11,6 +11,7 @@ import {
   FileText,
   BookOpen,
   Calendar,
+  Newspaper,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -98,6 +99,11 @@ export default function NavGuest({
       href: "/acara",
     },
     {
+      name: "Artikel",
+      icon: Newspaper,
+      href: "/artikel",
+    },
+    {
       name: "Publikasi",
       icon: FileText,
       submenu: [
@@ -105,18 +111,6 @@ export default function NavGuest({
         { name: "Galeri", href: "/galeri" },
         { name: "Video", href: "/video" },
         { name: "Informasi Lainnya", href: "/informasi-tambahan" },
-      ],
-    },
-    {
-      name: "Direktori",
-      icon: BookOpen,
-      submenu: [
-        ...kategoris.map((kategori) => ({
-          name: kategori.nama_kategori,
-          href: `/direktori/${kategori.nama_kategori.toLowerCase()}`,
-        })),
-        { name: "Sarana", href: "/sarana" },
-        { name: "Wisata", href: "/wisata" },
       ],
     },
   ];

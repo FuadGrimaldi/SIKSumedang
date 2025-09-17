@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Breadcrumb from "../Breadchumb/Breadchumb";
 import { motion } from "framer-motion";
-import { Article } from "@/types/article";
+import { Acara } from "@/types/Acara";
 import CardNews from "../Card/NewsCard";
+import { BlogCard } from "../Card/CardAcaraLanding";
 
 interface LayananProps {
   nama_kecamatan?: string;
@@ -12,32 +13,32 @@ interface LayananProps {
 
 const ITEMS_PER_PAGE = 6;
 
-const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
+const AcaraComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [acara, setAcara] = useState<Acara[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch articles by kecamatan_id with pagination
-  const fetchArticles = useCallback(async () => {
+  // Fetch acara by kecamatan_id with pagination
+  const fetchAcara = useCallback(async () => {
     if (!kecamatanId) return;
 
     setLoading(true);
     setError(null);
     try {
       const res = await fetch(
-        `/api/articles/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}&kategori_id=1`
+        `/api/acara/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}`
       );
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
       const data = await res.json();
-      setArticles(data.items);
+      setAcara(data.items);
       setTotalItems(data.total);
     } catch (err) {
-      console.error("Error fetching articles:", err);
+      console.error("Error fetching acara:", err);
       setError("Gagal memuat artikel");
-      setArticles([]);
+      setAcara([]);
       setTotalItems(0);
     } finally {
       setLoading(false);
@@ -47,13 +48,13 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
   // Fetch data ketika kecamatanId atau page berubah
   useEffect(() => {
     if (kecamatanId) {
-      fetchArticles();
+      fetchAcara();
     } else {
       setLoading(false);
-      setArticles([]);
+      setAcara([]);
       setTotalItems(0);
     }
-  }, [kecamatanId, currentPage, fetchArticles]);
+  }, [kecamatanId, currentPage, fetchAcara]);
 
   // Initialize page from URL on component mount
   useEffect(() => {
@@ -147,15 +148,13 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
           <Breadcrumb
             links={[
               { to: "/", label: "Home" },
-              { to: "#", label: "Berita" },
+              { to: "#", label: "Acara" },
             ]}
           />
           <div className="relative mb-12">
-            <h1 className="text-2xl lg:text-4xl font-bold text-white">
-              Berita
-            </h1>
+            <h1 className="text-2xl lg:text-4xl font-bold text-white">Acara</h1>
             <p className="text-white text-sm lg:text-lg mt-1 mb-2 font-medium">
-              Berita Kecamatan {nama_kecamatan}
+              Acara Kecamatan {nama_kecamatan}
             </p>
             <div className="lg:w-72 w-full h-1 bg-blue-600 rounded-full"></div>
           </div>
@@ -168,12 +167,12 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
           <div className="max-w-5xl mx-auto">
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 text-center">
-                Update Berita & Informasi
+                Ketahui Lebih Banyak Acara di Kecamatan {nama_kecamatan}
               </h2>
               <p className="text-base text-gray-600 mb-8 text-center">
-                Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
-                dari kecamatan {nama_kecamatan} seputar kegiatan dan
-                perkembangan di lingkungan kita.
+                Temukan berbagai acara menarik yang berlangsung di kecamatan
+                ini. Dari festival budaya hingga kegiatan komunitas, selalu ada
+                sesuatu yang baru untuk dijelajahi.
               </p>
               {loading ? (
                 <div className="w-full max-w-7xl mx-auto px-4">
@@ -185,7 +184,7 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
                     ))}
                   </div>
                 </div>
-              ) : articles.length === 0 ? (
+              ) : acara.length === 0 ? (
                 <>
                   <div className="text-center py-4">
                     <div className="w-full bg-gray-50 rounded-lg p-8 inline-block">
@@ -203,10 +202,10 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
                         />
                       </svg>
                       <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                        Belum Ada Berita
+                        Belum Ada Acara
                       </h3>
                       <p className="text-gray-500">
-                        Tidak ada berita yang tersedia untuk kecamatan ini saat
+                        Tidak ada Acara yang tersedia untuk kecamatan ini saat
                         ini.
                       </p>
                     </div>
@@ -221,17 +220,8 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
                     transition={{ duration: 0.6 }}
                     className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
                   >
-                    {articles.map((article) => (
-                      <CardNews
-                        key={article.id}
-                        id={article.id}
-                        slug={article.slug}
-                        date={article.created_at}
-                        CardTitle={article.title}
-                        CardDescription={article.content}
-                        image={article.featured_image}
-                        category={article.kategori_article?.nama}
-                      />
+                    {acara.map((acara) => (
+                      <BlogCard key={acara.id} acara={acara} />
                     ))}
                   </motion.div>
                   {/* Pagination */}
@@ -304,7 +294,7 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
                       <div className="text-sm text-gray-600">
                         Showing {startIndex + 1} to{" "}
                         {Math.min(startIndex + ITEMS_PER_PAGE, totalItems)} of{" "}
-                        {totalItems} berita
+                        {totalItems} Acara
                       </div>
                     </div>
                   )}
@@ -325,4 +315,4 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
   );
 };
 
-export default BeritaComp;
+export default AcaraComp;

@@ -42,8 +42,8 @@ export async function PUT(
       );
     }
     const body = await req.json();
-    const { nama } = body;
-    if (!nama) {
+    const { nama, kecamatan_id } = body;
+    if (!nama || !kecamatan_id) {
       return NextResponse.json(
         { error: "Missing required field: nama" },
         { status: 400 }
@@ -52,6 +52,7 @@ export async function PUT(
     const updatedKategori = await KategoriArtikelService.updateKategoriArtikel(
       id,
       {
+        kecamatan_id,
         nama,
       }
     );

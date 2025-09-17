@@ -110,8 +110,8 @@ const BlogCard = ({ acara }: BlogCardProps) => {
           {/* Bagian Judul + Deskripsi */}
           <div className="flex justify-between items-center">
             <div className="flex-1">
-              <h3 className="mt-2 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
-                <h2 className="line-clamp-2">{acara.judul}</h2>
+              <h3 className="mt-2 text-lg font-semibold text-gray-900 hover:text-blue-600 transition line-clamp-2">
+                {acara.judul}
               </h3>
 
               <p className="text-sm text-gray-700 line-clamp-3">

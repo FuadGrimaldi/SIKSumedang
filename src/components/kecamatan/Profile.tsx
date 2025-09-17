@@ -45,7 +45,7 @@ const ProfileComp = ({ kecamatanId }: profileProps) => {
       fetchProfile();
     }
   }, [kecamatanId, fetchProfile]);
-  console.log("Profile component kecamatanId:", profile);
+
   return (
     <div className="relative bg-white">
       {/* Hero Section */}

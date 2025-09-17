@@ -16,7 +16,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { nama } = body;
+    const { nama, kecamatan_id } = body;
     if (!nama) {
       return NextResponse.json(
         { error: "Missing required field: nama" },
@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const newKategori = await KategoriArtikelService.createKategoriArtikel({
+      kecamatan_id,
       nama,
     });
     return NextResponse.json(newKategori, { status: 201 });

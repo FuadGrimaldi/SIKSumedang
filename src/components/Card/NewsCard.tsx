@@ -8,11 +8,29 @@ export default function CardNews({
   image,
   date,
   CardTitle,
+  slug,
   CardDescription,
 }) {
+  // Truncate deskripsi
+  const truncateContent = (content: string, maxLength: number = 50) => {
+    if (!content) return "";
+    const plainText = content.replace(/<[^>]*>/g, ""); // hapus tag HTML
+    return plainText.length > maxLength
+      ? plainText.substring(0, maxLength) + "..."
+      : plainText;
+  };
+
+  const formatDate = (dateString: string | Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
   return (
     <Link
-      href={`/berita/${id}`}
+      href={`/berita/${slug.replace(/\s+/g, "-").toLowerCase()}`}
       className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:-translate-y-1 overflow-hidden"
     >
       <div className="relative">
@@ -23,7 +41,7 @@ export default function CardNews({
           width={400}
           height={200}
         />
-        <div className="absolute top-0 right-0 text-black text-xs px-3 py-1 m-2 rounded backdrop-blur-xl bg-white/60">
+        <div className="absolute top-0 right-0 text-white text-xs px-3 py-1 m-2 rounded backdrop-blur-xl bg-blue-600/50">
           {category}
         </div>
       </div>
@@ -37,13 +55,13 @@ export default function CardNews({
               clipRule="evenodd"
             />
           </svg>
-          {date}
+          {formatDate(date)}
         </time>
         <h3 className="mt-4 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
           <span>{CardTitle}</span>
         </h3>
-        <div className="mt-2 text-sm text-gray-600">
-          {parse(CardDescription)}
+        <div className="mt-2 text-sm text-gray-600 line-clamp-3">
+          {parse(truncateContent(CardDescription))}
         </div>
       </div>
     </Link>

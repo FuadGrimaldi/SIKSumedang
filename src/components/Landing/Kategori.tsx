@@ -109,7 +109,7 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
             .map((kat, index) => {
               const IconComponent = getIconForCategory(kat.nama);
               return (
-                <Link key={kat.id} href={`/artikel/${kat.nama.toLowerCase()}`}>
+                <Link key={kat.id} href={`/artikel?kategori_id=${kat.id}`}>
                   <div className="bg-white hover:bg-blue-500 border border-gray-200 rounded-2xl px-4 py-3 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group cursor-pointer flex items-center space-x-3">
                     {/* Icon */}
                     <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110">
@@ -135,10 +135,7 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
                   const IconComponent = getIconForCategory(kat.nama);
 
                   return (
-                    <Link
-                      key={kat.id}
-                      href={`/artikel/${kat.nama.toLowerCase()}`}
-                    >
+                    <Link key={kat.id} href={`/artikel?kategori_id=${kat.id}`}>
                       <div className="bg-white hover:bg-blue-500 border border-gray-200 rounded-2xl px-4 py-3 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group cursor-pointer flex items-center space-x-3">
                         {/* Icon */}
                         <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110">

@@ -57,7 +57,16 @@ export class AcaraKecamatanService {
   }
 
   // Get Acaras by kecamatan_id
-  static async getAcaraByKecamatanId(kecamatan_id: number) {
+  static async getAcaraByKecamatanId(
+    kecamatan_id: number,
+    options?: {
+      page?: number;
+      limit?: number;
+    }
+  ) {
+    const { page = 1, limit = 10 } = options || {};
+    const skip = (page - 1) * limit;
+
     return prisma.acara.findMany({
       where: { kecamatan_id },
       include: {
@@ -75,6 +84,8 @@ export class AcaraKecamatanService {
         },
       },
       orderBy: { created_at: "desc" },
+      skip,
+      take: limit,
     });
   }
   // Update an existing Acara

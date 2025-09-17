@@ -52,7 +52,6 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
       }
 
       const data = await res.json();
-      console.log("Fetched articles data:", data);
 
       if (data.error) {
         setError(data.error);
@@ -61,7 +60,7 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
         setPengumuman([]);
       } else {
         // Sort by published_at descending
-        const sortedArticles = data
+        const sortedArticles = data.items
           .sort(
             (a: Article, b: Article) =>
               new Date(b.published_at).getTime() -
@@ -71,7 +70,7 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
             (article: Article) =>
               article.kategori_id !== 8 && article.status === "published"
           );
-        const pengumumanTerbaru = data
+        const pengumumanTerbaru = data.items
           .filter((a: Article) => a.kategori_id === 8)
           .sort(
             (a: Article, b: Article) =>
@@ -105,8 +104,6 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
       setLoading(false);
     }
   }, [kecamatanId, fetchArticles, fetchInfografis]);
-
-  console.log("Articles:", articles);
 
   // Loading state
   if (loading) {
