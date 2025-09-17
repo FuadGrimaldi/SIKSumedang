@@ -6,6 +6,7 @@ import LaporCard from "@/components/Card/LaporCard";
 import GalleryCard from "@/components/Card/GalleryCard";
 import HeroImage from "@/components/Landing/HeroImage";
 import Kawilang from "@/components/kecamatan/Kawilang";
+import KategoriComp from "@/components/Landing/Kategori";
 export default async function Home() {
   const headersList = headers();
   const host = headersList.get("host") || "";
@@ -17,7 +18,10 @@ export default async function Home() {
       <div>
         <HeroImage subdomain={kecamatan?.nama_kecamatan || ""} />
       </div>
-      <div className="px-[31px] lg:px-[100px] py-16 bg-gray-50  ">
+      <div className="px-[31px] lg:px-[100px] py-8 bg-gray-100  ">
+        <KategoriComp kecamatanId={Number(kecamatan?.id)} />
+      </div>
+      <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
         <Kawilang kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">

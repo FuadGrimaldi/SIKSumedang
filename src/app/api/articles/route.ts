@@ -3,7 +3,7 @@ import { ArticlesKecamatanService } from "@/lib/prisma-service/articleskecamatan
 import { writeFile } from "fs/promises";
 import fs from "fs";
 import path from "path";
-import { ArticleType, ArticleStatus, ArticleCreate } from "@/types/article";
+import { ArticleStatus, ArticleCreate } from "@/types/article";
 
 export async function GET() {
   try {
@@ -22,8 +22,10 @@ export async function POST(req: NextRequest) {
 
     // Extract form fields
     const user_id = formData.get("user_id") as string;
+    const desa_id = formData.get("desa_id") as string;
+    const kategori_id = formData.get("kategori_id") as string;
+    const sub_kategori_id = formData.get("sub_kategori_id") as string;
     const kecamatan_id = formData.get("kecamatan_id") as string;
-    const tipe = formData.get("tipe") as string;
     const title = formData.get("title") as string;
     const slug = formData.get("slug") as string;
     const content = formData.get("content") as string;
@@ -35,7 +37,14 @@ export async function POST(req: NextRequest) {
     const published_at = formData.get("published_at") as string;
 
     // Validation
-    if (!user_id || !kecamatan_id || !tipe || !title || !slug || !content) {
+    if (
+      !user_id ||
+      !kecamatan_id ||
+      !kategori_id ||
+      !title ||
+      !slug ||
+      !content
+    ) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -85,7 +94,9 @@ export async function POST(req: NextRequest) {
     const articleData: ArticleCreate = {
       user_id: parseInt(user_id),
       kecamatan_id: parseInt(kecamatan_id),
-      tipe: tipe as ArticleType, // enum
+      desa_id: desa_id ? parseInt(desa_id) : null,
+      kategori_id: parseInt(kategori_id),
+      sub_kategori_id: sub_kategori_id ? parseInt(sub_kategori_id) : null,
       title,
       slug,
       content,

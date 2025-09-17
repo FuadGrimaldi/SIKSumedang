@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Acara } from "@/types/Acara";
-import { PencilIcon } from "lucide-react";
+import { ArrowBigRight, ArrowRight, LinkIcon, PencilIcon } from "lucide-react";
+import Link from "next/link";
 
 interface BlogCardProps {
   acara: Acara;
@@ -105,17 +106,29 @@ const BlogCard = ({ acara }: BlogCardProps) => {
           </span>
         </div>
 
-        {/* Judul */}
-        <h3 className="mt-2 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
-          <a href={`/acara/${acara.slug}`} className="line-clamp-2">
-            {acara.judul}
-          </a>
-        </h3>
+        <div className="flex flex-col space-y-2">
+          {/* Bagian Judul + Deskripsi */}
+          <div className="flex justify-between items-center">
+            <div className="flex-1">
+              <h3 className="mt-2 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
+                <h2 className="line-clamp-2">{acara.judul}</h2>
+              </h3>
 
-        {/* Deskripsi */}
-        <p className="text-sm text-gray-700 line-clamp-3">
-          {truncateContent(acara.deskripsi)}
-        </p>
+              <p className="text-sm text-gray-700 line-clamp-3">
+                {truncateContent(acara.deskripsi)}
+              </p>
+            </div>
+
+            {/* Icon Link */}
+            <Link
+              href={`/acara/${acara.slug}`}
+              className="ml-3 p-2 rounded-full hover:bg-blue-100 transition"
+              title="Lihat detail acara"
+            >
+              <ArrowRight className="w-6 h-6 text-blue-600" />
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
