@@ -18,6 +18,15 @@ export interface Acara {
   status_acara: StatusAcara;
   created_at: string; // ISO date string
   updated_at: string; // ISO date string
+  users?: {
+    id: number;
+    full_name: string;
+    email: string;
+  } | null; // Optional user relation
+  kecamatan?: {
+    id: number;
+    nama_kecamatan: string;
+  } | null; // Optional kecamatan relation
 }
 
 export interface CreateAcaraData {

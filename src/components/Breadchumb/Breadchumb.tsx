@@ -10,6 +10,13 @@ interface BreadcrumbProps {
 }
 
 function Breadcrumb({ links }: BreadcrumbProps) {
+  const truncateContent = (content: string, maxLength: number = 20) => {
+    if (!content) return "";
+    const plainText = content.replace(/<[^>]*>/g, ""); // hapus tag HTML
+    return plainText.length > maxLength
+      ? plainText.substring(0, maxLength) + "..."
+      : plainText;
+  };
   return (
     <nav
       className="relative py-2 text-white text-sm font-medium flex mb-4"
@@ -27,7 +34,7 @@ function Breadcrumb({ links }: BreadcrumbProps) {
                   : "text-white hover:text-blue-400"
               }
             >
-              {link.label}
+              {truncateContent(link.label)}
               {links.length === 1 && <span className={`px-2`}>/</span>}
             </Link>
           </li>

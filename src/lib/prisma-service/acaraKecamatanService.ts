@@ -23,6 +23,28 @@ export class AcaraKecamatanService {
     });
   }
 
+  // Get Acara by title (slug)
+  static async getAcaraBySlug(title: string) {
+    return prisma.acara.findUnique({
+      where: { slug: title },
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+
   // Create a new Acara
   static async createAcara(data: CreateAcaraData) {
     try {

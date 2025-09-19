@@ -202,8 +202,6 @@ const ArtikelComp = ({
   useEffect(() => {
     if (kecamatanId && isFilterInitialized) {
       fetchArticles();
-    } else if (kecamatanId && !isFilterInitialized) {
-      fetchArticles();
     }
   }, [filters, kecamatanId, currentPage, isFilterInitialized, fetchArticles]);
 
@@ -215,6 +213,7 @@ const ArtikelComp = ({
   // Parse initial filters dari URL / props
   useEffect(() => {
     if (typeof window !== "undefined") {
+      setIsFilterInitialized(true);
       const urlParams = new URLSearchParams(window.location.search);
       const pageParam = urlParams.get("page");
       if (pageParam) {
@@ -276,7 +275,6 @@ const ArtikelComp = ({
         initialFiltersState.sub_kategori_id.length > 0
       ) {
         setFilters(initialFiltersState);
-        setIsFilterInitialized(true);
       }
     }
   }, [initialFilters]);
