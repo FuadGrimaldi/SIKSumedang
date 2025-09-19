@@ -401,10 +401,6 @@ const AcaraDetailComp = ({ title, nama_kecamatan }: AcaraDetailsProps) => {
                         </div>
                       )}
                     </div>
-                    {/* <CommentSection
-                      articleId={acara.id}
-                      kecamatanId={acara.id}
-                    /> */}
                   </motion.div>
                 </div>
               </div>
