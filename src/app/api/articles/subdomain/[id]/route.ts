@@ -39,17 +39,20 @@ export async function GET(
         sub_kategori_id,
       }
     );
-
+    const filterArticles = articles.filter(
+      (articles) => articles.kategori_id !== 1 && articles.kategori_id !== 8
+    );
+    // Pagination
     const startIndex = (page - 1) * limit;
-    const paginatedItems = articles.slice(startIndex, startIndex + limit);
+    const paginatedItems = filterArticles.slice(startIndex, startIndex + limit);
 
     return NextResponse.json(
       {
         items: paginatedItems,
-        total: articles.length,
+        total: filterArticles.length,
         page,
         limit,
-        totalPages: Math.ceil(articles.length / limit),
+        totalPages: Math.ceil(filterArticles.length / limit),
       },
       { status: 200 }
     );

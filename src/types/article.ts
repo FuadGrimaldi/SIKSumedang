@@ -24,9 +24,9 @@ export interface Article {
   published_at: string; // ISO date string
   created_at: string; // ISO date string
   updated_at: string; // ISO date string
-  profile_desa?: {
+  profile_kecamatan?: {
     id: number;
-    nama_desa: string;
+    nama_kecamatan: string;
   } | null; // optional, for include
   users?: {
     id: number;

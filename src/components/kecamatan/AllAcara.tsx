@@ -103,7 +103,7 @@ const AcaraComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
   const getPageNumbers = useCallback(() => {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const pageNumbers: number[] = [];
-    const maxVisiblePages = 5;
+    const maxVisiblePages = 3;
 
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {
@@ -167,12 +167,12 @@ const AcaraComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
           <div className="max-w-5xl mx-auto">
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 text-center">
-                Ketahui Lebih Banyak Acara di Kecamatan {nama_kecamatan}
+                Kalender Wisata Seni dan Budaya {nama_kecamatan} Sumedang
               </h2>
               <p className="text-base text-gray-600 mb-8 text-center">
-                Temukan berbagai acara menarik yang berlangsung di kecamatan
-                ini. Dari festival budaya hingga kegiatan komunitas, selalu ada
-                sesuatu yang baru untuk dijelajahi.
+                KAWILANG Menyajikan informasi terkini seputar acara dan kegiatan
+                menarik di Kecamatan {nama_kecamatan}. Temukan berbagai acara
+                budaya, seni, dan komunitas yang dapat Anda ikuti atau kunjungi.
               </p>
               {loading ? (
                 <div className="w-full max-w-7xl mx-auto px-4">

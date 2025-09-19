@@ -3,10 +3,11 @@ import News from "@/components/News/News";
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import LaporCard from "@/components/Card/LaporCard";
-import GalleryCard from "@/components/Card/GalleryCard";
 import HeroImage from "@/components/Landing/HeroImage";
 import Kawilang from "@/components/kecamatan/Kawilang";
 import KategoriComp from "@/components/Landing/Kategori";
+import { Metadata } from "next";
+
 export default async function Home() {
   const headersList = headers();
   const host = headersList.get("host") || "";
@@ -26,9 +27,6 @@ export default async function Home() {
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
         <News kecamatanId={Number(kecamatan?.id)} />
-      </div>
-      <div className="px-[31px] lg:px-[100px] py-2 bg-gray-50 pt-[50px]">
-        <GalleryCard kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50">
         <LaporCard />

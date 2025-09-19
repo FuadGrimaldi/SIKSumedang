@@ -27,7 +27,7 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
     setError(null);
     try {
       const res = await fetch(
-        `/api/articles/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}&kategori_id=1`
+        `/api/articles/berita/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}`
       );
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
@@ -102,7 +102,7 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
   const getPageNumbers = useCallback(() => {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const pageNumbers: number[] = [];
-    const maxVisiblePages = 5;
+    const maxVisiblePages = 3;
 
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {

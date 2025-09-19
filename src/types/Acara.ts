@@ -1,7 +1,6 @@
 export enum StatusAcara {
-  Pending = "pending",
-  Approved = "approved",
-  Rejected = "rejected",
+  published = "published",
+  draft = "draft",
 }
 
 export interface Acara {

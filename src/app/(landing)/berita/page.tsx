@@ -1,6 +1,14 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import BeritaComp from "@/components/kecamatan/AllBerita";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Berita Kecamatan",
+    description: "Kumpulan Berita Menarik dari Kecamatan Anda",
+  };
+}
 
 export default async function BeritaPage() {
   const headersList = headers();

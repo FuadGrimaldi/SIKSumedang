@@ -2,6 +2,15 @@ import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import StrukturComp from "@/components/kecamatan/Struktur";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Struktur Kecamatan",
+    description: "Struktur Organisasi dan Tupoksi di Kecamatan Anda",
+  };
+}
+
 export default async function StruturPage() {
   const headersList = headers();
   const host = headersList.get("host") || "";

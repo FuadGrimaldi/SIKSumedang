@@ -1,7 +1,14 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
-import ProfileComp from "@/components/kecamatan/Profile";
-import DetailArticle from "@/components/kecamatan/DetailArticle";
+import ArtikelDetailComp from "@/components/kecamatan/DetailArticle";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Detail Artikel",
+    description: "Baca Artikel Menarik dari Kecamatan Anda",
+  };
+}
 
 type Props = {
   params: { title: string };
@@ -17,7 +24,7 @@ export default async function DetailArticlePage({ params }: Props) {
   return (
     <div>
       <div>
-        <DetailArticle title={title} />
+        <ArtikelDetailComp title={title} />
       </div>
     </div>
   );

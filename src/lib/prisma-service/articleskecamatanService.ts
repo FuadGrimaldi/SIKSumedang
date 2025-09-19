@@ -13,6 +13,12 @@ export class ArticlesKecamatanService {
             nama_kecamatan: true,
           },
         },
+        desa: {
+          select: {
+            id: true,
+            nama_desa: true,
+          },
+        },
         users: {
           select: {
             id: true,
@@ -195,7 +201,7 @@ export class ArticlesKecamatanService {
 
     const skip = (page - 1) * limit;
 
-    const where: any = { kecamatan_id };
+    const where: any = { kecamatan_id, status: "published" };
     if (desa_id) where.desa_id = desa_id;
     if (kategori_id) where.kategori_id = kategori_id;
     if (sub_kategori_id) where.sub_kategori_id = sub_kategori_id;

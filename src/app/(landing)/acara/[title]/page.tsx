@@ -1,6 +1,14 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import AcaraDetailComp from "@/components/kecamatan/DetailAcara";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Kawilang - Detail Acara",
+    description: "Kunjungi dan Ikuti Acara Menarik di Kecamatan Rancakalong",
+  };
+}
 
 type Props = {
   params: { title: string };

@@ -9,10 +9,10 @@ interface GaleriProps {
   kecamatanId: number;
 }
 
+const ITEMS_PER_PAGE = 8;
 const GalleryCard = ({ kecamatanId }: GaleriProps) => {
   const [galleryItems, setGalleryData] = useState<GalleryItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 6;
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +51,70 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
       setTotalItems(0);
       setLoading(false);
     }
-  }, [fetchGalleryData, kecamatanId]);
+  }, [fetchGalleryData, currentPage, kecamatanId]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get("page");
+      if (pageParam) {
+        const pageNum = parseInt(pageParam);
+        if (!isNaN(pageNum) && pageNum > 0) {
+          setCurrentPage(pageNum);
+        }
+      }
+    }
+  }, []);
+  const updateURL = useCallback((page: number) => {
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (page === 1) {
+        url.searchParams.delete("page");
+      } else {
+        url.searchParams.set("page", page.toString());
+      }
+      window.history.pushState({}, "", url.toString());
+    }
+  }, []);
+  // Update URL when page changes
+  useEffect(() => {
+    updateURL(currentPage);
+  }, [currentPage, updateURL]);
+  // Handle page change
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+      if (page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+      }
+    },
+    [totalItems]
+  );
+
+  // Generate page numbers for pagination
+  const getPageNumbers = useCallback(() => {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const pageNumbers: number[] = [];
+    const maxVisiblePages = 3;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      let start = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      const end = Math.min(totalPages, start + maxVisiblePages - 1);
+
+      if (end - start + 1 < maxVisiblePages) {
+        start = Math.max(1, end - maxVisiblePages + 1);
+      }
+
+      for (let i = start; i <= end; i++) {
+        pageNumbers.push(i);
+      }
+    }
+
+    return pageNumbers;
+  }, [totalItems, currentPage]);
 
   // Handle image click for lightbox
   const handleImageClick = (item: GalleryItem) => {
@@ -61,20 +124,19 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
   const closeLightbox = () => {
     setSelectedImage(null);
   };
+  // Calculate pagination values
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
 
   // Loading state
   if (loading) {
     return (
-      <div className="container">
-        <div className="text-right mb-[35px]">
-          <h1 className="lg:text-4xl text-2xl font-bold text-gray-800 mb-4">
-            Galeri dan Infografis
-          </h1>
-          <p className="text-base text-gray-600 lg:w-[50%] w-[75%] justify-self-end">
-            Temukan berbagai foto dan infografis menarik serta informasi penting
-            dari kegiatan dan peristiwa di Kecamatan.
-          </p>
-        </div>
+      <div>
+        <p className="text-base text-gray-600 mb-8 text-center">
+          Galeri foto kegiatan dan dokumentasi Kecamatan. Temukan berbagai momen
+          penting, aktivitas, dan suasana di wilayah kecamatan melalui koleksi
+          gambar yang tersedia di bawah ini.
+        </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (
             <div
@@ -89,16 +151,12 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
 
   if (galleryItems.length === 0) {
     return (
-      <div className="container">
-        <div className="text-right mb-[35px]">
-          <h1 className="lg:text-4xl text-3xl font-bold text-gray-800 mb-4">
-            Galeri dan Infografis
-          </h1>
-          <p className="text-base text-gray-600 lg:w-[50%] w-[75%] justify-self-end">
-            Temukan berbagai foto dan infografis menarik serta informasi penting
-            dari kegiatan dan peristiwa di Kecamatan.
-          </p>
-        </div>
+      <div>
+        <p className="text-base text-gray-600 mb-8 text-center">
+          Galeri foto kegiatan dan dokumentasi Kecamatan. Temukan berbagai momen
+          penting, aktivitas, dan suasana di wilayah kecamatan melalui koleksi
+          gambar yang tersedia di bawah ini.
+        </p>
         <div className="text-center py-4">
           <div className="w-full bg-gray-50 rounded-lg p-8 inline-block">
             <svg
@@ -128,17 +186,11 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
 
   return (
     <div>
-      {/* Header Section */}
-      <div className="text-right mb-[35px]">
-        <h1 className="lg:text-4xl text-3xl font-bold text-gray-800 mb-4">
-          Galeri dan Infografis
-        </h1>
-        <p className="text-base text-gray-600 lg:w-[50%] w-[75%] justify-self-end">
-          Temukan berbagai foto dan infografis menarik serta informasi penting
-          dari kegiatan dan peristiwa di Kecamatan.
-        </p>
-      </div>
-
+      <p className="text-base text-gray-600 mb-8 text-center">
+        Galeri foto kegiatan dan dokumentasi Kecamatan. Temukan berbagai momen
+        penting, aktivitas, dan suasana di wilayah kecamatan melalui koleksi
+        gambar yang tersedia di bawah ini.
+      </p>
       {/* Cards Grid */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -177,6 +229,80 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
           </motion.div>
         ))}
       </motion.div>
+      {/* Enhanced Pagination */}
+      {totalPages > 1 && (
+        <div className="flex flex-col items-center space-y-4 mt-8">
+          <div className="flex items-center justify-center space-x-2">
+            {/* Previous Button */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors"
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Previous
+            </button>
+
+            {/* Page Numbers */}
+            <div className="flex space-x-1">
+              {getPageNumbers().map((pageNum) => (
+                <button
+                  key={pageNum}
+                  onClick={() => handlePageChange(pageNum)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    currentPage === pageNum
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors"
+            >
+              Next
+              <svg
+                className="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Page Info */}
+          <div className="text-sm text-gray-600">
+            Showing {startIndex + 1} to{" "}
+            {Math.min(startIndex + ITEMS_PER_PAGE, totalItems)} of {totalItems}{" "}
+            foto
+          </div>
+        </div>
+      )}
       {/* Lightbox Modal */}
       <AnimatePresence>
         {selectedImage && (

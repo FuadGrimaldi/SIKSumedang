@@ -1,6 +1,14 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import AcaraComp from "@/components/kecamatan/AllAcara";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Kawilang - Acara Rancakalong",
+    description: "Kalender Wisata Seni dan Budaya Rancakalong Sumedang",
+  };
+}
 
 export default async function AcaraPage() {
   const headersList = headers();

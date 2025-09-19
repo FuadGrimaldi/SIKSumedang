@@ -3,8 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Breadcrumb from "../Breadchumb/Breadchumb";
 import { motion } from "framer-motion";
 import { Article } from "@/types/article";
-import CardNews from "../Card/NewsCard";
-import { filter } from "framer-motion/m";
+import CardArtikel from "../Card/ArticleCard";
 
 interface LayananProps {
   nama_kecamatan?: string;
@@ -173,13 +172,7 @@ const ArtikelComp = ({
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
       const data = await res.json();
-      const filteredArticles = data.items.filter(
-        (article: Article) =>
-          article.kategori_id !== 1 &&
-          article.kategori_id !== 8 &&
-          article.status === "published"
-      );
-      setArticles(filteredArticles || []);
+      setArticles(data.items || []);
       setTotalItems(data.total || 0);
     } catch (err) {
       console.error("Error fetching articles:", err);
@@ -389,7 +382,7 @@ const ArtikelComp = ({
   const getPageNumbers = useCallback(() => {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const pageNumbers: number[] = [];
-    const maxVisiblePages = 5;
+    const maxVisiblePages = 3;
 
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {
@@ -548,7 +541,7 @@ const ArtikelComp = ({
                       className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
                     >
                       {articles.map((article) => (
-                        <CardNews
+                        <CardArtikel
                           key={article.id}
                           id={article.id}
                           slug={article.slug}

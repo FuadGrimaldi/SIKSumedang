@@ -149,9 +149,9 @@ const ProfileComp = ({ kecamatanId }: profileProps) => {
                   {/* Map */}
                   <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <div className="bg-gray-400 p-4">
-                      <h3 className="text-xl font-bold text-white flex items-center">
+                      <h3 className="lg:text-xl text-lg font-bold text-white flex items-center">
                         <MapPin className="w-5 h-5 mr-2" />
-                        Lokasi Kantor Desa
+                        Lokasi Kantor Kecamatan
                       </h3>
                     </div>
                     <div className="p-6">

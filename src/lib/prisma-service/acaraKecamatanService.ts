@@ -90,7 +90,10 @@ export class AcaraKecamatanService {
     const skip = (page - 1) * limit;
 
     return prisma.acara.findMany({
-      where: { kecamatan_id },
+      where: {
+        kecamatan_id,
+        status_acara: "published",
+      },
       include: {
         profile_kecamatan: {
           select: {

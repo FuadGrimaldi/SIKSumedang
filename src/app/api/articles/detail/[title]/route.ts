@@ -14,7 +14,7 @@ export async function GET(
       );
     }
 
-    const article = await ArticlesKecamatanService.getArticleBytitle(title);
+    const article = await ArticlesKecamatanService.getArticleBySlug(title);
     if (!article) {
       return NextResponse.json({ error: "Article not found" }, { status: 404 });
     }
