@@ -45,7 +45,9 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
     setError(null);
     try {
       // Gunakan endpoint khusus untuk desa dengan filter
-      const res = await fetch(`/api/articles/subdomain/${kecamatanId}`);
+      const res = await fetch(
+        `/api/articles/berita/subdomain/${kecamatanId}?page=1&limit=6&kategori_id=1`
+      );
 
       if (!res.ok) {
         throw new Error("Failed to fetch articles");
@@ -56,40 +58,43 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
       if (data.error) {
         setError(data.error);
         setArticles([]);
-        setSidebarArticles([]);
-        setPengumuman([]);
       } else {
-        // Sort by published_at descending
-        const sortedArticles = data.items
-          .sort(
-            (a: Article, b: Article) =>
-              new Date(b.published_at).getTime() -
-              new Date(a.published_at).getTime()
-          )
-          .filter(
-            (article: Article) =>
-              article.kategori_id !== 8 && article.status === "published"
-          );
-        const pengumumanTerbaru = data.items
-          .filter((a: Article) => a.kategori_id === 8)
-          .sort(
-            (a: Article, b: Article) =>
-              new Date(b.published_at).getTime() -
-              new Date(a.published_at).getTime()
-          )
-          .slice(0, 3);
-
-        setPengumuman(pengumumanTerbaru);
-
-        setArticles(sortedArticles);
-        // Set different articles for sidebar (skip first 3 for main display)
-        setSidebarArticles(sortedArticles.slice(3, 7));
+        setArticles(data.items || []);
       }
     } catch (error) {
       console.error("Error fetching articles:", error);
       setError("Gagal memuat artikel");
       setArticles([]);
-      setSidebarArticles([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [kecamatanId]);
+  // Fetch articles by desa_id
+  const fetchArticlesAn = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Gunakan endpoint khusus untuk desa dengan filter
+      const res = await fetch(
+        `/api/articles/berita/subdomain/${kecamatanId}?page=1&limit=6&kategori_id=8`
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch articles");
+      }
+
+      const data = await res.json();
+
+      if (data.error) {
+        setError(data.error);
+        setPengumuman([]);
+      } else {
+        setPengumuman(data.items || []);
+      }
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      setError("Gagal memuat artikel");
+      setPengumuman([]);
     } finally {
       setLoading(false);
     }
@@ -100,10 +105,11 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
     if (kecamatanId) {
       fetchArticles();
       fetchInfografis();
+      fetchArticlesAn();
     } else {
       setLoading(false);
     }
-  }, [kecamatanId, fetchArticles, fetchInfografis]);
+  }, [kecamatanId, fetchArticles, fetchInfografis, fetchArticlesAn]);
 
   // Loading state
   if (loading) {
@@ -128,7 +134,7 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
     );
   }
   // Get first 3 articles for main display
-  const displayedNews = articles.slice(0, 3);
+  const displayedNews = articles.slice(0, 4);
 
   return (
     <section>
@@ -182,9 +188,11 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
                 </div>
                 <div>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {displayedNews.map((article) => (
-                      <BlogCard key={article.id} article={article} />
-                    ))}
+                    {displayedNews
+                      .map((article) => (
+                        <BlogCard key={article.id} article={article} />
+                      ))
+                      .slice(1)}
                   </div>
                   {/* Read More Button */}
                   <div className="mt-8">

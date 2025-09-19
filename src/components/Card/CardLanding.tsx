@@ -108,7 +108,7 @@ const BlogCardSingle = ({ article }: BlogCardProps) => {
             {/* Title */}
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 leading-tight">
               <a
-                href={`/artikel/${article.title}`}
+                href={`/berita/${article.slug}`}
                 className="hover:text-blue-600 transition-colors duration-200 cursor-pointer"
               >
                 {article.title}
@@ -232,7 +232,7 @@ const BlogCard = ({ article }: BlogCardProps) => {
           </div>
         </div>
         <h3 className="mt-2 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
-          <a href={`/artikel/${article.title}`} className="line-clamp-2">
+          <a href={`/berita/${article.slug}`} className="line-clamp-2">
             {article.title}
           </a>
         </h3>

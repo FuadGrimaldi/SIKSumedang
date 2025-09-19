@@ -27,8 +27,9 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
     setError(null);
     try {
       const res = await fetch(
-        `/api/articles/berita/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}`
+        `/api/articles/berita/subdomain/${kecamatanId}?page=${currentPage}&limit=${ITEMS_PER_PAGE}&kategori_id=1`
       );
+      console.log(res);
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
       const data = await res.json();
@@ -54,6 +55,7 @@ const BeritaComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
       setTotalItems(0);
     }
   }, [kecamatanId, currentPage, fetchArticles]);
+  console.log("Articles State:", articles);
 
   // Initialize page from URL on component mount
   useEffect(() => {

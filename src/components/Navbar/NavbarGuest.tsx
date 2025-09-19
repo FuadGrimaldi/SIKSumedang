@@ -82,6 +82,7 @@ export default function NavGuest({
       icon: ClipboardPen,
       submenu: [
         { name: "Daftar Layanan", href: "/layanan" },
+        { name: "SIPPAdes", href: "/sippades" },
         {
           name: "Data Desa Cantik",
           href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/kecamatan/${kecamatanId}`,
@@ -162,7 +163,7 @@ export default function NavGuest({
                   {item.submenu ? (
                     <div className="relative">
                       <button className="flex items-center px-4 py-2 text-white hover:text-gray-100 hover:backdrop-blur-sm hover:bg-gray-600/60 rounded-lg transition-all duration-200 group">
-                        <span className="font-medium text-[17px]">
+                        <span className="font-medium text-[16px]">
                           {item.name}
                         </span>
                         <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
@@ -173,7 +174,7 @@ export default function NavGuest({
                             <Link
                               key={subindex}
                               href={subitem.href}
-                              className="block text-[17px] px-4 py-3 text-white hover:text-gray-100 hover:backdrop-blur-md hover:bg-gray-600/60 transition-colors duration-200 font-medium"
+                              className="block text-[16px] px-4 py-3 text-white hover:text-gray-100 hover:backdrop-blur-md hover:bg-gray-600/60 transition-colors duration-200 font-medium"
                             >
                               {subitem.name}
                             </Link>
@@ -184,7 +185,7 @@ export default function NavGuest({
                   ) : (
                     <a
                       href={item.href}
-                      className="flex items-center text-[17px] px-4 py-2 text-white hover:text-gray-100 hover:backdrop-blur-sm hover:bg-gray-600/60 rounded-lg transition-all duration-200 font-medium"
+                      className="flex items-center text-[16px] px-4 py-2 text-white hover:text-gray-100 hover:backdrop-blur-sm hover:bg-gray-600/60 rounded-lg transition-all duration-200 font-medium"
                     >
                       {item.name}
                     </a>
