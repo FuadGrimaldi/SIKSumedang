@@ -10,7 +10,7 @@ export interface SubKategoriArtikel {
   id: number;
   kecamatan_id: number;
   kategori_id: number;
-  nama_sub: string;
+  sub_nama: string;
   created_at: string;
   updated_at: string;
 }
@@ -27,11 +27,11 @@ export interface UpdateKategoriArtikel {
 export interface CreateSubKategoriArtikel {
   kecamatan_id: number;
   kategori_id: number;
-  nama_sub: string;
+  sub_nama: string;
 }
 
 export interface UpdateSubKategoriArtikel {
   kecamatan_id?: number;
   kategori_id?: number;
-  nama_sub?: string;
+  sub_nama?: string;
 }

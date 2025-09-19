@@ -80,7 +80,7 @@ const ArtikelComp = ({
 
     setLoadingDesa(true);
     try {
-      const res = await fetch(`/api/articles/desa/subdomain/${kecamatanId}`);
+      const res = await fetch(`/api/desa/subdomain/${kecamatanId}`);
       if (res.ok) {
         const data = await res.json();
         setDesaOptions(data || []);
