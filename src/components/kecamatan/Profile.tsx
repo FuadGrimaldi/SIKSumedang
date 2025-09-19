@@ -188,11 +188,13 @@ const ProfileComp = ({ kecamatanId }: profileProps) => {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Senin - Jumat</span>
-                      <span className="font-medium">08:00 - 16:00</span>
+                      <span className="font-medium text-gray-500">
+                        08:00 - 16:00
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Sabtu</span>
-                      <span className="font-medium">08:00 - 12:00</span>
+                      <span className="font-medium text-red-500">Tutup</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Minggu</span>

@@ -58,6 +58,8 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
   useEffect(() => {
     if (kecamatanId) {
       fetchKategori();
+    } else {
+      setLoading(false);
     }
   }, [fetchKategori, kecamatanId]);
 
@@ -69,12 +71,9 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
   if (loading) {
     return (
       <div className="w-full max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="animate-pulse">
-              <div className="bg-gray-200 rounded-3xl h-32 w-full"></div>
-            </div>
-          ))}
+        <div className="flex justify-center items-center min-h-[200px]">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <span className="ml-3 text-gray-500">Memuat berita...</span>
         </div>
       </div>
     );
@@ -85,6 +84,56 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="bg-red-50 border border-red-200 rounded-2xl p-6 text-center">
           <p className="text-red-600 font-medium">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (kategori.length === 0) {
+    return (
+      <div className="w-full max-w-7xl mx-auto lg:px-4 px-0">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Jelajahi berbagai kategori artikel yang mencerminkan kekayaan budaya
+            dan informasi Sunda
+          </p>
+        </div>
+
+        <div className="text-center py-4">
+          <div className="w-full bg-gray-50 rounded-lg p-8 inline-block">
+            <svg
+              className="w-16 h-16 text-gray-400 mx-auto mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v8m0 0V9a2 2 0 00-2-2H9m10 13a2 2 0 01-2-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2h10z"
+              />
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              Belum Ada Kategori
+            </h3>
+            <p className="text-gray-500">
+              Tidak ada Kategori yang tersedia untuk kecamatan ini saat ini.
+            </p>
+          </div>
+        </div>
+
+        {/* Decorative Elements */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center space-x-2 text-gray-400">
+            <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+            <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+            <span className="text-sm font-medium ml-2">
+              Warisan Budaya Sunda
+            </span>
+          </div>
         </div>
       </div>
     );

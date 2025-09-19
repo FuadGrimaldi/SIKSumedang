@@ -274,7 +274,7 @@ const PengaduanAspirasiComp = ({
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
                       Dashboard Pengaduan & Aspirasi Kecamatan {nama_kecamatan}
                     </h2>
-                    <p className="text-base text-gray-600 dark:text-gray-400">
+                    <p className="text-base text-gray-600 ">
                       Silahkan ajukan pengaduan dan aspirasi dengan isi form di
                       bawah ini.
                     </p>
@@ -298,12 +298,12 @@ const PengaduanAspirasiComp = ({
                       >
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex-1">
-                            <div className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">
+                            <div className="text-gray-600 text-sm font-medium mb-1">
                               {card.title}
                             </div>
-                            <div className="text-3xl font-bold text-gray-900 dark:text-white">
+                            <div className="text-3xl font-bold text-gray-900">
                               {loading ? (
-                                <div className="animate-pulse bg-gray-300 dark:bg-gray-700 h-8 w-12 rounded"></div>
+                                <div className="animate-pulse bg-gray-300  h-8 w-12 rounded"></div>
                               ) : (
                                 card.value
                               )}
@@ -320,25 +320,19 @@ const PengaduanAspirasiComp = ({
                         {card.status && (
                           <div className="flex flex-col gap-1 mt-auto">
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600 dark:text-gray-400">
-                                Pending:
-                              </span>
+                              <span className="text-gray-600 ">Pending:</span>
                               <span className="font-semibold">
                                 {card.status.pending}
                               </span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600 dark:text-gray-400">
-                                Approved:
-                              </span>
+                              <span className="text-gray-600 ">Approved:</span>
                               <span className="font-semibold">
                                 {card.status.approved}
                               </span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600 dark:text-gray-400">
-                                Rejected:
-                              </span>
+                              <span className="text-gray-600 ">Rejected:</span>
                               <span className="font-semibold">
                                 {card.status.rejected}
                               </span>
@@ -354,7 +348,7 @@ const PengaduanAspirasiComp = ({
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mb-6 p-4 bg-green-100 dark:bg-green-900/20 border border-green-400 text-green-700 dark:text-green-400 rounded-lg flex items-center gap-2"
+                      className="mb-6 p-4 bg-green-100  border border-green-400 text-green-700 rounded-lg flex items-center gap-2"
                     >
                       <CheckCircle className="w-5 h-5" />
                       <span>Pengaduan/Aspirasi berhasil dikirim!</span>
@@ -364,7 +358,7 @@ const PengaduanAspirasiComp = ({
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mb-6 p-4 bg-red-100 dark:bg-red-900/20 border border-red-400 text-red-700 dark:text-red-400 rounded-lg flex items-center gap-2"
+                      className="mb-6 p-4 bg-red-100  border border-red-400 text-red-700 rounded-lg flex items-center gap-2"
                     >
                       <AlertCircle className="w-5 h-5" />
                       <span>{error}</span>
@@ -376,13 +370,13 @@ const PengaduanAspirasiComp = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
+                    className="bg-white  rounded-xl shadow-lg p-8"
                   >
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                      <h3 className="text-xl font-semibold text-gray-900  mb-2">
                         Form Pengaduan dan Aspirasi
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-600 ">
                         Sampaikan pengaduan atau aspirasi Anda untuk kemajuan
                         desa
                       </p>
@@ -392,7 +386,7 @@ const PengaduanAspirasiComp = ({
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Name Field */}
                         <div>
-                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                             <User className="w-4 h-4" />
                             Nama Lengkap
                           </label>
@@ -402,14 +396,14 @@ const PengaduanAspirasiComp = ({
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            className="w-full px-4 py-3 bg-white border border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent transition-colors"
                             placeholder="Masukkan nama lengkap"
                           />
                         </div>
 
                         {/* Phone Field */}
                         <div>
-                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                             <Phone className="w-4 h-4" />
                             Nomor Telepon
                           </label>
@@ -419,7 +413,7 @@ const PengaduanAspirasiComp = ({
                             value={formData.no_telp}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            className="w-full px-4 py-3 bg-white border border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent  transition-colors"
                             placeholder="Contoh: 08123456789"
                           />
                         </div>
@@ -427,7 +421,7 @@ const PengaduanAspirasiComp = ({
 
                       {/* Email Field */}
                       <div>
-                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                           <Mail className="w-4 h-4" />
                           Email
                         </label>
@@ -437,15 +431,15 @@ const PengaduanAspirasiComp = ({
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent  transition-colors"
                           placeholder="nama@email.com"
                         />
                       </div>
 
                       {/* Category Field */}
                       <div>
-                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                          <FileText className="w-4 h-4" />
+                        <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 ">
+                          <FileText className="w-4 h-4  " />
                           Kategori
                         </label>
                         <select
@@ -453,7 +447,7 @@ const PengaduanAspirasiComp = ({
                           value={formData.kategori}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-400   rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent transition-colors"
                         >
                           <option value="pengaduan">Pengaduan</option>
                           <option value="aspirasi">Aspirasi</option>
@@ -462,7 +456,7 @@ const PengaduanAspirasiComp = ({
 
                       {/* Message Field */}
                       <div>
-                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                           <MessageCircle className="w-4 h-4" />
                           Pesan
                         </label>
@@ -472,7 +466,7 @@ const PengaduanAspirasiComp = ({
                           onChange={handleInputChange}
                           required
                           rows={6}
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors resize-vertical"
+                          className="w-full px-4 py-3 bg-white border border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent transition-colors resize-vertical"
                           placeholder="Tuliskan pengaduan atau aspirasi Anda secara detail..."
                         />
                       </div>

@@ -19,7 +19,7 @@ export default async function VideoPage() {
     <div>
       <div>
         <VideoComp
-          kecamatanId={Number(kecamatan?.id)}
+          kecamatanId={Number(kecamatan?.id) || 48}
           nama_kecamatan={kecamatan?.nama_kecamatan}
         />
       </div>

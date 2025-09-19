@@ -21,7 +21,7 @@ export default async function ArtikelPage() {
       <div>
         <ArtikelComp
           nama_kecamatan={kecamatan?.nama_kecamatan}
-          kecamatanId={Number(kecamatan?.id)}
+          kecamatanId={Number(kecamatan?.id) || 48}
         />
       </div>
     </div>

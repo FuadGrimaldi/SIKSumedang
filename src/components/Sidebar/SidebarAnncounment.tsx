@@ -46,7 +46,7 @@ const SidebarPengumumanLanding = ({ articles }: SidebarNewsProps) => {
               >
                 {articles.length > 0 ? (item as Article).title : item.title}
               </a>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
+              <span className="text-xs text-gray-500">
                 {articles.length > 0
                   ? formatDate((item as Article).published_at)
                   : item.date}

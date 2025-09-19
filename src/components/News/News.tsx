@@ -117,10 +117,10 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
       <section className="pb-16">
         <div className="container mx-auto">
           <div className="text-left mb-6 max-w-xl ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
               Berita dan Informasi
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600 ">
               Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
               penting seputar kegiatan dan perkembangan di lingkungan kita.
             </p>
@@ -140,7 +140,7 @@ const News = ({ kecamatanId }: AllBeritaProps) => {
     <section>
       <div className="container mx-auto">
         <div className="text-left mb-6 max-w-xl">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
             Berita dan Informasi
           </h2>
           <p className="text-base text-gray-600">
