@@ -17,12 +17,12 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
-        subdomainDesaId: { label: "Subdomain Desa ID", type: "text" },
+        subdomainkecamatanId: { label: "Subdomain Desa ID", type: "text" },
       },
       async authorize(credentials, req) {
         if (!credentials) return null;
 
-        const { email, password, subdomainDesaId } = credentials;
+        const { email, password, subdomainkecamatanId } = credentials;
 
         const user = await prisma.users.findUnique({
           where: { email },
@@ -31,13 +31,18 @@ export const authOptions: NextAuthOptions = {
         if (user && user.password) {
           const passwordMatch = await bcrypt.compare(password, user.password);
           if (passwordMatch) {
-            if (user.desa_id && user.desa_id.toString() !== subdomainDesaId) {
-              // Jika desa_id tidak sesuai dengan subdomainDesaId, tolak login
+            if (
+              user.kecamatan_id &&
+              user.kecamatan_id.toString() !== subdomainkecamatanId
+            ) {
+              // Jika kecamatan_id tidak sesuai dengan subdomainkecamatanId, tolak login
               return null;
             }
             return {
               id: user.id.toString(), // Convert BigInt to string
-              desaId: user.desa_id ? user.desa_id.toString() : null,
+              kecamatanId: user.kecamatan_id
+                ? user.kecamatan_id.toString()
+                : null,
               email: user.email,
               name: user.full_name,
               role: user.role,
@@ -53,7 +58,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.desaId = user.desaId ?? null;
+        token.kecamatanId = user.kecamatanId ?? null;
         token.email = user.email;
         token.username = user.username;
         token.name = user.name;
@@ -64,7 +69,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.desaId = (token.desaId as string) ?? null;
+        session.user.kecamatanId = (token.kecamatanId as string) ?? null;
         session.user.email = token.email as string;
         session.user.username = token.username as string;
         session.user.name = token.name as string;

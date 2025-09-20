@@ -1,0 +1,13 @@
+import { Metadata } from "next";
+import "../globals.css";
+import RootLayoutAdminKec from "./rootLayoutAdminKec";
+
+export const metadata: Metadata = {
+  title: "Selamat Datang di Website Kami!",
+  description:
+    "Website Resmi Kecamatan Rancakalong - Informasi, Berita, dan Layanan Masyarakat",
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <RootLayoutAdminKec>{children}</RootLayoutAdminKec>;
+}
