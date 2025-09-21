@@ -17,7 +17,10 @@ export default async function Home() {
   return (
     <div>
       <div>
-        <HeroImage subdomain={kecamatan?.nama_kecamatan || ""} />
+        <HeroImage
+          subdomain={kecamatan?.nama_kecamatan || ""}
+          kecamatanId={Number(kecamatan?.id) || 48}
+        />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-100  ">
         <KategoriComp kecamatanId={Number(kecamatan?.id) || 48} />

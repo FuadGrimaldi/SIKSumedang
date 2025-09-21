@@ -79,7 +79,7 @@ export class AcaraKecamatanService {
   }
 
   // Get Acaras by kecamatan_id
-  static async getAcaraByKecamatanId(
+  static async getAcaraPublishByKecamatanId(
     kecamatan_id: number,
     options?: {
       page?: number;
@@ -93,6 +93,40 @@ export class AcaraKecamatanService {
       where: {
         kecamatan_id,
         status_acara: "published",
+      },
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+      },
+      orderBy: { waktu: "desc" },
+      skip,
+      take: limit,
+    });
+  }
+  // Get Acaras by kecamatan_id
+  static async getAcaraAllByKecamatanId(
+    kecamatan_id: number,
+    options?: {
+      page?: number;
+      limit?: number;
+    }
+  ) {
+    const { page = 1, limit = 10 } = options || {};
+    const skip = (page - 1) * limit;
+
+    return prisma.acara.findMany({
+      where: {
+        kecamatan_id,
       },
       include: {
         profile_kecamatan: {

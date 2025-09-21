@@ -15,6 +15,7 @@ export interface Komentar {
   status: Status;
   created_at: Date;
   updated_at: Date;
+  articles?: { id: number; title: string };
 }
 
 export interface CreateKomentarData {

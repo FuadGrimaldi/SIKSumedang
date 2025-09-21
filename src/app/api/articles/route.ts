@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
     const slug = formData.get("slug") as string;
     const content = formData.get("content") as string;
     const featured_image = formData.get("featured_image") as File | null;
-    const dokumen_terkait_path = formData.get("dokumen_terkait_path") as string;
     const waktu_kegiatan = formData.get("waktu_kegiatan") as string;
     const lokasi_kegiatan = formData.get("lokasi_kegiatan") as string;
     const status = formData.get("status") as string;
@@ -101,7 +100,6 @@ export async function POST(req: NextRequest) {
       slug,
       content,
       featured_image: imagePath ?? "/assets/default/image-not-available.png",
-      dokumen_terkait_path: dokumen_terkait_path || null,
       waktu_kegiatan: new Date(waktu_kegiatan).toISOString() || null,
       lokasi_kegiatan: lokasi_kegiatan || null,
       status: (status as ArticleStatus) || ArticleStatus.draft,

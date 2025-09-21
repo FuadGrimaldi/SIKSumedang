@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     const newVideo = await VideoService.createVideo(data);
+
     return NextResponse.json(newVideo, { status: 201 });
   } catch (error) {
     console.error("❌ POST /api/videos error:", error);

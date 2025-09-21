@@ -33,7 +33,11 @@ const AcaraComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
       const data = await res.json();
-      setAcara(data.items);
+      const sortedAcara = data.items.sort(
+        (a: Acara, b: Acara) =>
+          new Date(b.waktu).getTime() - new Date(a.waktu).getTime()
+      );
+      setAcara(sortedAcara);
       setTotalItems(data.total);
     } catch (err) {
       console.error("Error fetching acara:", err);

@@ -14,7 +14,7 @@ export async function GET(
       return NextResponse.json({ error: "Invalid kec ID" }, { status: 400 });
     }
 
-    const acara = await AcaraKecamatanService.getAcaraByKecamatanId(
+    const acara = await AcaraKecamatanService.getAcaraPublishByKecamatanId(
       kecamatanId
     );
 

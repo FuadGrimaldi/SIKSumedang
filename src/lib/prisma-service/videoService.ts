@@ -20,7 +20,7 @@ export class VideoService {
         title: data.title,
         deskripsi: data.deskripsi,
         embed_url: data.embed_url,
-        categori: data.categori,
+        kategori: data.kategori,
         uploaded_at: data.uploaded_at || new Date(),
         created_at: data.created_at || new Date(),
         updated_at: data.updated_at || new Date(),
@@ -52,8 +52,8 @@ export class VideoService {
       if (data.embed_url !== undefined) {
         updateData.embed_url = data.embed_url;
       }
-      if (data.categori !== undefined) {
-        updateData.categori = data.categori;
+      if (data.kategori !== undefined) {
+        updateData.kategori = data.kategori;
       }
       if (data.uploaded_at !== undefined) {
         updateData.uploaded_at = data.uploaded_at;

@@ -84,7 +84,6 @@ export class ArticlesKecamatanService {
         slug: data.slug,
         content: data.content,
         featured_image: data.featured_image,
-        dokumen_terkait_path: data.dokumen_terkait_path,
         waktu_kegiatan: data.waktu_kegiatan,
         lokasi_kegiatan: data.lokasi_kegiatan,
         status: data.status,
@@ -152,7 +151,6 @@ export class ArticlesKecamatanService {
         slug: data.slug,
         content: data.content,
         featured_image: data.featured_image,
-        dokumen_terkait_path: data.dokumen_terkait_path,
         waktu_kegiatan: data.waktu_kegiatan,
         lokasi_kegiatan: data.lokasi_kegiatan,
         status: data.status,
@@ -202,6 +200,64 @@ export class ArticlesKecamatanService {
     const skip = (page - 1) * limit;
 
     const where: any = { kecamatan_id, status: "published" };
+    if (desa_id) where.desa_id = desa_id;
+    if (kategori_id) where.kategori_id = kategori_id;
+    if (sub_kategori_id) where.sub_kategori_id = sub_kategori_id;
+
+    return prisma.articles.findMany({
+      where,
+      include: {
+        profile_kecamatan: {
+          select: {
+            id: true,
+            nama_kecamatan: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+        kategori_article: {
+          select: {
+            id: true,
+            nama: true,
+          },
+        },
+        sub_kategori_article: {
+          select: {
+            id: true,
+            sub_nama: true,
+          },
+        },
+      },
+      orderBy: { created_at: "desc" },
+      skip,
+      take: limit,
+    });
+  }
+  static async getArticlesAllByKecamatanId(
+    kecamatan_id: number,
+    options?: {
+      desa_id?: number;
+      kategori_id?: number;
+      sub_kategori_id?: number;
+      page?: number;
+      limit?: number;
+    }
+  ) {
+    const {
+      desa_id,
+      kategori_id,
+      sub_kategori_id,
+      page = 1,
+      limit = 10,
+    } = options || {};
+
+    const skip = (page - 1) * limit;
+
+    const where: any = { kecamatan_id };
     if (desa_id) where.desa_id = desa_id;
     if (kategori_id) where.kategori_id = kategori_id;
     if (sub_kategori_id) where.sub_kategori_id = sub_kategori_id;

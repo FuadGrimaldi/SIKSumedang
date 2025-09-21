@@ -1,7 +1,6 @@
-import DestinationSwiper from "../Slider/SwiperHero";
 import ImageSwiper from "../Slider/SwiperImage";
 
-const HeroImage = async ({ subdomain }) => {
+const HeroImage = async ({ subdomain, kecamatanId }) => {
   return (
     <div className="relative">
       <div
@@ -19,7 +18,7 @@ const HeroImage = async ({ subdomain }) => {
         <div className="flex flex-col justify-center items-center w-full h-full rounded-2xl relative z-3 pt-[100px]">
           {/* Swiper */}
           <div className="pb-16">
-            <ImageSwiper />
+            <ImageSwiper kecamatanId={kecamatanId} />
           </div>
         </div>
       </div>

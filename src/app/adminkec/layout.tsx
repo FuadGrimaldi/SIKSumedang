@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import "../globals.css";
-import RootLayoutAdminKab from "./rootLayoutAdminKab";
+import DashboardLayoutClient from "./rootLayoutAdminKab";
 
 export const metadata: Metadata = {
   title: "Selamat Datang di Website Kami!",
   description:
-    "Website Resmi Kecamatan Rancakalong - Informasi, Berita, dan Layanan Masyarakat",
+    "Website Resmi Kecamatan - Informasi, Berita, dan Layanan Masyarakat",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <RootLayoutAdminKab>{children}</RootLayoutAdminKab>;
+  return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
 }

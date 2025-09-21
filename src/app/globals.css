@@ -31,3 +31,13 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+.quill-editor .ql-container {
+  min-height: 300px; /* tinggi area editor */
+}
+
+.quill-editor .ql-editor {
+  min-height: 300px; /* tinggi area teks */
+  font-size: 16px; /* biar lebih enak dibaca */
+  line-height: 1.6;
+}

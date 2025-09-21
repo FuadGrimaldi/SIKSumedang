@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
+import Dashboard from "@/components/AdminKec/Dashboard";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -16,11 +17,9 @@ export default async function Home() {
     redirect("/login");
   }
   const kecamatanId = session.user.kecamatanId;
-  console.log("session:", session);
-  console.log("Session:", kecamatanId);
   return (
     <div>
-      <div>{/* content */}</div>
+      <Dashboard kecamatanId={Number(kecamatanId)} />
     </div>
   );
 }

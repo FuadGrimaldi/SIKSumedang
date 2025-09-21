@@ -26,7 +26,7 @@ export async function GET(
     );
 
     // Fetch published acara with posters
-    const acara = await AcaraKecamatanService.getAcaraByKecamatanId(
+    const acara = await AcaraKecamatanService.getAcaraPublishByKecamatanId(
       kecamatanId
     );
 

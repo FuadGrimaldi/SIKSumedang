@@ -3,7 +3,7 @@ import { ArticlesKecamatanService } from "@/lib/prisma-service/articleskecamatan
 import { writeFile } from "fs/promises";
 import fs from "fs";
 import path from "path";
-import { ArticleType, ArticleStatus, ArticleUpdate } from "@/types/article";
+import { ArticleStatus, ArticleUpdate } from "@/types/article";
 
 export async function GET(
   req: NextRequest,
@@ -48,21 +48,20 @@ export async function PUT(
     }
 
     const formData = await req.formData();
-    const user_id = formData.get("user_id") as string;
-    const kecamatan_id = formData.get("kecamatan_id") as string;
-    const tipe = formData.get("tipe") as string;
+    const desa_id = formData.get("desa_id") as string;
+    const kategori_id = formData.get("kategori_id") as string;
+    const sub_kategori_id = formData.get("sub_kategori_id") as string;
     const title = formData.get("title") as string;
     const slug = formData.get("slug") as string;
     const content = formData.get("content") as string;
     const featured_image = formData.get("featured_image") as File | null;
-    const dokumen_terkait_path = formData.get("dokumen_terkait_path") as string;
     const waktu_kegiatan = formData.get("waktu_kegiatan") as string;
     const lokasi_kegiatan = formData.get("lokasi_kegiatan") as string;
     const status = formData.get("status") as string;
     const published_at = formData.get("published_at") as string;
 
     // Validation
-    if (!user_id || !kecamatan_id || !tipe || !title || !slug || !content) {
+    if (!title || !slug || !content) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -126,12 +125,13 @@ export async function PUT(
       }
     }
     const updateData: ArticleUpdate = {
-      tipe: tipe as ArticleType,
+      desa_id: desa_id ? parseInt(desa_id) : null,
+      kategori_id: kategori_id ? parseInt(kategori_id) : null,
+      sub_kategori_id: sub_kategori_id ? parseInt(sub_kategori_id) : null,
       title,
       slug,
       content,
       featured_image: imagePath,
-      dokumen_terkait_path,
       waktu_kegiatan: new Date(waktu_kegiatan).toISOString() || null,
       lokasi_kegiatan,
       status: status as ArticleStatus,

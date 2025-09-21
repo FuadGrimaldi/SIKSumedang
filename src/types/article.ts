@@ -17,7 +17,6 @@ export interface Article {
   slug: string;
   content: string;
   featured_image: string | null;
-  dokumen_terkait_path: string | null;
   waktu_kegiatan: string | null; // ISO date string
   lokasi_kegiatan: string | null;
   status: ArticleStatus; // pakai enum
@@ -57,7 +56,6 @@ export interface ArticleCreate {
   slug: string;
   content: string;
   featured_image?: string | null;
-  dokumen_terkait_path?: string | null;
   waktu_kegiatan?: string | null;
   lokasi_kegiatan?: string | null;
   status?: ArticleStatus; // enum
@@ -73,7 +71,6 @@ export interface ArticleUpdate {
   slug?: string;
   content?: string;
   featured_image?: string | null;
-  dokumen_terkait_path?: string | null;
   waktu_kegiatan?: string | null; // ISO date string
   lokasi_kegiatan?: string | null;
   status?: ArticleStatus;
