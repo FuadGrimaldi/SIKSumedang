@@ -17,7 +17,9 @@ export default async function BeritaPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Berita dan Pengumuman</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-800">
+        Berita dan Pengumuman
+      </div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <BeritaManagerKec
         kecamatanId={Number(session.user.kecamatanId)}

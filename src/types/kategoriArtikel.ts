@@ -4,6 +4,10 @@ export interface KategoriArtikel {
   nama: string;
   created_at: string;
   updated_at: string;
+  profile_kecamatan?: {
+    id: number;
+    nama_kecamatan: string;
+  } | null;
 }
 
 export interface SubKategoriArtikel {
@@ -13,6 +17,14 @@ export interface SubKategoriArtikel {
   sub_nama: string;
   created_at: string;
   updated_at: string;
+  kategori_article?: {
+    id: number;
+    nama: string;
+  } | null;
+  profile_kecamatan?: {
+    id: number;
+    nama_kecamatan: string;
+  } | null;
 }
 
 export interface CreateKategoriArtikel {

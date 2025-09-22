@@ -18,7 +18,7 @@ export default async function VideoPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Video</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-800">Video</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <VideoManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

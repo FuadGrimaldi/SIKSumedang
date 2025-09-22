@@ -108,7 +108,7 @@ export class OfficialsService {
 
       if (!data.name || !data.position || !data.kecamatan_id) {
         throw new Error(
-          "Missing required fields: name, position, kecamatan_id, display_order"
+          "Missing required fields: name, position, kecamatan_id"
         );
       }
 

@@ -17,7 +17,7 @@ export default async function GalleryPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Gallery</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-700">Gallery</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <GalleryManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

@@ -186,7 +186,7 @@ export default function AspirasiPengaduanManagerKec({
             placeholder="Cari nama, email atau pesan..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 bg-white"
           />
         </div>
       </div>
@@ -197,18 +197,20 @@ export default function AspirasiPengaduanManagerKec({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 hidden">
               <div>
-                <label className="block mb-2 text-sm font-medium">Nama *</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">
+                  Nama *
+                </label>
                 <input
                   type="text"
                   name="name"
                   defaultValue={editData?.name || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Email *
                 </label>
                 <input
@@ -217,11 +219,11 @@ export default function AspirasiPengaduanManagerKec({
                   defaultValue={editData?.email || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   No. Telepon
                 </label>
                 <input
@@ -229,11 +231,11 @@ export default function AspirasiPengaduanManagerKec({
                   name="no_telp"
                   defaultValue={editData?.no_telp || ""}
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Kategori *
                 </label>
                 <select
@@ -243,7 +245,7 @@ export default function AspirasiPengaduanManagerKec({
                   }
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 >
                   <option value={PengaduanAspirasiKategori.pengaduan}>
                     Pengaduan
@@ -254,7 +256,7 @@ export default function AspirasiPengaduanManagerKec({
                 </select>
               </div>
               <div className="lg:col-span-2">
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Pesan *
                 </label>
                 <textarea
@@ -263,18 +265,20 @@ export default function AspirasiPengaduanManagerKec({
                   defaultValue={editData?.pesan || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium">Status *</label>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Status *
+              </label>
               <select
                 name="status"
                 defaultValue={editData?.status || Status.pending}
                 required
                 disabled={submitting}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
               >
                 <option value={Status.approved}>Approved</option>
                 <option value={Status.pending}>Pending</option>
@@ -314,25 +318,31 @@ export default function AspirasiPengaduanManagerKec({
             <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Nama</th>
-                  <th className="px-6 py-4 text-left">Email</th>
-                  <th className="px-6 py-4 text-left">Pesan</th>
-                  <th className="px-6 py-4 text-left">Kategori</th>
-                  <th className="px-6 py-4 text-left">Status</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Nama</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Email</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Pesan</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Kategori
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Status</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredData.map((d, index) => (
                   <tr key={d.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{d.name}</td>
-                    <td className="px-6 py-4">{d.email}</td>
-                    <td className="px-6 py-4">{d.pesan}</td>
-                    <td className="px-6 py-4 capitalize">{d.kategori}</td>
-                    <td className="px-6 py-4 capitalize">{d.status}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">{d.name}</td>
+                    <td className="px-6 py-4 text-gray-700">{d.email}</td>
+                    <td className="px-6 py-4 text-gray-700">{d.pesan}</td>
+                    <td className="px-6 py-4 text-gray-700 capitalize">
+                      {d.kategori}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700 capitalize">
+                      {d.status}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(d)}

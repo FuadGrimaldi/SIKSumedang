@@ -17,7 +17,7 @@ export default async function KomentarPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Komentar</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-700">Komentar</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <KomentarManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

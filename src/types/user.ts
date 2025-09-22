@@ -4,27 +4,27 @@ export enum Status {
   rejected = "rejected",
 }
 export enum Roles {
-  admin_kan = "admin_kab",
-  admin_desa = "admin_desa",
-  user = "user",
+  admin_kecamatan = "admin_kecamatan",
+  admin_kabupaten = "admin_kab",
+  user = "masyarakat",
 }
 export interface User {
   id: number;
-  desa_id: number | null;
+  kecamatan_id: number | null;
   nik: string;
   username: string;
   email: string;
   full_name: string;
   role: Roles;
   status: Status;
-  profile_desa?: {
+  profile_kecamatan?: {
     id: number;
-    nama_desa: string;
+    nama_kecamatan: string;
   } | null; // optional, for include
 }
 
 export interface UserCreate {
-  desa_id?: number | null; // optional, bisa null
+  kecamatan_id?: number | null; // optional, bisa null
   nik: string;
   full_name: string;
   username: string;
@@ -35,7 +35,7 @@ export interface UserCreate {
 }
 
 export interface UserUpdate {
-  desa_id?: number | null; // optional, bisa null
+  kecamatan_id?: number | null; // optional, bisa null
   nik?: string;
   username?: string;
   email?: string;

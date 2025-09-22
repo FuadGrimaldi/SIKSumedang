@@ -131,6 +131,7 @@ export async function PUT(
       deskripsi,
       lokasi,
       waktu: new Date(waktu).toISOString(),
+      penyelenggara,
       poster: posterPath,
       status_acara: status_acara as StatusAcara,
     };

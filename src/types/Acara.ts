@@ -22,7 +22,7 @@ export interface Acara {
     full_name: string;
     email: string;
   } | null; // Optional user relation
-  kecamatan?: {
+  profile_kecamatan?: {
     id: number;
     nama_kecamatan: string;
   } | null; // Optional kecamatan relation

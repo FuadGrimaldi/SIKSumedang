@@ -12,7 +12,7 @@ import AdminKecFooter from "@/components/Footer/FooterAdminKec";
 function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   const { isExpanded } = useSidebar();
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen bg-white">
       {/* Sidebar Fixed */}
       <div className="fixed z-30  md:hidden">
         <MobileMenuButton />

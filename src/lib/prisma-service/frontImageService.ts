@@ -9,12 +9,25 @@ export class FrontImageService {
   static async getFrontImageByKecamatanId(kecamatan_id: number) {
     return prisma.front_image.findMany({
       where: { kecamatan_id },
+      include: {
+        profile_kecamatan: {
+          select: { id: true, nama_kecamatan: true },
+        },
+      },
+      orderBy: { id: "desc" },
     });
   }
 
   //   get all
   static async getAllFrontImages() {
-    return prisma.front_image.findMany();
+    return prisma.front_image.findMany({
+      include: {
+        profile_kecamatan: {
+          select: { id: true, nama_kecamatan: true },
+        },
+      },
+      orderBy: { id: "desc" },
+    });
   }
   // create
   static async createFrontImage(data: FrontImageCreate) {

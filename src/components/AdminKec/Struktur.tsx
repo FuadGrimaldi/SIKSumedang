@@ -192,7 +192,7 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
             Manajemen Officials
           </h2>
           <p className="text-green-100 mt-1">
-            Kelola data pejabat desa di kabupaten
+            Kelola data pejabat kecamatan di kabupaten
           </p>
         </div>
         <button
@@ -212,7 +212,7 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 bg-white  text-gray-800"
           />
         </div>
       </div>
@@ -229,7 +229,7 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
               {/* Left */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Nama Official *
                   </label>
                   <input
@@ -238,11 +238,11 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
                     defaultValue={viewData?.name || editData?.name || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Jabatan *
                   </label>
                   <input
@@ -253,7 +253,7 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
@@ -261,7 +261,9 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
               {/* Right */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">Foto</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Foto
+                  </label>
                   <input
                     type="file"
                     name="photo"
@@ -320,18 +322,18 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="w-24 px-6 py-4 text-left">No</th>
-                <th className="px-6 py-4 text-left">Foto</th>
-                <th className="px-6 py-4 text-left">Nama</th>
-                <th className="px-6 py-4 text-left">Jabatan</th>
-                <th className="px-6 py-4 text-center">Aksi</th>
+                <th className="w-24 px-6 py-4 text-gray-700 text-left">No</th>
+                <th className="px-6 py-4 text-gray-700 text-left">Foto</th>
+                <th className="px-6 py-4 text-gray-700 text-left">Nama</th>
+                <th className="px-6 py-4 text-gray-700 text-left">Jabatan</th>
+                <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {filteredOfficials.map((o, index) => (
                 <tr key={o.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                  <td className="px-6 py-4 text-gray-700">
                     {o.photo ? (
                       <Image
                         src={o.photo}
@@ -346,9 +348,9 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
                       </div>
                     )}
                   </td>
-                  <td className="px-6 py-4">{o.name}</td>
-                  <td className="px-6 py-4">{o.position}</td>
-                  <td className="px-6 py-4 text-center">
+                  <td className="px-6 py-4 text-gray-700">{o.name}</td>
+                  <td className="px-6 py-4 text-gray-700">{o.position}</td>
+                  <td className="px-6 py-4 text-gray-700 text-center">
                     <div className="flex justify-center gap-2">
                       <button
                         onClick={() => handleOpenView(o)}

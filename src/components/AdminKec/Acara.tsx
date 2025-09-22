@@ -79,7 +79,9 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
   const fetchAcaras = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/acara/subdomain/all/${kecamatanId}`);
+      const res = await fetch(
+        `/api/acara/subdomain/all/${kecamatanId}?page=1&limit=1000`
+      );
       const data = await res.json();
       setAcaras(data.items || []);
       setFilteredAcaras(data.items || []);
@@ -168,6 +170,13 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
         .replace(/[^a-z0-9\-]/g, "");
       formData.set("slug", slug);
     }
+    console.log(
+      "Submitting form data:",
+      Object.fromEntries(formData.entries())
+    );
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
 
     try {
       let res;
@@ -250,7 +259,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
             placeholder="Cari judul, lokasi, atau penyelenggara..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white text-gray-800"
           />
         </div>
       </div>
@@ -267,7 +276,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
               {/* Left */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Judul Acara *
                   </label>
                   <input
@@ -276,11 +285,11 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                     defaultValue={viewData?.judul || editData?.judul || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Deskripsi *
                   </label>
                   <RichTextEditor
@@ -290,7 +299,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Lokasi Maps *
                   </label>
                   <input
@@ -299,7 +308,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                     defaultValue={viewData?.lokasi || editData?.lokasi || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
@@ -307,7 +316,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
               {/* Right */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Tanggal & Waktu *
                   </label>
                   <input
@@ -318,11 +327,11 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                     )}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-white bg-gray-700"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Penyelenggara *
                   </label>
                   <input
@@ -333,11 +342,11 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Status *
                   </label>
                   <select
@@ -347,7 +356,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   >
                     <option value="">Pilih status</option>
                     <option value="published">Published</option>
@@ -355,7 +364,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                   </select>
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Poster
                   </label>
                   <input
@@ -417,21 +426,25 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Poster</th>
-                  <th className="px-6 py-4 text-left">Judul</th>
-                  <th className="px-6 py-4 text-left">tanggal acara</th>
-                  <th className="px-6 py-4 text-left">Penyelenggara</th>
-                  <th className="px-6 py-4 text-left">Status</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Poster</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Judul</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    tanggal acara
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Penyelenggara
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Status</th>
 
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredAcaras.map((a, index) => (
                   <tr key={a.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {a.poster ? (
                         <Image
                           src={a.poster}
@@ -446,13 +459,17 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4">{a.judul}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{a.judul}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {formatDatetimeLocal(a.waktu)}
                     </td>
-                    <td className="px-6 py-4">{a.penyelenggara}</td>
-                    <td className="px-6 py-4">{a.status_acara}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">
+                      {a.penyelenggara}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700">
+                      {a.status_acara}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenView(a)}

@@ -96,6 +96,7 @@ export default function RichTextEditor({
         theme="snow"
         placeholder="Tulis konten artikel di sini..."
         style={{
+          color: "black",
           backgroundColor: "white",
           minHeight: "200px",
         }}

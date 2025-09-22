@@ -195,7 +195,7 @@ export default function SubKategoriManagerKec({
             placeholder="Cari sub kategori..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 bg-white text-gray-700"
           />
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function SubKategoriManagerKec({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Nama Sub Kategori *
                 </label>
                 <input
@@ -215,11 +215,11 @@ export default function SubKategoriManagerKec({
                   defaultValue={editData?.sub_nama || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white  "
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Kategori *
                 </label>
                 <select
@@ -227,7 +227,7 @@ export default function SubKategoriManagerKec({
                   defaultValue={editData?.kategori_id || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white  "
                 >
                   <option value="">-- Pilih Kategori --</option>
                   {kategoris.map((k) => (
@@ -271,22 +271,26 @@ export default function SubKategoriManagerKec({
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Nama Sub Kategori</th>
-                  <th className="px-6 py-4 text-left">Kategori</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Nama Sub Kategori
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Kategori
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredSubKategoris.map((s, index) => (
                   <tr key={s.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{s.sub_nama}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">{s.sub_nama}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {kategoris.find((k) => k.id === s.kategori_id)?.nama ||
                         "-"}
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(s)}

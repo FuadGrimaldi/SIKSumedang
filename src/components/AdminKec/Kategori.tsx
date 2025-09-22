@@ -188,7 +188,7 @@ export default function KategoriManagerKec({ kecamatanId }: KategoriProps) {
             placeholder="Cari kategori..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 bg-white"
           />
         </div>
       </div>
@@ -198,14 +198,16 @@ export default function KategoriManagerKec({ kecamatanId }: KategoriProps) {
         <div className="bg-white rounded-lg shadow p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block mb-2 text-sm font-medium">Nama *</label>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Nama *
+              </label>
               <input
                 type="text"
                 name="nama"
                 defaultValue={editData?.nama || ""}
                 required
                 disabled={submitting}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
               />
             </div>
 
@@ -241,17 +243,17 @@ export default function KategoriManagerKec({ kecamatanId }: KategoriProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="w-24 px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Nama</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="w-24 px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Nama</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredKategoris.map((k, index) => (
                   <tr key={k.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{k.nama}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">{k.nama}</td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(k)}

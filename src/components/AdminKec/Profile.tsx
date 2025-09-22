@@ -188,7 +188,7 @@ export default function ProfileKecManagerKec({
                       type="text"
                       name="subdomain"
                       defaultValue={kecamatan.subdomain}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       required
                       disabled
                     />
@@ -202,7 +202,7 @@ export default function ProfileKecManagerKec({
                       type="text"
                       name="nama_kecamatan"
                       defaultValue={kecamatan.nama_kecamatan}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       required
                     />
                   </div>
@@ -214,7 +214,7 @@ export default function ProfileKecManagerKec({
                     <textarea
                       name="alamat"
                       defaultValue={kecamatan.alamat}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       rows={3}
                       required
                     />
@@ -228,7 +228,7 @@ export default function ProfileKecManagerKec({
                       type="tel"
                       name="telepon"
                       defaultValue={kecamatan.telepon}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       required
                     />
                   </div>
@@ -241,7 +241,7 @@ export default function ProfileKecManagerKec({
                       type="email"
                       name="email"
                       defaultValue={kecamatan.email}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       required
                     />
                   </div>
@@ -254,7 +254,7 @@ export default function ProfileKecManagerKec({
                       type="url"
                       name="website"
                       defaultValue={kecamatan.website || ""}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                     />
                   </div>
 
@@ -266,7 +266,7 @@ export default function ProfileKecManagerKec({
                       type="file"
                       name="foto_kantor"
                       accept="image/*"
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                     />
                     {kecamatan.foto_kantor && (
                       <div className="mt-2">
@@ -294,7 +294,7 @@ export default function ProfileKecManagerKec({
                     <textarea
                       name="visi"
                       defaultValue={kecamatan.visi}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       placeholder="Visi"
                       rows={3}
                       required
@@ -308,7 +308,7 @@ export default function ProfileKecManagerKec({
                     <textarea
                       name="misi"
                       defaultValue={kecamatan.misi}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       placeholder="Misi"
                       rows={3}
                       required
@@ -322,7 +322,7 @@ export default function ProfileKecManagerKec({
                     <textarea
                       name="sejarah"
                       defaultValue={kecamatan.sejarah}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       placeholder="Sejarah"
                       rows={4}
                       required
@@ -335,7 +335,7 @@ export default function ProfileKecManagerKec({
                     <textarea
                       name="deskripsi"
                       defaultValue={kecamatan.deskripsi}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       placeholder="Deskripsi"
                       rows={4}
                       required
@@ -350,7 +350,7 @@ export default function ProfileKecManagerKec({
                       type="url"
                       name="gmaps_embed_url"
                       defaultValue={kecamatan.gmaps_embed_url}
-                      className="w-full px-4 py-2 border rounded-lg"
+                      className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700"
                       placeholder="https://www.google.com/maps/embed?pb=..."
                       required
                     />

@@ -5,12 +5,11 @@ export interface Official {
   name: string;
   position: string;
   photo: string;
-
   created_at: Date;
   updated_at: Date;
-  profile_desa?: {
+  profile_kecamatan?: {
     id: number;
-    nama_desa: string;
+    nama_kecamatan: string;
   };
 }
 
@@ -27,14 +26,12 @@ export interface UpdateOfficialData {
   name?: string;
   position?: string;
   photo?: string | null;
-  display_order?: number;
 }
 
 export interface OfficialFormData {
   name: string;
   position: string;
   kecamatan_id: number;
-
   photo?: File | null;
 }
 

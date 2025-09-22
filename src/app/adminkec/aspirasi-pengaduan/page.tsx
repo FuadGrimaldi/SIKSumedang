@@ -17,7 +17,9 @@ export default async function AspirasiPengaduanPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Aspirasi dan Pengaduan</h1>
+      <div className="text-gray-700 text-2xl font-bold mb-4">
+        Aspirasi dan Pengaduan
+      </div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <AspirasiPengaduanManagerKec
         kecamatanId={Number(session.user.kecamatanId)}

@@ -68,6 +68,7 @@ const DestinationSwiper = ({ kecamatanId }: DestinationSwiperProps) => {
               src="/assets/default/front-image.jpg"
               alt="Default Image"
               fill
+              priority
               unoptimized={true}
               className="object-cover transform transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -18,7 +18,7 @@ export default async function ArtikelPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Artikel</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-700">Artikel</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <ArtikelManagerKec
         kecamatanId={Number(session.user.kecamatanId)}

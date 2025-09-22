@@ -144,6 +144,7 @@ export default function NavGuest({
                   width={60}
                   height={60}
                   className="object-contain"
+                  priority
                 />
               </div>
               <div className="flex flex-col">

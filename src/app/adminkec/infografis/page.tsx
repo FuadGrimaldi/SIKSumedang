@@ -17,7 +17,7 @@ export default async function InfografisPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Infografis</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-700">Infografis</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <InfografisManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

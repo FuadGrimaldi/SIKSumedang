@@ -273,7 +273,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
             placeholder="Cari judul atau kategori..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 text-gray-700 bg-white"
           />
         </div>
       </div>
@@ -290,7 +290,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
               {/* Left */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Judul Video *
                   </label>
                   <input
@@ -299,11 +299,11 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                     defaultValue={viewData?.title || editData?.title || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Deskripsi *
                   </label>
                   <textarea
@@ -314,7 +314,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
@@ -322,7 +322,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
               {/* Right */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Embed URL *
                   </label>
                   <input
@@ -333,7 +333,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                   {viewData?.embed_url || editData?.embed_url ? (
                     <div className="mt-3">
@@ -353,7 +353,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                   ) : null}
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Kategori *
                   </label>
                   <input
@@ -364,11 +364,11 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Tanggal Upload *
                   </label>
                   <input
@@ -387,7 +387,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                     }
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-white bg-gray-700"
                   />
                 </div>
               </div>
@@ -427,19 +427,25 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="w-24 px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Thumbnail</th>
-                  <th className="px-6 py-4 text-left">Judul</th>
-                  <th className="px-6 py-4 text-left">Kategori</th>
-                  <th className="px-6 py-4 text-left">Tanggal Upload</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="w-24 px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Thumbnail
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Judul</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Kategori
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-left">
+                    Tanggal Upload
+                  </th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredVideos.map((v, index) => (
                   <tr key={v.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {v.embed_url ? (
                         <Image
                           src={
@@ -458,12 +464,12 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4">{v.title}</td>
-                    <td className="px-6 py-4">{v.kategori}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{v.title}</td>
+                    <td className="px-6 py-4 text-gray-700">{v.kategori}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {new Date(v.uploaded_at).toLocaleDateString("id-ID")}
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenView(v)}

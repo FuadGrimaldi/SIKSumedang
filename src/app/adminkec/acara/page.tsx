@@ -17,7 +17,7 @@ export default async function AcaraPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Acara</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-800">Acara</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <AcaraManagerKec
         kecamatanId={Number(session.user.kecamatanId)}

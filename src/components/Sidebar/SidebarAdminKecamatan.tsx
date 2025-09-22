@@ -178,12 +178,6 @@ const AdminKecSidebar = () => {
           icon: Image,
           path: "/adminkec/infografis",
         },
-        {
-          id: "gallery",
-          label: "Gallery",
-          icon: Image,
-          path: "/adminkec/gallery",
-        },
       ],
     },
     // {
@@ -235,6 +229,12 @@ const AdminKecSidebar = () => {
           path: "/adminkec/aspirasi-pengaduan",
         },
       ],
+    },
+    {
+      id: "gallery",
+      label: "Gallery",
+      icon: Image,
+      path: "/adminkec/gallery",
     },
     // {
     //   id: "statistik",

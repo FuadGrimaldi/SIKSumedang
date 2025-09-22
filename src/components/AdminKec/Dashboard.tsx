@@ -464,7 +464,7 @@ export default function Dashboard({ kecamatanId }: Props) {
         <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white p-6 rounded-lg shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-yellow-100">Total acara</p>
+              <p className="text-yellow-100">Total acara (publish) </p>
               <p className="text-3xl font-bold">{stats.totalacaras}</p>
             </div>
             <Calendar className="w-8 h-8 text-yellow-200" />
@@ -507,7 +507,9 @@ export default function Dashboard({ kecamatanId }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Content Distribution Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">Distribusi Konten</h3>
+          <h3 className="text-lg font-semibold mb-4 text-black">
+            Distribusi Konten
+          </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -533,7 +535,9 @@ export default function Dashboard({ kecamatanId }: Props) {
 
         {/* Organization Distribution Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">Distribusi Artikel</h3>
+          <h3 className="text-lg font-semibold mb-4 text-black">
+            Distribusi Artikel
+          </h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -565,7 +569,7 @@ export default function Dashboard({ kecamatanId }: Props) {
                   className="w-3 h-3 rounded"
                   style={{ backgroundColor: entry.color }}
                 ></div>
-                <span className="text-sm">
+                <span className="text-sm text-black">
                   {entry.name} ({entry.value})
                 </span>
               </div>
@@ -578,8 +582,8 @@ export default function Dashboard({ kecamatanId }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4 flex items-center">
-            <Clock className="w-5 h-5 mr-2" />
+          <h3 className="text-lg font-semibold mb-4 flex items-center text-black">
+            <Clock className="w-5 h-5 mr-2 " />
             Aktivitas Terbaru
           </h3>
           <div className="space-y-3">
@@ -592,7 +596,7 @@ export default function Dashboard({ kecamatanId }: Props) {
                 >
                   <IconComponent className="w-5 h-5 text-gray-500 mr-3" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-800 ">
                       {activity.title}
                     </p>
                     <p className="text-xs text-gray-500">
@@ -610,7 +614,7 @@ export default function Dashboard({ kecamatanId }: Props) {
 
         {/* Quick Stats */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4 flex items-center">
+          <h3 className="text-lg font-semibold mb-4 flex items-center text-black">
             <TrendingUp className="w-5 h-5 mr-2" />
             Pintasan Cepat
           </h3>
@@ -619,7 +623,7 @@ export default function Dashboard({ kecamatanId }: Props) {
               href={"/adminkec/acara"}
               className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
             >
-              <span className="text-sm font-medium">Buat Acara</span>
+              <span className="text-sm font-medium text-black">Buat Acara</span>
               <span className="text-lg font-bold text-yellow-600">
                 <ArrowRight />
               </span>
@@ -628,7 +632,9 @@ export default function Dashboard({ kecamatanId }: Props) {
               href={"/adminkec/artikel"}
               className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
             >
-              <span className="text-sm font-medium">Buat Artikel</span>
+              <span className="text-sm font-medium text-black">
+                Buat Artikel
+              </span>
               <span className="text-lg font-bold text-yellow-600">
                 <ArrowRight />
               </span>
@@ -637,7 +643,9 @@ export default function Dashboard({ kecamatanId }: Props) {
               href={"/adminkec/berita"}
               className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
             >
-              <span className="text-sm font-medium">Buat Berita</span>
+              <span className="text-sm font-medium text-black">
+                Buat Berita
+              </span>
               <span className="text-lg font-bold text-yellow-600">
                 <ArrowRight />
               </span>
@@ -646,7 +654,7 @@ export default function Dashboard({ kecamatanId }: Props) {
               href={"/adminkec/aspirasi-pengaduan"}
               className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
             >
-              <span className="text-sm font-medium">
+              <span className="text-sm font-medium text-black">
                 Cek Pengaduan dan Aspirasi
               </span>
               <span className="text-lg font-bold text-yellow-600">

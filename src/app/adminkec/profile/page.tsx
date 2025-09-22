@@ -17,7 +17,7 @@ export default async function ProfileAdminKec() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
+      <div className="text-2xl font-bold mb-4 text-black">Profile</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <ProfileKecManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

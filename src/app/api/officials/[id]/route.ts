@@ -31,32 +31,31 @@ export async function PUT(
     // Extract form fields
     const name = formData.get("name") as string;
     const position = formData.get("position") as string;
-    const desa_id = formData.get("desa_id") as string;
+    const kecamatan_id = formData.get("kecamatan_id") as string;
     const photoFile = formData.get("photo") as File | null;
 
     // Validation
-    if (!name || !position || !desa_id) {
+    if (!name || !position || !kecamatan_id) {
       console.error("Missing required fields:", {
         name,
         position,
-        desa_id,
+        kecamatan_id,
       });
       return NextResponse.json(
         {
-          error:
-            "Missing required fields: name, position, desa_id, display_order",
+          error: "Missing required fields: name, position, kecamatan_id",
         },
         { status: 400 }
       );
     }
 
     // Parse numbers
-    const parsedDesaId = parseInt(desa_id);
+    const parseKecId = parseInt(kecamatan_id);
 
-    if (isNaN(parsedDesaId)) {
-      console.error("Invalid number fields:", { desa_id });
+    if (isNaN(parseKecId)) {
+      console.error("Invalid number fields:", { kecamatan_id });
       return NextResponse.json(
-        { error: "desa_id and display_order must be valid numbers" },
+        { error: "kecamatan_id  must be valid numbers" },
         { status: 400 }
       );
     }
@@ -121,7 +120,7 @@ export async function PUT(
 
     const updateData = {
       id,
-      desa_id: parsedDesaId,
+      kecamatan_id: parseKecId,
       name,
       position,
       photo: photoPath,

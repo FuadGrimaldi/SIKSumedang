@@ -24,6 +24,9 @@ export class KategoriArtikelService {
   static async getAllKategoriArtikel() {
     return prisma.kategori_article.findMany({
       orderBy: { id: "desc" },
+      include: {
+        profile_kecamatan: { select: { id: true, nama_kecamatan: true } },
+      },
     });
   }
   // Create a new kategori artikel

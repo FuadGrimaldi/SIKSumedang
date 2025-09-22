@@ -169,7 +169,7 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
             placeholder="Cari judul infografis..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 bg-white text-gray-700"
           />
         </div>
       </div>
@@ -184,7 +184,7 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Judul Infografis *
                 </label>
                 <input
@@ -193,11 +193,11 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
                   defaultValue={editData?.title || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Gambar Infografis
                 </label>
                 <input
@@ -252,17 +252,17 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
             <table className="w-full min-w-[500px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="w-24 px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Gambar</th>
-                  <th className="px-6 py-4 text-left">Judul</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="w-24 px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Gambar</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Judul</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredList.map((i, index) => (
                   <tr key={i.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {i.gambar_path ? (
                         <Image
                           src={i.gambar_path}
@@ -277,8 +277,8 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4">{i.title}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">{i.title}</td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(i)}

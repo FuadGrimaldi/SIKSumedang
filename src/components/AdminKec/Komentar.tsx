@@ -183,7 +183,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
             placeholder="Cari nama, email atau pesan..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 bg-white"
           />
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-4 hidden">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Nama *
                   </label>
                   <input
@@ -204,11 +204,11 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                     defaultValue={editData?.name || ""}
                     required
                     disabled={submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Email *
                   </label>
                   <input
@@ -217,11 +217,11 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                     defaultValue={editData?.email || ""}
                     required
                     disabled={submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     No. Telepon
                   </label>
                   <input
@@ -229,13 +229,13 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                     name="no_telp"
                     defaultValue={editData?.no_telp || ""}
                     disabled={submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Status *
                 </label>
                 <select
@@ -243,7 +243,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                   defaultValue={editData?.status || Status.Pending}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 >
                   <option value={Status.Approved}>Approved</option>
                   <option value={Status.Pending}>Pending</option>
@@ -252,7 +252,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
               </div>
               <div className="space-y-4 hidden">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Pesan *
                   </label>
                   <textarea
@@ -261,11 +261,11 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                     defaultValue={editData?.pesan || ""}
                     required
                     disabled={submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     ID Artikel *
                   </label>
                   <input
@@ -274,7 +274,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                     defaultValue={editData?.article_id || ""}
                     required
                     disabled={submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
@@ -312,25 +312,29 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
             <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Nama</th>
-                  <th className="px-6 py-4 text-left">Email</th>
-                  <th className="px-6 py-4 text-left">Pesan</th>
-                  <th className="px-6 py-4 text-left">Status</th>
-                  <th className="px-6 py-4 text-left">Artikel</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Nama</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Email</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Pesan</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Status</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Artikel</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredKomentars.map((k, index) => (
                   <tr key={k.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{k.name}</td>
-                    <td className="px-6 py-4">{k.email}</td>
-                    <td className="px-6 py-4">{k.pesan}</td>
-                    <td className="px-6 py-4 capitalize">{k.status}</td>
-                    <td className="px-6 py-4">{k.articles?.title}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">{k.name}</td>
+                    <td className="px-6 py-4 text-gray-700">{k.email}</td>
+                    <td className="px-6 py-4 text-gray-700">{k.pesan}</td>
+                    <td className="px-6 py-4 text-gray-700 capitalize">
+                      {k.status}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700">
+                      {k.articles?.title}
+                    </td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(k)}

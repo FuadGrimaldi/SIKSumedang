@@ -175,7 +175,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
             placeholder="Cari judul atau lokasi foto..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white text-gray-800"
           />
         </div>
       </div>
@@ -190,7 +190,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Judul Foto *
                 </label>
                 <input
@@ -199,11 +199,11 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                   defaultValue={editData?.title || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Lokasi *
                 </label>
                 <input
@@ -212,11 +212,11 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                   defaultValue={editData?.lokasi || ""}
                   required
                   disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Gambar Foto
                 </label>
                 <input
@@ -271,18 +271,18 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="w-24 px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Gambar</th>
-                  <th className="px-6 py-4 text-left">Judul</th>
-                  <th className="px-6 py-4 text-left">Lokasi</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="w-24 px-6 py-4 text-gray-700 text-left">No</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Gambar</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Judul</th>
+                  <th className="px-6 py-4 text-gray-700 text-left">Lokasi</th>
+                  <th className="px-6 py-4 text-gray-700 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredList.map((f, index) => (
                   <tr key={f.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{index + 1}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {f.gambar_path ? (
                         <Image
                           src={f.gambar_path}
@@ -297,9 +297,9 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4">{f.title}</td>
-                    <td className="px-6 py-4">{f.lokasi}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700">{f.title}</td>
+                    <td className="px-6 py-4 text-gray-700">{f.lokasi}</td>
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(f)}

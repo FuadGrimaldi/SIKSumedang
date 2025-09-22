@@ -33,10 +33,15 @@ const AcaraComp = ({ nama_kecamatan, kecamatanId }: LayananProps) => {
       if (!res.ok) throw new Error("Gagal memuat artikel");
 
       const data = await res.json();
-      const sortedAcara = data.items.sort(
-        (a: Acara, b: Acara) =>
-          new Date(b.waktu).getTime() - new Date(a.waktu).getTime()
-      );
+      const sortedAcara = data.items
+        .filter(
+          (acara: Acara) =>
+            acara.status_acara === ("published" as Acara["status_acara"])
+        )
+        .sort(
+          (a: Acara, b: Acara) =>
+            new Date(b.waktu).getTime() - new Date(a.waktu).getTime()
+        );
       setAcara(sortedAcara);
       setTotalItems(data.total);
     } catch (err) {

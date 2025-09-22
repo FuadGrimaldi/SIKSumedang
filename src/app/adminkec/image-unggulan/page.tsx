@@ -17,7 +17,7 @@ export default async function FotoUnggulanPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Foto Unggulan</h1>
+      <div className="text-2xl font-bold mb-4 text-black">Foto Unggulan</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <FotoDepanManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

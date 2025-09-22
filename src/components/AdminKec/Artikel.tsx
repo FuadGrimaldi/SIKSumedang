@@ -287,7 +287,7 @@ export default function ArtikelManagerKec({
             placeholder="Cari judul, lokasi, atau penulis..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 bg-white"
           />
         </div>
       </div>
@@ -304,7 +304,7 @@ export default function ArtikelManagerKec({
               {/* Left */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Judul *
                   </label>
                   <input
@@ -313,11 +313,11 @@ export default function ArtikelManagerKec({
                     defaultValue={viewData?.title || editData?.title || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Konten *
                   </label>
                   <RichTextEditor
@@ -327,7 +327,7 @@ export default function ArtikelManagerKec({
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Tanggal & Waktu *
                   </label>
                   <input
@@ -338,11 +338,11 @@ export default function ArtikelManagerKec({
                     )}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-white bg-gray-700"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Lokasi Maps
                   </label>
                   <input
@@ -354,7 +354,7 @@ export default function ArtikelManagerKec({
                       ""
                     }
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   />
                 </div>
               </div>
@@ -362,12 +362,14 @@ export default function ArtikelManagerKec({
               {/* Right */}
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 text-sm font-medium">Desa</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Desa
+                  </label>
                   <select
                     name="desa_id"
                     defaultValue={viewData?.desa_id || editData?.desa_id || ""}
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                     required
                   >
                     <option value="">Pilih Desa</option>
@@ -379,7 +381,7 @@ export default function ArtikelManagerKec({
                   </select>
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Kategori
                   </label>
                   <select
@@ -391,7 +393,7 @@ export default function ArtikelManagerKec({
                       handleKategoriChange(parseInt(e.target.value))
                     }
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                     required
                   >
                     <option value="">Pilih Kategori</option>
@@ -408,7 +410,7 @@ export default function ArtikelManagerKec({
                   value={selectedSubKategori}
                   onChange={(e) => setSelectedSubKategori(e.target.value)}
                   disabled={!!viewData || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   required
                 >
                   <option value="">Pilih Sub Kategori</option>
@@ -419,7 +421,7 @@ export default function ArtikelManagerKec({
                   ))}
                 </select>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Status *
                   </label>
                   <select
@@ -427,7 +429,7 @@ export default function ArtikelManagerKec({
                     defaultValue={viewData?.status || editData?.status || ""}
                     required
                     disabled={!!viewData || submitting}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-gray-700 bg-white"
                   >
                     <option value="">Pilih status</option>
                     <option value={ArticleStatus.PUBLISHED}>Published</option>
@@ -435,7 +437,7 @@ export default function ArtikelManagerKec({
                   </select>
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Featured Image
                   </label>
                   <input
@@ -498,25 +500,25 @@ export default function ArtikelManagerKec({
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     No
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     Featured
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     Judul
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     Kategori
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     Penulis
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-left text-sm md:text-base">
                     Status
                   </th>
-                  <th className="px-4 md:px-6 py-3 md:py-4 text-center text-sm md:text-base">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-center text-sm md:text-base">
                     Aksi
                   </th>
                 </tr>
@@ -527,8 +529,10 @@ export default function ArtikelManagerKec({
                     key={a.id}
                     className="hover:bg-gray-50 border-b last:border-none"
                   >
-                    <td className="px-4 md:px-6 py-3 md:py-4">{index + 1}</td>
-                    <td className="px-4 md:px-6 py-3 md:py-4">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700">
+                      {index + 1}
+                    </td>
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700">
                       {a.featured_image ? (
                         <Image
                           src={a.featured_image}
@@ -543,19 +547,19 @@ export default function ArtikelManagerKec({
                         </div>
                       )}
                     </td>
-                    <td className="px-4 md:px-6 py-3 md:py-4 text-sm md:text-base">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-sm md:text-base">
                       {a.title}
                     </td>
-                    <td className="px-4 md:px-6 py-3 md:py-4 text-sm md:text-base">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-sm md:text-base">
                       {a.kategori_article?.nama || "-"}
                     </td>
-                    <td className="px-4 md:px-6 py-3 md:py-4 text-sm md:text-base">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-sm md:text-base">
                       {a.users?.full_name || "-"}
                     </td>
-                    <td className="px-4 md:px-6 py-3 md:py-4 text-sm md:text-base">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-sm md:text-base">
                       {a.status || "-"}
                     </td>
-                    <td className="px-4 md:px-6 py-3 md:py-4 text-center">
+                    <td className="px-4 md:px-6 py-3 md:py-4 text-gray-700 text-center">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleOpenView(a)}

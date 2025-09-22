@@ -25,10 +25,12 @@ export default async function Layout({
     await ProfileKecamatanService.getKecamatanProfileBySubdomain(subdomain);
   const session = await getServerSession(authOptions);
 
+  console.log("kecamatan", kecamatan?.id);
+  console.log("session", session?.user.kecamatanId);
   if (!session) {
     redirect("/login");
   }
-  if (session.user.kecamatanId !== kecamatan?.id) {
+  if (Number(session.user.kecamatanId) !== Number(kecamatan?.id)) {
     redirect("/");
   }
   return <DashboardLayoutClient>{children}</DashboardLayoutClient>;

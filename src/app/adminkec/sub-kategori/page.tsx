@@ -17,7 +17,7 @@ export default async function SubKategoriPage() {
   }
   return (
     <div className="container min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Sub Kategori</h1>
+      <div className="text-2xl font-bold mb-4 text-gray-700">Sub Kategori</div>
       {/* komponen yang menampilkan prodfile dari desa cipeundeuy */}
       <SubKategoriManagerKec kecamatanId={Number(session.user.kecamatanId)} />
     </div>

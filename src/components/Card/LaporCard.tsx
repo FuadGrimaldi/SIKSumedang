@@ -14,7 +14,7 @@ export default function LaporCard() {
           alt="logo lapor"
           className="object-contain "
           width={250}
-          height={250}
+          height={100}
         />
       </div>
 
