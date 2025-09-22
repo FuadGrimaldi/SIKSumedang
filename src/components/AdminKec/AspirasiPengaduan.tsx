@@ -314,6 +314,7 @@ export default function AspirasiPengaduanManagerKec({
             <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-4 text-left">No</th>
                   <th className="px-6 py-4 text-left">Nama</th>
                   <th className="px-6 py-4 text-left">Email</th>
                   <th className="px-6 py-4 text-left">Pesan</th>
@@ -323,8 +324,9 @@ export default function AspirasiPengaduanManagerKec({
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((d) => (
+                {filteredData.map((d, index) => (
                   <tr key={d.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">{d.name}</td>
                     <td className="px-6 py-4">{d.email}</td>
                     <td className="px-6 py-4">{d.pesan}</td>

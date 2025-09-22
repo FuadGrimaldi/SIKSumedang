@@ -14,7 +14,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen ">
       {/* Sidebar Fixed */}
-      <div className="fixed z-30 md:hidden">
+      <div className="fixed z-30  md:hidden">
         <MobileMenuButton />
       </div>
 

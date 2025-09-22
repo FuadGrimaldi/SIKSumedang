@@ -19,17 +19,17 @@ export default async function Home() {
       <div>
         <HeroImage
           subdomain={kecamatan?.nama_kecamatan || ""}
-          kecamatanId={Number(kecamatan?.id) || 48}
+          kecamatanId={Number(kecamatan?.id)}
         />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-100  ">
-        <KategoriComp kecamatanId={Number(kecamatan?.id) || 48} />
+        <KategoriComp kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
-        <Kawilang kecamatanId={Number(kecamatan?.id) || 48} />
+        <Kawilang kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
-        <News kecamatanId={Number(kecamatan?.id) || 48} />
+        <News kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50">
         <LaporCard />

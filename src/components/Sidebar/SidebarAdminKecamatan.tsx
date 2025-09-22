@@ -28,6 +28,7 @@ import {
   Menu,
   X,
   CalendarCheck,
+  Files,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -141,6 +142,18 @@ const AdminKecSidebar = () => {
       label: "Publikasi",
       icon: Newspaper,
       subItems: [
+        {
+          id: "kategori",
+          label: "Kategori",
+          icon: Files,
+          path: "/adminkec/kategori",
+        },
+        {
+          id: "sub-kategori",
+          label: "Sub Kategori",
+          icon: Files,
+          path: "/adminkec/sub-kategori",
+        },
         {
           id: "artikel",
           label: "Artikel",
@@ -464,12 +477,14 @@ export const MobileMenuButton = () => {
   if (!isMobile) return null;
 
   return (
-    <button
-      onClick={toggleMobileSidebar}
-      className="fixed top-4 left-4 z-30 p-2 bg-white rounded-lg shadow-lg border border-gray-200 md:hidden"
-    >
-      <Menu size={20} className="text-gray-600" />
-    </button>
+    <div className="fixed top-0 w-full bg-gray-100 p-3 flex justify-start border-b border-gray-200">
+      <button
+        onClick={toggleMobileSidebar}
+        className="p-2 rounded-lg border border-gray-200 md:hidden"
+      >
+        <Menu size={20} className="text-gray-600" />
+      </button>
+    </div>
   );
 };
 

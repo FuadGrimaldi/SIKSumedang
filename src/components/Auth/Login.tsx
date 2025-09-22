@@ -42,8 +42,6 @@ const LoginComp = ({ kecamatanId }: LoginProps) => {
       });
       if (response.status === 200 && response.data) {
         const kecamatan_id = response.data.user.kecamatan_id;
-        console.log("kecamatan_id:", kecamatan_id);
-        console.log("kecamatanId:", kecamatanId);
         // Cek apakah kecamatan_id sesuai dengan subdomainkecamatanId
         if (kecamatan_id === kecamatanId) {
           Swal.fire({

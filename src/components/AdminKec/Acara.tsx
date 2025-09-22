@@ -291,7 +291,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium">
-                    Lokasi *
+                    Lokasi Maps *
                   </label>
                   <input
                     type="text"
@@ -417,9 +417,10 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-4 text-left">No</th>
                   <th className="px-6 py-4 text-left">Poster</th>
                   <th className="px-6 py-4 text-left">Judul</th>
-                  <th className="px-6 py-4 text-left">Lokasi</th>
+                  <th className="px-6 py-4 text-left">tanggal acara</th>
                   <th className="px-6 py-4 text-left">Penyelenggara</th>
                   <th className="px-6 py-4 text-left">Status</th>
 
@@ -427,8 +428,9 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                 </tr>
               </thead>
               <tbody>
-                {filteredAcaras.map((a) => (
+                {filteredAcaras.map((a, index) => (
                   <tr key={a.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">
                       {a.poster ? (
                         <Image
@@ -445,7 +447,9 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                       )}
                     </td>
                     <td className="px-6 py-4">{a.judul}</td>
-                    <td className="px-6 py-4">{a.lokasi}</td>
+                    <td className="px-6 py-4">
+                      {formatDatetimeLocal(a.waktu)}
+                    </td>
                     <td className="px-6 py-4">{a.penyelenggara}</td>
                     <td className="px-6 py-4">{a.status_acara}</td>
                     <td className="px-6 py-4 text-center">

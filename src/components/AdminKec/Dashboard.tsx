@@ -29,6 +29,7 @@ import {
   TrendingUp,
   Eye,
   Clock,
+  ArrowRight,
 } from "lucide-react";
 
 // publikasi
@@ -48,6 +49,7 @@ import {
   PengaduanAspirasiKategori,
 } from "@/types/pengaduanAspirasi";
 import { Komentar } from "@/types/komentar";
+import Link from "next/link";
 
 interface Props {
   kecamatanId: number;
@@ -143,13 +145,13 @@ export default function Dashboard({ kecamatanId }: Props) {
       const res = await fetch(
         `/api/articles/subdomain/all/${kecamatanId}?page=1&limit=1000`
       );
-      console.log(res);
+
       const res2 = await fetch(
         `/api/articles/kategori/subdomain/${kecamatanId}`
       );
       if (res.ok) {
         const data = await res.json();
-        console.log(data.items);
+
         setArticles(Array.isArray(data.items) ? data.items : []);
       }
       if (res2.ok) {
@@ -610,15 +612,47 @@ export default function Dashboard({ kecamatanId }: Props) {
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <TrendingUp className="w-5 h-5 mr-2" />
-            Statistik Cepat
+            Pintasan Cepat
           </h3>
           <div className="space-y-4">
-            <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
-              <span className="text-sm font-medium">Total Komentar</span>
+            <Link
+              href={"/adminkec/acara"}
+              className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
+            >
+              <span className="text-sm font-medium">Buat Acara</span>
               <span className="text-lg font-bold text-yellow-600">
-                {stats.totalKomentar}
+                <ArrowRight />
               </span>
-            </div>
+            </Link>
+            <Link
+              href={"/adminkec/artikel"}
+              className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
+            >
+              <span className="text-sm font-medium">Buat Artikel</span>
+              <span className="text-lg font-bold text-yellow-600">
+                <ArrowRight />
+              </span>
+            </Link>
+            <Link
+              href={"/adminkec/berita"}
+              className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
+            >
+              <span className="text-sm font-medium">Buat Berita</span>
+              <span className="text-lg font-bold text-yellow-600">
+                <ArrowRight />
+              </span>
+            </Link>
+            <Link
+              href={"/adminkec/aspirasi-pengaduan"}
+              className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition"
+            >
+              <span className="text-sm font-medium">
+                Cek Pengaduan dan Aspirasi
+              </span>
+              <span className="text-lg font-bold text-yellow-600">
+                <ArrowRight />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

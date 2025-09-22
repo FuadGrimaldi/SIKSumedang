@@ -98,7 +98,6 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
           video.thumbnail = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
         }
       });
-      console.log(data);
       setVideos(data || []);
       setFilteredVideos(data || []);
     } catch (error) {
@@ -173,10 +172,6 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
     const uploaded_at = formData.get("uploaded_at")
       ? new Date(formData.get("uploaded_at") as string)
       : undefined;
-    console.log("Form Data Entries:");
-    Array.from(formData.entries()).forEach((pair) => {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    });
 
     try {
       let res;
@@ -205,7 +200,6 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
           kategori,
           uploaded_at,
         };
-        console.log(payload);
         res = await fetch("/api/videos", {
           method: "POST",
           body: JSON.stringify({
@@ -433,6 +427,7 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="w-24 px-6 py-4 text-left">No</th>
                   <th className="px-6 py-4 text-left">Thumbnail</th>
                   <th className="px-6 py-4 text-left">Judul</th>
                   <th className="px-6 py-4 text-left">Kategori</th>
@@ -441,8 +436,9 @@ export default function VideoManagerKec({ kecamatanId }: VideoProps) {
                 </tr>
               </thead>
               <tbody>
-                {filteredVideos.map((v) => (
+                {filteredVideos.map((v, index) => (
                   <tr key={v.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">
                       {v.embed_url ? (
                         <Image

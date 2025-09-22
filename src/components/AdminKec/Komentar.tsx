@@ -312,6 +312,7 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
             <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-4 text-left">No</th>
                   <th className="px-6 py-4 text-left">Nama</th>
                   <th className="px-6 py-4 text-left">Email</th>
                   <th className="px-6 py-4 text-left">Pesan</th>
@@ -321,8 +322,9 @@ export default function KomentarManagerKec({ kecamatanId }: KomentarProps) {
                 </tr>
               </thead>
               <tbody>
-                {filteredKomentars.map((k) => (
+                {filteredKomentars.map((k, index) => (
                   <tr key={k.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">{k.name}</td>
                     <td className="px-6 py-4">{k.email}</td>
                     <td className="px-6 py-4">{k.pesan}</td>

@@ -83,11 +83,6 @@ export default function ProfileKecManagerKec({
       formData.append("subdomain", kecamatan.subdomain);
     }
 
-    console.log("Form Data Entries:");
-    Array.from(formData.entries()).forEach((pair) => {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    });
-
     try {
       const res = await fetch(`/api/kecamatan/${kecamatanId}`, {
         method: "PUT",

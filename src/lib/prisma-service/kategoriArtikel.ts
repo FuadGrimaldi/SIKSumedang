@@ -9,6 +9,18 @@ import {
 
 export class KategoriArtikelService {
   // Get all kategori artikel
+  static async getAllSubKategoriArtikel() {
+    return prisma.sub_kategori_article.findMany({
+      orderBy: { id: "desc" },
+      include: {
+        kategori_article: {
+          select: { id: true, nama: true },
+        },
+        profile_kecamatan: { select: { id: true, nama_kecamatan: true } },
+      },
+    });
+  }
+  // Get all kategori artikel
   static async getAllKategoriArtikel() {
     return prisma.kategori_article.findMany({
       orderBy: { id: "desc" },
@@ -76,6 +88,12 @@ export class KategoriArtikelService {
   static async getAllSubKategoriByKategoriId(kategoriId: number) {
     return prisma.sub_kategori_article.findMany({
       where: { kategori_id: kategoriId },
+      include: {
+        kategori_article: {
+          select: { id: true, nama: true },
+        },
+        profile_kecamatan: { select: { id: true, nama_kecamatan: true } },
+      },
       orderBy: { id: "desc" },
     });
   }
@@ -84,6 +102,12 @@ export class KategoriArtikelService {
   static async getSubKategoriById(id: number) {
     return prisma.sub_kategori_article.findUnique({
       where: { id },
+      include: {
+        kategori_article: {
+          select: { id: true, nama: true },
+        },
+        profile_kecamatan: { select: { id: true, nama_kecamatan: true } },
+      },
     });
   }
 
@@ -144,6 +168,12 @@ export class KategoriArtikelService {
   static async getAllSubKategoriByKecamatanId(kecamatanId: number) {
     return prisma.sub_kategori_article.findMany({
       where: { kecamatan_id: kecamatanId },
+      include: {
+        kategori_article: {
+          select: { id: true, nama: true },
+        },
+        profile_kecamatan: { select: { id: true, nama_kecamatan: true } },
+      },
       orderBy: { id: "desc" },
     });
   }

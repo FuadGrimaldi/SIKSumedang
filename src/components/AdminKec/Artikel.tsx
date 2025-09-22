@@ -343,7 +343,7 @@ export default function ArtikelManagerKec({
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium">
-                    Lokasi Kegiatan
+                    Lokasi Maps
                   </label>
                   <input
                     type="text"
@@ -499,6 +499,9 @@ export default function ArtikelManagerKec({
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                    No
+                  </th>
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
                     Featured
                   </th>
                   <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
@@ -519,11 +522,12 @@ export default function ArtikelManagerKec({
                 </tr>
               </thead>
               <tbody>
-                {filteredArticles.map((a) => (
+                {filteredArticles.map((a, index) => (
                   <tr
                     key={a.id}
                     className="hover:bg-gray-50 border-b last:border-none"
                   >
+                    <td className="px-4 md:px-6 py-3 md:py-4">{index + 1}</td>
                     <td className="px-4 md:px-6 py-3 md:py-4">
                       {a.featured_image ? (
                         <Image

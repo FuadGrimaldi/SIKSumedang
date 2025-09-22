@@ -1,58 +1,53 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 import Swal from "sweetalert2";
-import { Plus, Edit3, Trash2, Camera, Search } from "lucide-react";
+import { Plus, Edit3, Trash2, Search } from "lucide-react";
+import { KategoriArtikel } from "@/types/kategoriArtikel";
 
-export type Infografis = {
-  id: number;
-  kecamatan_id: number;
-  title: string;
-  gambar_path: string;
-  created_at: string;
-  updated_at: string;
-};
-
-interface InfografisProps {
+interface KategoriProps {
   kecamatanId: number;
 }
 
-export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
-  const [infografisList, setInfografisList] = useState<Infografis[]>([]);
-  const [filteredList, setFilteredList] = useState<Infografis[]>([]);
+export default function KategoriManagerKec({ kecamatanId }: KategoriProps) {
+  const [kategoris, setKategoris] = useState<KategoriArtikel[]>([]);
+  const [filteredKategoris, setFilteredKategoris] = useState<KategoriArtikel[]>(
+    []
+  );
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-  const [editData, setEditData] = useState<Infografis | null>(null);
+  const [editData, setEditData] = useState<KategoriArtikel | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const fetchInfografis = useCallback(async () => {
+  const fetchKategoris = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/infografis/subdomain/${kecamatanId}`);
+      const res = await fetch(
+        `/api/articles/kategori/subdomain/${kecamatanId}`
+      );
       const data = await res.json();
-      setInfografisList(data || []);
-      setFilteredList(data || []);
+      setKategoris(data || []);
+      setFilteredKategoris(data || []);
     } catch (error) {
-      setInfografisList([]);
-      setFilteredList([]);
-      Swal.fire("Error", "Gagal memuat data infografis", "error");
+      setKategoris([]);
+      setFilteredKategoris([]);
+      Swal.fire("Error", "Gagal memuat data kategori", "error");
     }
     setLoading(false);
   }, [kecamatanId]);
 
   useEffect(() => {
-    fetchInfografis();
-  }, [fetchInfografis]);
+    fetchKategoris();
+  }, [fetchKategoris]);
 
   const handleOpenAdd = () => {
     setEditData(null);
     setFormOpen(true);
   };
 
-  const handleOpenEdit = (item: Infografis) => {
-    setEditData(item);
+  const handleOpenEdit = (kategori: KategoriArtikel) => {
+    setEditData(kategori);
     setFormOpen(true);
   };
 
@@ -73,12 +68,14 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await fetch(`/api/infografis/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/articles/kategori/${id}`, {
+        method: "DELETE",
+      });
       if (res.ok) {
-        fetchInfografis();
-        Swal.fire("Berhasil", "Infografis dihapus", "success");
+        fetchKategoris();
+        Swal.fire("Berhasil", "Kategori dihapus", "success");
       } else {
-        Swal.fire("Error", "Gagal menghapus data", "error");
+        Swal.fire("Error", "Gagal menghapus kategori", "error");
       }
     } catch {
       Swal.fire("Error", "Terjadi kesalahan", "error");
@@ -88,33 +85,55 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-
     const form = e.currentTarget;
     const formData = new FormData(form);
-    if (!formData.get("kecamatan_id")) {
-      formData.set("kecamatan_id", kecamatanId.toString());
-    }
+
+    const payload = {
+      kecamatan_id: kecamatanId,
+      nama: formData.get("nama") as string,
+    };
 
     try {
       let res;
+      let kategoriId = editData?.id;
       if (editData) {
-        res = await fetch(`/api/infografis/${editData.id}`, {
+        res = await fetch(`/api/articles/kategori/${editData.id}`, {
           method: "PUT",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, updated_at: new Date() }),
         });
       } else {
-        res = await fetch("/api/infografis", {
+        res = await fetch("/api/articles/kategori", {
           method: "POST",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...payload,
+            created_at: new Date(),
+            updated_at: new Date(),
+          }),
         });
+        if (res.ok) {
+          const kategori = await res.json();
+          kategoriId = kategori.id;
+          // Create sub kategori after kategori is created
+          await fetch("/api/articles/kategori/sub-kategori", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              kecamatan_id: kecamatanId,
+              kategori_id: kategoriId,
+              sub_nama: payload.nama,
+            }),
+          });
+        }
       }
 
       if (res.ok) {
         handleCloseForm();
-        fetchInfografis();
+        fetchKategoris();
         Swal.fire(
           "Berhasil",
-          `Infografis ${editData ? "diperbarui" : "ditambahkan"}`,
+          `Kategori ${editData ? "diperbarui" : "ditambahkan"}`,
           "success"
         );
       } else {
@@ -132,10 +151,10 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
     if (!value) {
-      setFilteredList(infografisList);
+      setFilteredKategoris(kategoris);
     } else {
-      setFilteredList(
-        infografisList.filter((i) => i.title.toLowerCase().includes(value))
+      setFilteredKategoris(
+        kategoris.filter((k) => k.nama.toLowerCase().includes(value))
       );
     }
   };
@@ -146,17 +165,17 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-green-600 to-green-500 p-6 rounded-xl shadow-lg">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            📊 Manajemen Infografis
+            📂 Manajemen Kategori Artikel
           </h2>
           <p className="text-green-100 mt-1">
-            Kelola data infografis di kecamatan ini
+            Kelola kategori artikel di kecamatan ini
           </p>
         </div>
         <button
           onClick={handleOpenAdd}
           className="px-6 py-3 bg-white text-green-600 font-semibold rounded-lg shadow hover:bg-gray-50 transition-colors flex items-center gap-2"
         >
-          <Plus className="w-5 h-5" /> Tambah Infografis
+          <Plus className="w-5 h-5" /> Tambah Kategori
         </button>
       </div>
 
@@ -166,7 +185,7 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Cari judul infografis..."
+            placeholder="Cari kategori..."
             value={searchTerm}
             onChange={handleSearch}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
@@ -177,47 +196,17 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
       {/* Form Inline */}
       {formOpen && (
         <div className="bg-white rounded-lg shadow p-6">
-          <form
-            onSubmit={handleSubmit}
-            encType="multipart/form-data"
-            className="space-y-6"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div>
-                <label className="block mb-2 text-sm font-medium">
-                  Judul Infografis *
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  defaultValue={editData?.title || ""}
-                  required
-                  disabled={submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-medium">
-                  Gambar Infografis
-                </label>
-                <input
-                  type="file"
-                  name="gambar_path"
-                  accept="image/*"
-                  disabled={submitting}
-                />
-                {editData?.gambar_path && (
-                  <div className="mt-3">
-                    <Image
-                      src={editData.gambar_path}
-                      alt="Infografis"
-                      width={120}
-                      height={120}
-                      className="rounded-lg border object-cover"
-                    />
-                  </div>
-                )}
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block mb-2 text-sm font-medium">Nama *</label>
+              <input
+                type="text"
+                name="nama"
+                defaultValue={editData?.nama || ""}
+                required
+                disabled={submitting}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
             </div>
 
             <div className="flex justify-end gap-3">
@@ -244,50 +233,35 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
       {/* Table */}
       {loading ? (
         <div className="text-center py-8">Memuat data...</div>
-      ) : filteredList.length === 0 ? (
+      ) : filteredKategoris.length === 0 ? (
         <div className="text-center py-8">Belum ada data</div>
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[500px]">
+            <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="w-24 px-6 py-4 text-left">No</th>
-                  <th className="px-6 py-4 text-left">Gambar</th>
-                  <th className="px-6 py-4 text-left">Judul</th>
+                  <th className="px-6 py-4 text-left">Nama</th>
                   <th className="px-6 py-4 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredList.map((i, index) => (
-                  <tr key={i.id} className="hover:bg-gray-50">
+                {filteredKategoris.map((k, index) => (
+                  <tr key={k.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">
-                      {i.gambar_path ? (
-                        <Image
-                          src={i.gambar_path}
-                          width={64}
-                          height={64}
-                          alt={i.title}
-                          className="rounded-lg"
-                        />
-                      ) : (
-                        <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                          <Camera className="w-6 h-6 text-gray-400" />
-                        </div>
-                      )}
-                    </td>
-                    <td className="px-6 py-4">{i.title}</td>
+                    <td className="px-6 py-4">{k.nama}</td>
                     <td className="px-6 py-4 text-center">
                       <div className="flex justify-center gap-2">
                         <button
-                          onClick={() => handleOpenEdit(i)}
-                          className="p-2 bg-yellow-500 text-white rounded-lg"
+                          onClick={() => handleOpenEdit(k)}
+                          className="p-2 bg-yellow-500 text-white rounded-lg flex items-center gap-1"
                         >
                           <Edit3 className="w-4 h-4" />
+                          Edit
                         </button>
                         <button
-                          onClick={() => handleDelete(i.id)}
+                          onClick={() => handleDelete(k.id)}
                           className="p-2 bg-red-600 text-white rounded-lg"
                         >
                           <Trash2 className="w-4 h-4" />

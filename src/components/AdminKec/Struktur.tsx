@@ -132,10 +132,6 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
       formData.set("kecamatan_id", kecamatanId.toString());
     }
 
-    console.log("Form Data Entries:");
-    Array.from(formData.entries()).forEach((pair) => {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    });
     try {
       let res;
       if (editData) {
@@ -324,6 +320,7 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
+                <th className="w-24 px-6 py-4 text-left">No</th>
                 <th className="px-6 py-4 text-left">Foto</th>
                 <th className="px-6 py-4 text-left">Nama</th>
                 <th className="px-6 py-4 text-left">Jabatan</th>
@@ -331,8 +328,9 @@ export default function OfficialManagerKec({ kecamatanId }: officialProps) {
               </tr>
             </thead>
             <tbody>
-              {filteredOfficials.map((o) => (
+              {filteredOfficials.map((o, index) => (
                 <tr key={o.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">
                     {o.photo ? (
                       <Image

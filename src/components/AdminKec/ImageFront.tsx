@@ -33,7 +33,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
     try {
       const res = await fetch(`/api/foto-unggulan/subdomain/${kecamatanId}`);
       const data = await res.json();
-      console.log(data);
+
       setFotoList(data || []);
       setFilteredList(data || []);
     } catch (error) {
@@ -271,6 +271,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="w-24 px-6 py-4 text-left">No</th>
                   <th className="px-6 py-4 text-left">Gambar</th>
                   <th className="px-6 py-4 text-left">Judul</th>
                   <th className="px-6 py-4 text-left">Lokasi</th>
@@ -278,8 +279,9 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                 </tr>
               </thead>
               <tbody>
-                {filteredList.map((f) => (
+                {filteredList.map((f, index) => (
                   <tr key={f.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">{index + 1}</td>
                     <td className="px-6 py-4">
                       {f.gambar_path ? (
                         <Image

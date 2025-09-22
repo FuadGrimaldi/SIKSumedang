@@ -83,7 +83,6 @@ export default function BeritaManagerKec({ kecamatanId, userId }: BeritaProps) {
           a.kecamatan_id === kecamatanId &&
           (a.kategori_id === 1 || a.kategori_id === 8)
       );
-      console.log("Filtered Articles:", filteredArticles);
       setArticles(filteredArticles || []);
       setFilteredArticles(filteredArticles || []);
     } catch {
@@ -499,6 +498,9 @@ export default function BeritaManagerKec({ kecamatanId, userId }: BeritaProps) {
             <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="w-24 px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
+                    No
+                  </th>
                   <th className="px-4 md:px-6 py-3 md:py-4 text-left text-sm md:text-base">
                     Featured
                   </th>
@@ -520,11 +522,12 @@ export default function BeritaManagerKec({ kecamatanId, userId }: BeritaProps) {
                 </tr>
               </thead>
               <tbody>
-                {filteredArticles.map((a) => (
+                {filteredArticles.map((a, index) => (
                   <tr
                     key={a.id}
                     className="hover:bg-gray-50 border-b last:border-none"
                   >
+                    <td className="px-6 md:px-6 py-3 md:py-4">{index + 1}</td>
                     <td className="px-4 md:px-6 py-3 md:py-4">
                       {a.featured_image ? (
                         <Image

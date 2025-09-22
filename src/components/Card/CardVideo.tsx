@@ -140,6 +140,8 @@ const AllVideo = ({ kecamatanId }: AllVideoData) => {
   useEffect(() => {
     if (kecamatanId) {
       fetchVideos();
+    } else {
+      setLoading(false);
     }
   }, [kecamatanId, fetchVideos]);
 

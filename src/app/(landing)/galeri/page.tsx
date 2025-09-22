@@ -20,7 +20,7 @@ export default async function GaleryPage() {
     <div>
       <div>
         <GaleriComp
-          kecamatanId={Number(kecamatan?.id) || 48}
+          kecamatanId={Number(kecamatan?.id)}
           nama_kecamatan={kecamatan?.nama_kecamatan}
         />
       </div>

@@ -195,6 +195,8 @@ const ArtikelComp = ({
   useEffect(() => {
     if (kecamatanId && isFilterInitialized) {
       fetchArticles();
+    } else {
+      setLoading(false);
     }
   }, [filters, kecamatanId, currentPage, isFilterInitialized, fetchArticles]);
 
@@ -407,7 +409,6 @@ const ArtikelComp = ({
   // Calculate pagination values
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  console.log(articles);
 
   return (
     <div className="relative bg-white">
