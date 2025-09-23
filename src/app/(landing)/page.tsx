@@ -1,4 +1,3 @@
-import HeroSection from "@/components/Landing/Hero";
 import News from "@/components/News/News";
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
@@ -6,7 +5,6 @@ import LaporCard from "@/components/Card/LaporCard";
 import HeroImage from "@/components/Landing/HeroImage";
 import Kawilang from "@/components/kecamatan/Kawilang";
 import KategoriComp from "@/components/Landing/Kategori";
-import { Metadata } from "next";
 
 export default async function Home() {
   const headersList = headers();
