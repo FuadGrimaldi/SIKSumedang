@@ -67,6 +67,7 @@ const SippadesComp = ({ nama_kecamatan }: SippadesProps) => {
                   alt="SIPPAdes Logo"
                   width={120}
                   height={120}
+                  unoptimized
                   className="object-contain w-28 h-28 lg:w-40 lg:h-40"
                 />
               </div>

@@ -546,6 +546,7 @@ export default function ArtikelManagerKab() {
                         width={120}
                         height={120}
                         className="rounded-lg border object-cover"
+                        unoptimized
                       />
                     </div>
                   )}
@@ -628,6 +629,7 @@ export default function ArtikelManagerKab() {
                           height={64}
                           alt={a.title}
                           className="rounded-lg object-cover"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">

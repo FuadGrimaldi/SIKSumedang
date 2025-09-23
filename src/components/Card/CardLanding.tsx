@@ -38,6 +38,7 @@ const BlogCardSingle = ({ article }: BlogCardProps) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             width={320}
             height={240}
+            unoptimized
           />
 
           {/* Dark overlay yang hilang saat hover */}
@@ -196,6 +197,7 @@ const BlogCard = ({ article }: BlogCardProps) => {
           className="w-full h-48 object-cover "
           width={400}
           height={200}
+          unoptimized
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/default-article.jpg";

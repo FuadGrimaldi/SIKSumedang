@@ -66,6 +66,7 @@ const BlogCard = ({ acara }: BlogCardProps) => {
             className="w-full h-48 object-cover"
             width={400}
             height={200}
+            unoptimized
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = "/images/default-article.jpg";

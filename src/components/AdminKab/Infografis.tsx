@@ -241,6 +241,7 @@ export default function InfografisManagerKab() {
                       width={120}
                       height={120}
                       className="rounded-lg border object-cover"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -300,6 +301,7 @@ export default function InfografisManagerKab() {
                           height={64}
                           alt={i.title}
                           className="rounded-lg"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">

@@ -13,6 +13,7 @@ export default function LaporCard() {
           src="/assets/logo-fix/logolapor.png"
           alt="logo lapor"
           className="object-contain "
+          unoptimized
           width={250}
           height={100}
         />

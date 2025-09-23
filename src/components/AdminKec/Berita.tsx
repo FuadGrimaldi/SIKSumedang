@@ -458,6 +458,7 @@ export default function BeritaManagerKec({ kecamatanId, userId }: BeritaProps) {
                         alt="Featured Image"
                         width={120}
                         height={120}
+                        unoptimized
                         className="rounded-lg border object-cover"
                       />
                     </div>
@@ -539,6 +540,7 @@ export default function BeritaManagerKec({ kecamatanId, userId }: BeritaProps) {
                           src={a.featured_image}
                           width={64}
                           height={64}
+                          unoptimized
                           alt={a.title}
                           className="rounded-lg object-cover"
                         />

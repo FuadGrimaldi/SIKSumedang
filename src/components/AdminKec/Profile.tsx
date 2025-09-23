@@ -276,6 +276,7 @@ export default function ProfileKecManagerKec({
                           height={120}
                           alt="Foto Kantor"
                           className="rounded-lg border"
+                          unoptimized
                         />
                       </div>
                     )}
@@ -392,6 +393,7 @@ export default function ProfileKecManagerKec({
                     height={250}
                     alt="Foto Kantor"
                     className="rounded-lg border w-full object-cover"
+                    unoptimized
                   />
                 ) : (
                   <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">

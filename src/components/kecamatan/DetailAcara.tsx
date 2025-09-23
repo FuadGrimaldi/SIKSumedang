@@ -296,6 +296,7 @@ const AcaraDetailComp = ({ title, nama_kecamatan }: AcaraDetailsProps) => {
                           className="object-cover w-full h-full rounded-xl"
                           style={{ objectPosition: "center" }}
                           priority
+                          unoptimized
                           sizes="(max-width: 768px) 100vw, 800px"
                         />
                       </div>

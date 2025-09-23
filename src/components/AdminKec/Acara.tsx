@@ -383,6 +383,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                         }
                         alt="Poster Acara"
                         width={120}
+                        unoptimized
                         height={120}
                         className="rounded-lg border object-cover"
                       />
@@ -452,6 +453,7 @@ export default function AcaraManagerKec({ kecamatanId, userId }: AcaraProps) {
                           height={64}
                           alt={a.judul}
                           className="rounded-lg"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">

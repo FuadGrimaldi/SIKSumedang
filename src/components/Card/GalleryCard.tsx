@@ -212,6 +212,7 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
                 src={item.image_url}
                 alt={item.title}
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               />
@@ -345,6 +346,7 @@ const GalleryCard = ({ kecamatanId }: GaleriProps) => {
                   alt={selectedImage.title}
                   width={600}
                   height={400}
+                  unoptimized
                   className="object-contain"
                 />
 

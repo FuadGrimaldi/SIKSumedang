@@ -261,6 +261,7 @@ export default function FotoDepanManagerKab() {
                       width={120}
                       height={120}
                       className="rounded-lg border object-cover bg-white text-black"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -321,6 +322,7 @@ export default function FotoDepanManagerKab() {
                           height={200}
                           alt={f.title}
                           className="rounded-lg"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">

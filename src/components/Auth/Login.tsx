@@ -136,6 +136,7 @@ const LoginComp = ({ kecamatanId }: LoginProps) => {
                     alt="Login Illustration"
                     width={500}
                     height={500}
+                    unoptimized
                     className="w-full h-auto"
                   />
                 </motion.div>

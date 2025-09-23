@@ -214,6 +214,7 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
                       width={120}
                       height={120}
                       className="rounded-lg border object-cover"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -270,6 +271,7 @@ export default function InfografisManagerKec({ kecamatanId }: InfografisProps) {
                           height={64}
                           alt={i.title}
                           className="rounded-lg"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">

@@ -14,6 +14,7 @@ const FooterGuest = () => {
             src="/assets/logo-fix/logo-sumedang-500.png"
             alt="Logo Sumedang"
             width={100}
+            unoptimized
             height={100}
             className="object-contain transition-transform duration-300 hover:scale-110"
           />
@@ -162,6 +163,7 @@ const FooterGuest = () => {
                 alt="Google Play MPP"
                 width={120}
                 height={36}
+                unoptimized
                 className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg"
               />
               <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
@@ -182,6 +184,7 @@ const FooterGuest = () => {
                 alt="Google Play Tahu"
                 width={120}
                 height={36}
+                unoptimized
                 className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg"
               />
               <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>

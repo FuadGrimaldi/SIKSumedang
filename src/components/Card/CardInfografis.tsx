@@ -146,6 +146,7 @@ const AllInfografis = ({ kecamatan_id }: InfografisProps) => {
                 src={item.gambar_path}
                 alt={item.title}
                 fill
+                unoptimized
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               />
@@ -221,6 +222,7 @@ const AllInfografis = ({ kecamatan_id }: InfografisProps) => {
                 alt={selectedImage.title}
                 width={1000}
                 height={800}
+                unoptimized
                 className="object-contain h-[500px] w-auto"
               />
               <div className="text-center text-white mt-4">

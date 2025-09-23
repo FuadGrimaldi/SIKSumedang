@@ -40,6 +40,7 @@ export default function CardNews({
           className="w-full h-48 object-cover"
           width={400}
           height={200}
+          unoptimized
         />
         <div className="absolute top-0 right-0 text-white text-xs px-3 py-1 m-2 rounded backdrop-blur-xl bg-blue-600/50">
           {category}

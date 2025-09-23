@@ -233,6 +233,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                       width={120}
                       height={120}
                       className="rounded-lg border object-cover"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -289,6 +290,7 @@ export default function FotoDepanManagerKec({ kecamatanId }: FotoDepanProps) {
                           width={200}
                           height={200}
                           alt={f.title}
+                          unoptimized
                           className="rounded-lg"
                         />
                       ) : (

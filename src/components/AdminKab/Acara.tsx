@@ -432,6 +432,7 @@ export default function AcaraManagerKab() {
                         width={120}
                         height={120}
                         className="rounded-lg border object-cover"
+                        unoptimized
                       />
                     </div>
                   )}
@@ -502,6 +503,7 @@ export default function AcaraManagerKab() {
                           height={64}
                           alt={a.judul}
                           className="rounded-lg"
+                          unoptimized
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
