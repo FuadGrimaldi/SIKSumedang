@@ -89,14 +89,27 @@ export async function PUT(
           existingInfografis.gambar_path &&
           !defaultImages.includes(existingInfografis.gambar_path)
         ) {
-          // Delete old image if it exists and is not a default image
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingInfografis.gambar_path
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingInfografis.gambar_path.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingInfografis.gambar_path
+            );
+          } else if (existingInfografis.gambar_path.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              existingInfografis.gambar_path
+            );
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await gambar_path.arrayBuffer();
@@ -108,13 +121,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "infografis"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "infografis");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -122,7 +129,7 @@ export async function PUT(
         // Write file to disk
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        imagePath = `/assets/uploads/infografis/${fileName}`;
+        imagePath = `/uploads/infografis/${fileName}`;
       } catch (fileError) {
         console.error("❌ File upload error:", fileError);
         return NextResponse.json(
@@ -183,12 +190,23 @@ export async function DELETE(
       existingInfografis.gambar_path &&
       !defaultImages.includes(existingInfografis.gambar_path)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingInfografis.gambar_path
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingInfografis.gambar_path.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingInfografis.gambar_path
+        );
+      } else if (existingInfografis.gambar_path.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingInfografis.gambar_path);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

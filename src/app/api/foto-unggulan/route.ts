@@ -44,20 +44,14 @@ export async function POST(req: NextRequest) {
         const fileExtension = path.extname(gambar_path.name);
         const fileName = `${uniqueSuffix}${fileExtension}`;
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "foto-unggulan"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "foto-unggulan");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
         // Write file to the upload directory
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        imagePath = `/assets/uploads/foto-unggulan/${fileName}`;
+        imagePath = `/uploads/foto-unggulan/${fileName}`;
       } catch (error) {
         console.error("File upload error:", error);
         return NextResponse.json(

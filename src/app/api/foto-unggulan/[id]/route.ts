@@ -48,13 +48,27 @@ export async function PUT(
           existingFrontImage.gambar_path &&
           !defaultImages.includes(existingFrontImage.gambar_path)
         ) {
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingFrontImage.gambar_path
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingFrontImage.gambar_path.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingFrontImage.gambar_path
+            );
+          } else if (existingFrontImage.gambar_path.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              existingFrontImage.gambar_path
+            );
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await gambar_path.arrayBuffer();
@@ -64,20 +78,14 @@ export async function PUT(
         const fileExtension = path.extname(gambar_path.name);
         const fileName = `${uniqueSuffix}${fileExtension}`;
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "foto-unggulan"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "foto-unggulan");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
         // Write file to the upload directory
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        imagePath = `/assets/uploads/foto-unggulan/${fileName}`;
+        imagePath = `/uploads/foto-unggulan/${fileName}`;
       } catch (error) {
         console.error("File upload error:", error);
         return NextResponse.json(
@@ -130,12 +138,23 @@ export async function DELETE(
       existingFrontImage.gambar_path &&
       !defaultImages.includes(existingFrontImage.gambar_path)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingFrontImage.gambar_path
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingFrontImage.gambar_path.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingFrontImage.gambar_path
+        );
+      } else if (existingFrontImage.gambar_path.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingFrontImage.gambar_path);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

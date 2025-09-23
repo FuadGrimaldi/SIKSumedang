@@ -81,14 +81,24 @@ export async function PUT(
           existingAcara.poster &&
           !defaultImages.includes(existingAcara.poster)
         ) {
-          // Delete old image if it exists
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingAcara.poster
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingAcara.poster.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingAcara.poster
+            );
+          } else if (existingAcara.poster.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(process.cwd(), existingAcara.poster);
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await poster.arrayBuffer();
@@ -100,13 +110,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "acara"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "acara");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -114,7 +118,7 @@ export async function PUT(
         // Write file to disk
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        posterPath = `/assets/uploads/acara/${fileName}`;
+        posterPath = `/uploads/acara/${fileName}`;
       } catch (error) {
         console.error("Error uploading poster:", error);
         return NextResponse.json(
@@ -166,13 +170,20 @@ export async function DELETE(
     ];
     // Delete poster if it exists
     if (existingAcara.poster && !defaultImages.includes(existingAcara.poster)) {
-      const posterPath = path.join(
-        process.cwd(),
-        "public",
-        existingAcara.poster
-      );
-      if (fs.existsSync(posterPath)) {
-        fs.unlinkSync(posterPath);
+      let imagePath: string;
+
+      if (existingAcara.poster.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), "public", existingAcara.poster);
+      } else if (existingAcara.poster.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingAcara.poster);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
       }
     }
     await AcaraKecamatanService.deleteAcara(id);

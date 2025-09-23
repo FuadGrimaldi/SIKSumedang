@@ -60,13 +60,7 @@ export async function POST(req: NextRequest) {
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "acara"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "acara");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -74,7 +68,7 @@ export async function POST(req: NextRequest) {
         // Write file to disk
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        posterPath = `/assets/uploads/acara/${fileName}`;
+        posterPath = `/uploads/acara/${fileName}`;
       } catch (error) {
         console.error("Error uploading poster:", error);
         return NextResponse.json(

@@ -90,14 +90,24 @@ export async function PUT(
           existingProfile.foto_kantor &&
           !defaultImages.includes(existingProfile.foto_kantor)
         ) {
-          // Delete old image if it exists
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingProfile.foto_kantor
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingProfile.foto_kantor.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingProfile.foto_kantor
+            );
+          } else if (existingProfile.foto_kantor.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(process.cwd(), existingProfile.foto_kantor);
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await foto_kantor.arrayBuffer();
@@ -109,13 +119,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "profile"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "profile");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -124,7 +128,7 @@ export async function PUT(
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
 
-        imagePath = `/assets/uploads/profile/${fileName}`;
+        imagePath = `/uploads/profile/${fileName}`;
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(
@@ -195,12 +199,23 @@ export async function DELETE(
       existingProfile.foto_kantor &&
       !defaultImages.includes(existingProfile.foto_kantor)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingProfile.foto_kantor
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingProfile.foto_kantor.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingProfile.foto_kantor
+        );
+      } else if (existingProfile.foto_kantor.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingProfile.foto_kantor);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

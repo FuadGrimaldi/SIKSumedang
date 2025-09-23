@@ -50,19 +50,13 @@ export async function POST(request: NextRequest) {
         const fileExtension = path.extname(foto_kantor.name);
         const fileName = `${uniqueSuffix}${fileExtension}`;
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "profile"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "profile");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        fotoKantorPath = `/assets/uploads/kecamatan/${fileName}`;
+        fotoKantorPath = `/uploads/kecamatan/${fileName}`;
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

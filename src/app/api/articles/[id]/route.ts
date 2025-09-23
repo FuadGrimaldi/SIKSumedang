@@ -81,14 +81,27 @@ export async function PUT(
           existingArticle.featured_image &&
           !defaultImages.includes(existingArticle.featured_image)
         ) {
-          // Delete old image if it exists
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingArticle.featured_image
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingArticle.featured_image.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingArticle.featured_image
+            );
+          } else if (existingArticle.featured_image.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              existingArticle.featured_image
+            );
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await featured_image.arrayBuffer();
@@ -100,13 +113,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "articles"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "articles");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -115,7 +122,7 @@ export async function PUT(
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
 
-        imagePath = `/assets/uploads/articles/${fileName}`;
+        imagePath = `/uploads/articles/${fileName}`;
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(
@@ -185,12 +192,23 @@ export async function DELETE(
       existingArticle.featured_image &&
       !defaultImages.includes(existingArticle.featured_image)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingArticle.featured_image
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingArticle.featured_image.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingArticle.featured_image
+        );
+      } else if (existingArticle.featured_image.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingArticle.featured_image);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }
