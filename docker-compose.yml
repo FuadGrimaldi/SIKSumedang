@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  web:
+    image: fuadgrimaldi/fullstack-web-kecamatan:latest
+    restart: unless-stopped
+    container_name: fullstack-web-kecamatan
+    ports:
+      - "3002:3000"
+    networks:
+      - portofolio
+    env_file:
+      - .env
+
+networks:
+  portofolio:
+    external: true
+    name: personal-app_portofolio
