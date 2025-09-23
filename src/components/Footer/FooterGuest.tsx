@@ -45,7 +45,7 @@ const FooterGuest = () => {
             </li>
             <li className="group">
               <Link
-                href="/profil"
+                href="/profile"
                 className="flex items-center gap-2 transition-all duration-300 hover:text-white/80 hover:translate-x-2 relative"
               >
                 <User

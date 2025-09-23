@@ -7,6 +7,8 @@ services:
     container_name: fullstack-web-kecamatan
     ports:
       - "3002:3000"
+    volumes:
+      - ./uploads:/app/public/assets/uploads
     networks:
       - portofolio
     env_file:
