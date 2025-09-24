@@ -126,7 +126,7 @@ const BlogCardSingle = ({ article }: BlogCardProps) => {
           <div className="flex items-center justify-between">
             {/* Read More Button */}
             <a
-              href={`/berita/${article.id}`}
+              href={`/berita/${article.slug}`}
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 group/btn"
             >
               Baca Selengkapnya

@@ -5,6 +5,9 @@ import LaporCard from "@/components/Card/LaporCard";
 import HeroImage from "@/components/Landing/HeroImage";
 import Kawilang from "@/components/kecamatan/Kawilang";
 import KategoriComp from "@/components/Landing/Kategori";
+import Akomodasi from "@/components/kecamatan/Akomodasi";
+import DestinasiKuliner from "@/components/kecamatan/Destinasi";
+import SeniEkraf from "@/components/kecamatan/SeniEkraf";
 
 export default async function Home() {
   const headersList = headers();
@@ -28,6 +31,15 @@ export default async function Home() {
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
         <News kecamatanId={Number(kecamatan?.id)} />
+      </div>
+      <div className="px-[31px] lg:px-[100px] py-8 bg-gray-100  ">
+        <SeniEkraf kecamatanId={Number(kecamatan?.id)} />
+      </div>
+      <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50  ">
+        <Akomodasi kecamatanId={Number(kecamatan?.id)} />
+      </div>
+      <div className="px-[31px] lg:px-[100px] py-8 bg-gray-100  ">
+        <DestinasiKuliner kecamatanId={Number(kecamatan?.id)} />
       </div>
       <div className="px-[31px] lg:px-[100px] py-8 bg-gray-50">
         <LaporCard />

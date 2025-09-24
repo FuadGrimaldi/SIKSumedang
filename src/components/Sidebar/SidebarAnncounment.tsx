@@ -40,7 +40,9 @@ const SidebarPengumumanLanding = ({ articles }: SidebarNewsProps) => {
             >
               <a
                 href={
-                  articles.length > 0 ? `/berita/${(item as Article).id}` : "#"
+                  articles.length > 0
+                    ? `/berita/${(item as Article).slug}`
+                    : "#"
                 }
                 className="block text-md font-medium text-black hover:underline line-clamp-2"
               >

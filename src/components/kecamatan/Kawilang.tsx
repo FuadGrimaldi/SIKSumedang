@@ -19,7 +19,9 @@ const Kawilang = ({ kecamatanId }: AllBeritaProps) => {
     setError(null);
     try {
       // Gunakan endpoint khusus untuk desa dengan filter
-      const res = await fetch(`/api/acara/subdomain/${kecamatanId}`);
+      const res = await fetch(
+        `/api/acara/subdomain/${kecamatanId}?page=1&limit=8`
+      );
 
       if (!res.ok) {
         throw new Error("Failed to fetch acara");

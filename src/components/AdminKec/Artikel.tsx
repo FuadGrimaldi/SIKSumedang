@@ -80,7 +80,7 @@ export default function ArtikelManagerKec({
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/articles/subdomain/all/${kecamatanId}?page=1&limit=1000`
+        `/api/articles/subdomain/all/${kecamatanId}?page=1&limit=100`
       );
       const data = await res.json();
       setArticles(data.items || []);

@@ -44,7 +44,11 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
       if (!res.ok) throw new Error("Failed to fetch kategori");
 
       const data = await res.json();
-      const filteredData = data.filter((a: KategoriArtikel) => a.id !== 8);
+      const filteredData = data.filter(
+        (a: KategoriArtikel) =>
+          a.nama.toLowerCase() !== "pengumuman" &&
+          a.nama.toLowerCase() !== "berita"
+      );
       setKategori(filteredData);
     } catch (err) {
       console.error("Error fetching kategori:", err);

@@ -86,7 +86,7 @@ export class AcaraKecamatanService {
       limit?: number;
     }
   ) {
-    const { page = 1, limit = 10 } = options || {};
+    const { page = 1, limit = 100 } = options || {};
     const skip = (page - 1) * limit;
 
     return prisma.acara.findMany({
@@ -121,7 +121,7 @@ export class AcaraKecamatanService {
       limit?: number;
     }
   ) {
-    const { page = 1, limit = 10 } = options || {};
+    const { page = 1, limit = 100 } = options || {};
     const skip = (page - 1) * limit;
 
     return prisma.acara.findMany({

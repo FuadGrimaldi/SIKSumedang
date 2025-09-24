@@ -194,7 +194,7 @@ export class ArticlesKecamatanService {
       kategori_id,
       sub_kategori_id,
       page = 1,
-      limit = 10,
+      limit = 100,
     } = options || {};
 
     const skip = (page - 1) * limit;
@@ -252,7 +252,7 @@ export class ArticlesKecamatanService {
       kategori_id,
       sub_kategori_id,
       page = 1,
-      limit = 10,
+      limit = 100,
     } = options || {};
 
     const skip = (page - 1) * limit;
@@ -302,7 +302,7 @@ export class ArticlesKecamatanService {
     kecamatan_id: number,
     kategori?: string,
     page: number = 1,
-    limit: number = 10
+    limit: number = 100
   ) {
     const skip = (page - 1) * limit;
 
