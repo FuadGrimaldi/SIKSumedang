@@ -96,7 +96,7 @@ const BlogCardSingle = ({ article }: BlogCardProps) => {
                     clipRule="evenodd"
                   />
                 </svg>
-                {formatDate(article.published_at)}
+                {formatDate(article.created_at)}
               </span>
               <div>
                 <span className="inline-flex items-center px-3 py-1 ml-3 text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 rounded-lg">
@@ -172,11 +172,10 @@ const BlogCard = ({ article }: BlogCardProps) => {
   // Format date
   const formatDate = (dateString: string | Date) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("id-ID", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   };
 
   // Truncate description
@@ -211,8 +210,8 @@ const BlogCard = ({ article }: BlogCardProps) => {
 
       <div className="p-5">
         {/* Published date badge */}
-        <div className="flex flex-row mb-4">
-          <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 rounded-lg">
+        <div className="flex flex-row gap-2 mb-4">
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 rounded-lg">
             <svg
               className="w-3 h-3 mr-1"
               fill="currentColor"
@@ -224,10 +223,10 @@ const BlogCard = ({ article }: BlogCardProps) => {
                 clipRule="evenodd"
               />
             </svg>
-            {formatDate(article.published_at)}
+            {formatDate(article.created_at)}
           </span>
           <div>
-            <span className="inline-flex items-center px-3 py-1 ml-3 text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 rounded-lg">
+            <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 rounded-lg">
               <PencilIcon className="w-3 h-3 mr-1" />
               {article.users?.full_name || "Admin"}
             </span>

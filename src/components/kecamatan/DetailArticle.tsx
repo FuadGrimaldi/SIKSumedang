@@ -395,7 +395,7 @@ const ArtikelDetailComp = ({ title }: ArtikelDetailsProps) => {
                                     Tanggal Publish
                                   </span>
                                   <div className="text-gray-600 text-sm">
-                                    {formatDate(article.published_at)}
+                                    {formatDate(article.created_at)}
                                   </div>
                                 </div>
                               </div>

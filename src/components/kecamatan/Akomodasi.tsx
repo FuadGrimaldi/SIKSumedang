@@ -18,7 +18,7 @@ const Akomodasi = ({ kecamatanId }: AllArticlesProps) => {
     setError(null);
     try {
       const res = await fetch(
-        `/api/articles/subdomain/${kecamatanId}?page=1&limit=4&kategori_id=100`
+        `/api/articles/subdomain/${kecamatanId}?page=1&limit=100`
       );
 
       if (!res.ok) {
@@ -26,7 +26,6 @@ const Akomodasi = ({ kecamatanId }: AllArticlesProps) => {
       }
 
       const data = await res.json();
-
       if (data.error) {
         setError(data.error);
         setArticles([]);
@@ -40,7 +39,14 @@ const Akomodasi = ({ kecamatanId }: AllArticlesProps) => {
           )
           .filter(
             (item: Article) =>
-              item.status === ("published" as Article["status"])
+              item.status === ("published" as Article["status"]) &&
+              item.kategori_article?.nama.toLowerCase() !== "berita" &&
+              item.kategori_article?.nama.toLowerCase() !== "pengumuman" &&
+              item.kategori_article?.nama.toLowerCase() !== "organisasi" &&
+              item.kategori_article?.nama.toLowerCase() !== "kuliner" &&
+              item.kategori_article?.nama.toLowerCase() !== "wisata" &&
+              item.kategori_article?.nama.toLowerCase() !== "ekraf" &&
+              item.kategori_article?.nama.toLowerCase() !== "seni budaya"
           );
 
         setArticles(sortedArticles);
@@ -69,10 +75,10 @@ const Akomodasi = ({ kecamatanId }: AllArticlesProps) => {
         <div className="container mx-auto">
           <div className="text-center mb-6 w-full">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
-              Akomodasi Terbaru di Kecamatan Rancakalong
+              Akomodasi di Kecamatan Rancakalong
             </h2>
             <p className="text-base text-gray-600">
-              Temukan berbagai pilihan akomodasi terbaik untuk kenyamanan Anda
+              Jelajahi berbagai akomodasi yang ada di kecamatan Rancakalong
             </p>
           </div>
           <div className="flex justify-center items-center min-h-[200px]">
@@ -91,10 +97,10 @@ const Akomodasi = ({ kecamatanId }: AllArticlesProps) => {
       <div className="container mx-auto">
         <div className="text-center mb-6 w-full">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
-            Akomodasi Terbaru di Kecamatan Rancakalong
+            Akomodasi di Kecamatan Rancakalong
           </h2>
           <p className="text-base text-gray-600">
-            Temukan berbagai pilihan akomodasi terbaik untuk kenyamanan Anda
+            Jelajahi berbagai akomodasi yang ada di kecamatan Rancakalong
           </p>
         </div>
 

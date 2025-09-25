@@ -385,7 +385,6 @@ export default function CommentSection({
             {[...Array(3)].map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="flex space-x-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                   <div className="flex-1 space-y-2">
                     <div className="h-4 bg-gray-200 rounded w-1/4"></div>
                     <div className="h-4 bg-gray-200 rounded w-1/6"></div>
@@ -423,21 +422,14 @@ export default function CommentSection({
           comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow mb-4"
+              className="bg-white border border-gray-200 rounded-lg px-4 py-3 hover:shadow-sm transition-shadow mb-4"
             >
               <div className="flex space-x-3">
-                {/* Avatar */}
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                    {getInitials(comment.name)}
-                  </div>
-                </div>
-
                 {/* Comment Content */}
                 <div className="flex-1 min-w-0">
                   {/* Comment Header */}
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
+                  <div className="flex  justify-between mb-2 flex-col sm:flex-row sm:justify-between">
+                    <div className="flex space-x-2">
                       <h4 className="text-sm font-semibold text-gray-900">
                         {comment.name}
                       </h4>
@@ -447,7 +439,7 @@ export default function CommentSection({
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center text-xs text-gray-500">
+                    <div className="flex  text-xs text-gray-500 mt-2 sm:mt-0">
                       <Calendar className="w-3 h-3 mr-1" />
                       {formatDate(comment.created_at)}
                     </div>

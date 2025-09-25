@@ -50,7 +50,7 @@ const SidebarPengumumanLanding = ({ articles }: SidebarNewsProps) => {
               </a>
               <span className="text-xs text-gray-500">
                 {articles.length > 0
-                  ? formatDate((item as Article).published_at)
+                  ? formatDate((item as Article).created_at)
                   : item.date}
               </span>
             </li>

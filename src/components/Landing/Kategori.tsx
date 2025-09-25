@@ -195,7 +195,7 @@ export default function KategoriComp({ kecamatanId }: KategoriProps) {
                           <IconComponent className="w-7 h-7 text-gray-600 group-hover:text-blue-600" />
                         </div>
                         {/* Nama kategori */}
-                        <h3 className="text-base font-semibold text-gray-800 group-hover:text-white transition-colors duration-300">
+                        <h3 className="lg:text-base text-md font-semibold text-gray-800 group-hover:text-white transition-colors duration-300">
                           {kat.nama}
                         </h3>
                       </div>
