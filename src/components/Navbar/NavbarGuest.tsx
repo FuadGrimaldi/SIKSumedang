@@ -82,7 +82,6 @@ export default function NavGuest({
       icon: ClipboardPen,
       submenu: [
         { name: "Daftar Layanan", href: "/layanan" },
-        { name: "SIPPAdes", href: "/sippades" },
         {
           name: "Data Desa Cantik",
           href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/kecamatan/${kecamatanId}`,
@@ -111,6 +110,15 @@ export default function NavGuest({
     //   ],
     // },
 
+    {
+      name: "Inovasi",
+      icon: ClipboardPen,
+      submenu: [
+        { name: "SIPPAdes", href: "/sippades" },
+        { name: "SIPERAHU", href: "/siperahu" },
+        { name: "MIRASSA", href: "/mirassa" },
+      ],
+    },
     {
       name: "Publikasi",
       icon: FileText,

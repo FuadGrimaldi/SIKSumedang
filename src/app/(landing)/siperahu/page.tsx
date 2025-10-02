@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { ProfileKecamatanService } from "@/lib/prisma-service/profilekecamatanService";
 import type { Metadata } from "next";
+import SiperahuComp from "@/components/kecamatan/Siperahu";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -18,7 +19,9 @@ export default async function SipperahuPage() {
     await ProfileKecamatanService.getKecamatanProfileBySubdomain(subdomain);
   return (
     <div>
-      <div>{/*  */}</div>
+      <div>
+        <SiperahuComp nama_kecamatan={kecamatan?.nama_kecamatan} />
+      </div>
     </div>
   );
 }

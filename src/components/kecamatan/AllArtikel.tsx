@@ -449,7 +449,7 @@ const ArtikelComp = ({
         <div className="bg-white rounded-2xl border pb-12 pt-8 px-3 lg:px-8">
           <div className="container mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 text-center">
-              Artikel Seputar Wilayah {nama_kecamatan}
+              Jelajahi Seputar Wilayah {nama_kecamatan}
             </h2>
             <p className="text-base text-gray-600 mb-8 text-center">
               Berbagai artikel terkini seputar wilayah {nama_kecamatan} dan
